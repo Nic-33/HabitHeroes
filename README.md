@@ -1,6 +1,8 @@
 # group_project
 crud
 
+![alt text](image.png)
+
 1. profile
     - create an account
     - edit account
@@ -27,6 +29,8 @@ stretch goals
 3. Level Up
     - Users should be able to gain experience by completing tasks.
     - Users should be able to level up and see their level change.
+    - consecutive multiplyer for daily streak
+
 
 
 User Avatars
@@ -53,8 +57,6 @@ Users should be able to create new to-dos.
 Users should be able to update their to-dos.
 Users should be able to delete their to-dos.
 
-Bonus: Drag and Drop
-Users should be able to drag and drop items within the same category.
 Bonus: Level Up
 Users should be able to gain experience by completing tasks.
 Users should be able to level up and see their level change.
