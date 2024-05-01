@@ -1,88 +1,109 @@
-Users
+# Users
 
-GET user by id
-Returns a dictionary with a users information
-GET /api/users/int:id
-Request Body: NONE
-Successful Response:
-Status Code: 200
-Headers:
-Content-Type: application/json
-Response Body:
-{
-    "email": "demo@aa.io",
-    "id": 1,
-    "username": "Demo"
-}
+## GET user by id
 
-Authentication
-Get signed in user
-Authenticates a user
-GET /api/auth/
-Request Body: NONE
-Successful Response:
-Status Code: 200
-Headers:
-Content-Type: application/json
-Response Body:
-{
-   "email": "demo@aa.io",
-   "id": 1,
-   "username": "Demo"
-}
+### Returns a dictionary with a users information
+` GET '/api/users/int:id'`
+* Request Body: NONE
+* Successful Response:
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Response Body:
 
-Log in
-Logs a user in
-POST /api/auth/login
-Request Body:
-{
-  "email": "demo@aa.io",
-  "password": "password"
-}
+    ```json
+    {
+      "email": "demo@aa.io",
+      "id": 1,
+      "username": "Demo"
+    }
+    ```
 
-Successful Response:
-Status Code: 200
-Headers:
-Content-Type: application/json
-Response Body:
+# Authentication
+## Get signed in user
+### Authenticates a user
+` GET '/api/auth/'`
+* Request Body: NONE
+* Successful Response:
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Response Body:
+
+    ```json
+    {
+      "email": "demo@aa.io",
+      "id": 1,
+      "username": "Demo"
+    }
+    ```
+# Log in
+##  Logs a user in
+`POST '/api/auth/login'`
+* Request Body:
+    ```json
+    {
+      "email": "demo@aa.io",
+      "password": "password"
+    }
+    ```
+
+* Successful Response:
+* Status Code: 200
+* Headers:
+  * Content-Type: application/json
+* Response Body:
+
+```json
 {
   "email": "demo@aa.io",
   "id": 1,
   "username": "Demo"
 }
+```
 
-Log Out
-Logs a user out
-GET /api/auth/logout
-Request Body: NONE
-Successful Response:
-Status Code: 200
-Headers:
-Content-Type: application/json
-Response Body:
+# Log Out
+## Logs a user out
+`GET '/api/auth/logout'`
+* Request Body: NONE
+* Successful Response:
+* Status Code: 200
+* Headers:
+  * Content-Type: application/json
+* Response Body:
+
+```json
 {
   "message": "User logged out"
 }
+```
 
-Sign Up
-Creates a new user and signs them in
-POST /api/auth/signup
-Request Body:
+# Sign Up
+## Creates a new user and signs them in
+`POST '/api/auth/signup'`
+* Request Body:
+
+```json
 {
   "username": "Demo"
   "email": "demo@aa.io",
   "password": "password"
 }
-Successful Response:
-Status Code: 200
-Headers:
-Content-Type: application/json
-Response Body:
+```
+
+* Successful Response:
+* Status Code: 200
+* Headers:
+  * Content-Type: application/json
+* Response Body:
+
+```json
 {
   "email": "demo@aa.io",
   "id": 1,
   "username": "Demo"
 }
+```
 
 Habits
 GET all habits of current user
@@ -218,51 +239,51 @@ Status Code: 200
 Headers:
 Content-Type: application/json
 Response Body:
-{ 
-  "id": 1, 
-  "title": "Buy groceries", 
-  "description": "Get milk, bread, and cheese", 
-  "user_id": 123 
+{
+  "id": 1,
+  "title": "Buy groceries",
+  "description": "Get milk, bread, and cheese",
+  "user_id": 123
 }
 POST new To-Do
 Create a new to-do for a user
 Authorization Required
 POST /users/int:user_id/todos
 Request Body:
-{ 
-  "title": "Finish project", 
-  "description": "Complete the final report and review code" 
+{
+  "title": "Finish project",
+  "description": "Complete the final report and review code"
 }
 Successful Response:
 Status Code: 200
 Headers:
 Content-Type: application/json
 Response Body:
-{ 
-  "id": 3, 
-  "title": "Finish project", 
-  "description": "Complete the final report and review code", 
-  "user_id": 123 
+{
+  "id": 3,
+  "title": "Finish project",
+  "description": "Complete the final report and review code",
+  "user_id": 123
 }
 Update a to-do
 Updates a preexisting to-do
 Requires Authorization
 **PUT ** /users/int:user_id/todos/int:todo_id
 Request Body:
-{ 
-  "title": "Visit doctor", 
-  "description": "Routine check-up at 3 pm" 
+{
+  "title": "Visit doctor",
+  "description": "Routine check-up at 3 pm"
 }
 Successful Response:
 Status Code: 200
 Headers:
 Content-Type: application/json
 Response Body:
-{ 
-  "id": 2, 
-  "title": "Visit doctor", 
-  "description": "Routine check-up at 3 pm", 
-  "user_id": 123 
+{
+  "id": 2,
+  "title": "Visit doctor",
+  "description": "Routine check-up at 3 pm",
+  "user_id": 123
 }
 Delete a to-do
 Returns a success message and removes the to-do from the database
@@ -291,7 +312,7 @@ Response Body:
 [{
   “id”: 1,
   “user_Id”: 1,
-  “title”: “Water House Plants”, 
+  “title”: “Water House Plants”,
   “description”: “Give palm tree a full water can amount and give cactus a little spray”,
   "strength": 1
   “repeats_frame”: 1,
@@ -313,7 +334,7 @@ Response Body:
 {
   “id”: 1,
   “user_Id”: 1,
-  “title”: “Water House Plants”, 
+  “title”: “Water House Plants”,
   “description”: “Give palm tree a full water can amount and give cactus a little spray”,
   "strength": 1
   “repeats_frame”: 1,
