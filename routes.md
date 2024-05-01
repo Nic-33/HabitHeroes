@@ -1,15 +1,21 @@
-# Users
+## Users
 
-## GET user by id
 
-### Returns a dictionary with a users information
-` GET '/api/users/int:id'`
-* Request Body: NONE
-* Successful Response:
+### Get the Current User by ID
+
+Returns the information about the current user that is logged in.
+
+* Require Authentication: true
+* Request
+  * Method: `GET`
+  * URL: `/api/users/int:id`
+  * Body: none
+
+* Successful Response when there is a logged in user
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
-  * Response Body:
+  * Body:
 
     ```json
     {
@@ -19,16 +25,24 @@
     }
     ```
 
-# Authentication
-## Get signed in user
-### Authenticates a user
-` GET '/api/auth/'`
-* Request Body: NONE
-* Successful Response:
+
+
+
+
+### Authentication / Get signed in user
+
+Authenticates a user
+
+Request
+* Method: `GET`
+* URL: `/api/auth` 
+* Body: None
+
+* Successful Response when authenticated:
   * Status Code: 200
   * Headers:
     * Content-Type: application/json
-  * Response Body:
+  * Body:
 
     ```json
     {
@@ -37,10 +51,21 @@
       "username": "Demo"
     }
     ```
-# Log in
-##  Logs a user in
-`POST '/api/auth/login'`
-* Request Body:
+
+
+### Log In a User
+
+Logs in a current user with valid credentials and returns the current user's
+information.
+
+* Require Authentication: false
+* Request
+  * Method: `POST`
+  * URL: `/api/auth/login`
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
     ```json
     {
       "email": "demo@aa.io",
@@ -48,62 +73,76 @@
     }
     ```
 
-* Successful Response:
-* Status Code: 200
-* Headers:
-  * Content-Type: application/json
-* Response Body:
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-```json
-{
-  "email": "demo@aa.io",
-  "id": 1,
-  "username": "Demo"
-}
-```
+    ```json
+    {
+      "email": "demo@aa.io",
+      "id": 1,
+      "username": "Demo"
+    }
+    ```
 
-# Log Out
-## Logs a user out
-`GET '/api/auth/logout'`
-* Request Body: NONE
-* Successful Response:
-* Status Code: 200
-* Headers:
-  * Content-Type: application/json
-* Response Body:
 
-```json
-{
-  "message": "User logged out"
-}
-```
+### Log Out
+Logs out current user
 
-# Sign Up
-## Creates a new user and signs them in
-`POST '/api/auth/signup'`
-* Request Body:
-
-```json
-{
-  "username": "Demo"
-  "email": "demo@aa.io",
-  "password": "password"
-}
-```
+* Request
+    * Method: `GET`
+    * URL: `/api/auth/logout`
+    * Body: NONE
 
 * Successful Response:
-* Status Code: 200
-* Headers:
-  * Content-Type: application/json
-* Response Body:
+    * Status Code: 200
+    * Headers:
+      * Content-Type: application/json
+    * Response Body:
 
-```json
-{
-  "email": "demo@aa.io",
-  "id": 1,
-  "username": "Demo"
-}
-```
+    ```json
+    {
+      "message": "User logged out"
+    }
+    ```
+
+### Sign Up a User
+
+Creates a new user, logs them in as the current user, and returns the current
+user's information.
+
+* Require Authentication: false
+* Request
+  * Method: `POST`
+  * URL: /api/auth/signup
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+    ```json
+    {
+      "username": "Demo",
+      "email": "demo@aa.io",
+      "password": "password"
+    }
+    ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+      "email": "demo@aa.io",
+      "id": 1,
+      "username": "Demo"
+    }
+    ```
+
+
 
 Habits
 GET all habits of current user
