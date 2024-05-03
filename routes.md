@@ -603,19 +603,6 @@ Returns the details of a Daily specified by its id.
         }
         ```
 
-
-### CREATE NEW DAILY
-
-Successful Response:
-Status Code: 200
-Headers:
-Content-Type: application/json
-Response Body:
-{
-
-}
-
-
 ### Create a new Daily
 
 Creates and returns a new Daily.
@@ -698,36 +685,63 @@ Updates and returns an existing Daily.
         }
         ```
 
-Update Daily- Completed
+
+### Update Daily - Completed
+
 Toggle the completed status on a daily and adjust the streak
-Authentication Required
-PUT /api/daily/int:id/completed
-Request Body: NONE -- Successful Response:
-Status Code: 200
-Headers:
-Content-Type: application/json
-Response Body:
-{
-“id”: 1,
-“user_Id”: 1,
-“title”: “Water House Plants” ,
-“description” : “Give palm tree a full water can amount and give cactus a little spray” ,
-“repeats_frame”: 1,
-“repeats_frequency” : 2,
-“streak”: 5,
-“completed” : false,
-“due_date” : “2023-09-10”,
-}
-DELETE DAILY
-Remove a record of a daily from the database and return a success message
-Requires Authentication
-DELETE /api/daily/int:id
-Request Body: None
-Successful Response:
-Status Code: 200
-Headers:
-Content-Type: application/json
-Response Body:
-{
-“Message”: “Successfully deleted”
-}
+
+-   Require Authentication: true
+-   Require proper authorization: To-do must belong to the current user
+-   Request
+
+    -   Method: `PUT`
+    -   URL: `/api/daily/int:daily_id/completed`
+    -   Headers:
+        -   Content-Type: application/json
+    -   Body: None
+
+-   Successful Response
+
+    -   Status Code: 200
+    -   Headers:
+        -   Content-Type: application/json
+    -   Body:
+
+        ```json
+        {
+            "1ser_Id": 1,
+            "title": "Water House Plants" ,
+            "description" : "Give palm tree a full water can amount and give cactus a little spray",
+            "repeats_frame": 1,
+            "repeats_frequency" : 2,
+            "streak": 5,
+            "completed" : false,
+            "due_date" :"2023-09-10",
+        }
+        ```
+
+
+### DELETE a Daily
+
+Deletes an existing Daily.
+
+-   Require Authentication: true
+-   Require proper authorization: Daily must belong to the current user
+-   Request
+
+    -   Method: `DELETE`
+    -   URL: `/api/daily/int:id`
+    -   Body: none
+
+-   Successful Response
+
+    -   Status Code: 200
+    -   Headers:
+        -   Content-Type: application/json
+    -   Body:
+
+        ```json
+        {
+            "message": "Successfully deleted"
+        }
+        ```
