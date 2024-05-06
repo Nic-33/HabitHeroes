@@ -16,7 +16,7 @@ class Todo(db.Model):
     due_date = db.Column(db.Date(),nullable=False)
     completed = db.Column(db.Boolean())
 
-    user = db.relationship("User", back_populates="todos")
+    users = db.relationship("User", back_populates="todos")
 
     def to_dict(self):
         return {

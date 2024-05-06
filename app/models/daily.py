@@ -1,6 +1,20 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+import enum
+from sqlalchemy import Enum 
 from flask_login import UserMixin
 
+class RepeatFrequency(enum.Enum):
+    ONE='one'
+    TWO='two'
+    THREE='three'
+class RepeatFrame(enum.Enum):
+    ONE='one'
+    TWO='two'
+    THREE='three'
+class RepeatOn(enum.Enum):
+    ONE='one'
+    TWO='two'
+    THREE='three'
 
 class Daily(db.Model):
     __tablename__ = 'dailies'
@@ -13,15 +27,15 @@ class Daily(db.Model):
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     difficulty = db.Column(db.Integer(),nullable=False)
-    repeats_frequency = db.Column(db.Enum())
-    repeats_frame = db.Column(db.Enum())
-    repeats_on = db.Column(db.Enum())
+    repeats_frequency = db.Column(db.Enum(RepeatFrequency))
+    repeats_frame = db.Column(db.Enum(RepeatFrame))
+    repeats_on = db.Column(db.Enum(RepeatOn))
     date_to_reset = db.Column(db.Date())
-    streak = db.Column(db.Enum())
+    streak = db.Column(db.Integer)
     due_date = db.Column(db.Date())
     completed = db.Column(db.Boolean())
 
-    user = db.relationship("User", back_populates="dailies")
+    users = db.relationship("User", back_populates="dailies")
     
     def to_dict(self):
         return {

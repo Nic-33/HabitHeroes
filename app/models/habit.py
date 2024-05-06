@@ -1,7 +1,11 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+import enum
+from sqlalchemy import Enum
 
-# from flask_login import UserMixin
-
+class FrequencyEnum(enum.Enum):
+    DAILY = 'daily'
+    WEEKLY = 'weekly'
+    MONTHLY = 'monthly'
 
 class Habit(db.Model):
     __tablename__ = 'habits'
@@ -14,7 +18,7 @@ class Habit(db.Model):
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     difficulty = db.Column(db.Integer,nullable=False)
-    frequency = db.Column(db.Enum())
+    frequency = db.Column(db.Enum(FrequencyEnum))
     date_to_reset = db.Column(db.Date())
     # strength = db.Column(db.Enum())
     pos = db.Column(db.Boolean())
@@ -22,7 +26,7 @@ class Habit(db.Model):
     pos_count = db.Column(db.Integer())
     neg_count = db.Column(db.Integer())
     
-    user = db.relationship("User", back_populates="habits")
+    users = db.relationship("User", back_populates="habits")
 
     def to_dict(self):
         return {
@@ -31,7 +35,7 @@ class Habit(db.Model):
             'title': self.title,
             'description':self.description,
             'difficulty':self.difficulty,
-            'frequency':self.frequency,
+            'frequency':FrequencyEnum.DAILY,
             'date_to_reset':self.date_to_reset,
             # 'strength':self.strength,
             'pos':self.pos,

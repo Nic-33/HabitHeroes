@@ -72,6 +72,10 @@ def api_help():
                     for rule in app.url_map.iter_rules() if rule.endpoint != 'static' }
     return route_list
 
+# @app.route("/api/users/<int:user_id>")
+# def get_users(user_id):
+#     user = User.query.filter_by(id=user_id).first()
+#     return user
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')

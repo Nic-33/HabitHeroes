@@ -38,5 +38,10 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'first_name':self.first_name,
+            'last_name':self.last_name,
+            'last_login':self.last_login,
+            'avatar_url':self.avatar_url,
+            'about':self.about
         }
