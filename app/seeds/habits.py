@@ -7,7 +7,7 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_habits():
     demo_habit = Habit(
-        user_id= 1,title='Excercise', description='Do some excercise', difficulty= 1, frequency=FrequencyEnum.DAILY,date_to_reset=datetime.now(),pos=True,neg=True,pos_count=0,neg_count=0)
+        user_id= 1,title='Excercise', description='Do some excercise', difficulty= 1, frequency='placeholder',date_to_reset=datetime.now(),pos=True,neg=True,pos_count=0,neg_count=0)
    
     # bobbie = User(
     #     username='bobbie', email='bobbie@aa.io', password='password')

@@ -7,9 +7,9 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_dailies():
     demo_daily = Daily(
-        user_id= 1,title='Daily seed', description='This is the daily seed', difficulty= 1,repeats_frequency=RepeatFrequency.ONE,repeats_frame = RepeatFrame.ONE,repeats_on=RepeatOn.ONE,date_to_reset=datetime.now(),streak = 0,due_date=datetime.now(),completed=False)
+        user_id= 1,title='Daily seed', description='This is the daily seed', difficulty= 1,repeats_frequency='once',repeats_frame = 'placeholder',repeats_on='placeholder',date_to_reset=datetime.now(),streak = 0,due_date=datetime.now(),completed=False)
     demo_daily2 = Daily(
-        user_id= 2,title='Daily seed2', description='This is the daily seed 2', difficulty= 1,repeats_frequency=RepeatFrequency.ONE,repeats_frame = RepeatFrame.ONE,repeats_on=RepeatOn.ONE,date_to_reset=datetime.now(),streak = 0,due_date=datetime.now(),completed=False)
+        user_id= 2,title='Daily seed2', description='This is the daily seed 2', difficulty= 1,repeats_frequency='twice',repeats_frame = 'placeholder',repeats_on='placeholder',date_to_reset=datetime.now(),streak = 0,due_date=datetime.now(),completed=False)
    
     # bobbie = User(
     #     username='bobbie', email='bobbie@aa.io', password='password')

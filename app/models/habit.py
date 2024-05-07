@@ -18,7 +18,7 @@ class Habit(db.Model):
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     difficulty = db.Column(db.Integer,nullable=False)
-    frequency = db.Column(db.Enum(FrequencyEnum))
+    frequency = db.Column(db.String(25))
     date_to_reset = db.Column(db.Date())
     # strength = db.Column(db.Enum())
     pos = db.Column(db.Boolean())
