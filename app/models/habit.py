@@ -35,7 +35,7 @@ class Habit(db.Model):
             'title': self.title,
             'description':self.description,
             'difficulty':self.difficulty,
-            'frequency':FrequencyEnum.DAILY,
+            'frequency':'daily',
             'date_to_reset':self.date_to_reset,
             # 'strength':self.strength,
             'pos':self.pos,

@@ -6,9 +6,12 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
+import habitReducer from "./habits";
+import todoReducer from "./todos";
+import dailyReducer from "./dailies";
 
 const rootReducer = combineReducers({
-  session: sessionReducer,
+  session: sessionReducer, habits:habitReducer, todos:todoReducer,dailies:dailyReducer
 });
 
 let enhancer;

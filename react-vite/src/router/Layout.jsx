@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
+import { thunkGetHabits } from "../redux/habits";
 import Navigation from "../components/Navigation/Navigation";
 
 export default function Layout() {
@@ -10,8 +11,8 @@ export default function Layout() {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));
+    dispatch(thunkGetHabits());
   }, [dispatch]);
-
   return (
     <>
       <ModalProvider>
