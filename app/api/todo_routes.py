@@ -16,7 +16,7 @@ def get_all_todo_user(id):
     todos = Todo.query.filter(Todo.user_id == id).all()
     return {'todos': [todo.to_dict() for todo in todos]}
 
-@todo_routes.route('/<id>', methods=['GET','POST'])
+@todo_routes.route('/<id>', methods=['POST'])
 def create_todo(id):
     form = TodoForm()
 
@@ -29,4 +29,6 @@ def create_todo(id):
         new_todo = Todo(user_id=id, title=title, description=description, difficulty=difficulty,due_date=dueDate, completed=0)
         db.session.add(new_todo)
         db.session.commit()
-        return redirect(f'/{id}')
+        return new_todo.to_dict()
+    return form.errors, 401
+
