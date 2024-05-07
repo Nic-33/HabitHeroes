@@ -25,7 +25,6 @@ def create_todo():
     form = TodoForm()
     user_id = current_user.to_dict()['id']
     if form.validate_on_submit():
-
         title = form.title.data
         description = form.description.data
         difficulty = form.difficulty.data
@@ -40,15 +39,17 @@ def create_todo():
 def update_todo(todo_id):
     form = TodoForm()
     todo = Todo.query.get(todo_id)
-    if form.validate_on_submit():
-        todo.title= form.title.data
-        todo.description = form.description.data
-        todo.difficulty = form.difficulty.data
-        todo.due_date=form.due_data.data
-        db.session.add(todo)
-        db.session.commit()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            todo.title= form.title.data
+            todo.description = form.description.data
+            todo.difficulty = form.difficulty.data
+            todo.due_date=form.due_data.data
+            db.session.add(todo)
+            db.session.commit()
+            return todo.to_dict()
+    elif request.method == "GET":
         return todo.to_dict()
-    return form.errors, 401
 
 @todo_routes.route('/<int:todo_id>/delete', methods=['GET','POST'])
 def delete_todo(todo_id):
@@ -56,5 +57,20 @@ def delete_todo(todo_id):
     if request.method == "POST":
         db.session.delete(todo)
         db.session.commit()
-        return {'delete':{'message': "successful"}}, 200
+        return {'delete': "successful"}, 200
     return {'delete':'Failed'},401
+
+@todo_routes.route('/<int:todo_id>/complete', methods=['GET','POST'])
+def complete_todo(todo_id):
+    todo = Todo.query.get(todo_id)
+    if todo.completed == 0:
+        todo.completed = 1
+        db.session.add(todo)
+        db.session.commit()
+        return todo.to_dict()
+    elif todo.completed == 1:
+        todo.completed = 0
+        db.session.add(todo)
+        db.session.commit()
+        return todo.to_dict()
+    return {"complete":"failed"},401
