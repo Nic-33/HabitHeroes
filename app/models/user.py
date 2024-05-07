@@ -19,9 +19,9 @@ class User(db.Model, UserMixin):
     avatar_url = db.Column(db.String())
     about = db.Column(db.String(255))
 
-    habits = db.relationship("Habit", back_populates="user")
-    todos = db.relationship("Todo", back_populates="user")
-    dailies = db.relationship("Daily", back_populates="user")
+    habits = db.relationship("Habit", back_populates="users")
+    todos = db.relationship("Todo", back_populates="users")
+    dailies = db.relationship("Daily", back_populates="users")
 
     @property
     def password(self):
