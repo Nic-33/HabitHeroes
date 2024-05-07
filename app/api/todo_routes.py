@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, Blueprint, jsonify
+from flask import Flask, render_template, redirect, Blueprint, jsonify, request
 from app.models import Todo, db
 from app.forms import TodoForm
 from flask_login import current_user
@@ -36,7 +36,7 @@ def create_todo():
         return new_todo.to_dict()
     return form.errors, 401
 
-@todo_routes.route('/<todo_id>', methods=["GET","POST"])
+@todo_routes.route('/<int:todo_id>', methods=["GET","POST"])
 def update_todo(todo_id):
     form = TodoForm()
     todo = Todo.query.get(todo_id)
@@ -49,3 +49,12 @@ def update_todo(todo_id):
         db.session.commit()
         return todo.to_dict()
     return form.errors, 401
+
+@todo_routes.route('/<int:todo_id>/delete', methods=['GET','POST'])
+def delete_todo(todo_id):
+    todo = Todo.query.get(todo_id)
+    if request.method == "POST":
+        db.session.delete(todo)
+        db.session.commit()
+        return {'delete':{'message': "successful"}}, 200
+    return {'delete':'Failed'},401
