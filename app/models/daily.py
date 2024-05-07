@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 import enum
-from sqlalchemy import Enum 
+from sqlalchemy import Enum
 from flask_login import UserMixin
 
 class RepeatFrequency(enum.Enum):
@@ -36,7 +36,7 @@ class Daily(db.Model):
     completed = db.Column(db.Boolean())
 
     users = db.relationship("User", back_populates="dailies")
-    
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -44,11 +44,11 @@ class Daily(db.Model):
             'title': self.title,
             'description':self.description,
             'difficulty':self.difficulty,
-            'frequency':self.frequency,
+            'frequency':self.repeats_frequency,
             'date_to_reset':self.date_to_reset,
             # 'strength':self.strength,
-            'pos':self.pos,
-            'neg':self.neg,
-            'pos_count':self.pos_count,
-            'neg_count':self.neg_count,
+            # 'pos':self.pos,
+            # 'neg':self.neg,
+            # 'pos_count':self.pos_count,
+            # 'neg_count':self.neg_count,
         }
