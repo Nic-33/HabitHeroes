@@ -24,7 +24,7 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
-@user_routes.route('/<int:id>' methods=['PUT'])
+@user_routes.route('/<int:id>', methods=['PUT'])
 def update_user (id):
     updated_user = User.query.filter(User.id == id).first()
     body = request.get_json()
