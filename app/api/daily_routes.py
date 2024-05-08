@@ -4,7 +4,6 @@ from app.models import Daily, db
 from app.forms import DailyForm
 from flask_login import current_user
 from datetime import datetime
-from time import time, gmtime, localtime
 
 daily_routes = Blueprint('daily', __name__)
 
