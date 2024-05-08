@@ -1,6 +1,6 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User
+from app.models import User, db
 
 user_routes = Blueprint('users', __name__)
 
@@ -23,3 +23,16 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/<int:id>' methods=['PUT'])
+def update_user (id):
+    updated_user = User.query.filter(User.id == id).first()
+    body = request.get_json()
+
+    if "about" in body:
+        updated_user.about =  body['about']
+    if 'avatarUrl' in body:
+        updated_user.avatar_url = body['avatarUrl']
+
+    db.session.commit()
+    return updated_user.to_dict()
