@@ -3,7 +3,8 @@ from flask_login import login_required
 from app.models import Daily, db
 from app.forms import DailyForm
 from flask_login import current_user
-from datetime import date
+from datetime import datetime
+from time import time, gmtime, localtime
 
 daily_routes = Blueprint('daily', __name__)
 
@@ -27,7 +28,8 @@ def create_daily():
         title = form.title.data
         description = form.description.data
         difficulty = form.difficulty.data
-        new_daily = Daily(user_id=user_id, title=title, description=description, difficulty=difficulty, due_date = date.today(), completed=0, streak=0)
+        new_daily = Daily(user_id=user_id, title=title, description=description, difficulty=difficulty, completed=0, streak=0, date_timestamp = datetime.timestamp(datetime.now()))
+        new_daily.due_date = new_daily.date_due()
         db.session.add(new_daily)
         db.session.commit()
         return new_daily.to_dict()
@@ -42,6 +44,7 @@ def update_daily(daily_id):
             daily.title= form.title.data
             daily.description = form.description.data
             daily.difficulty = form.difficulty.data
+            daily.repeat_days = daily.convert_set(form.repeat_days.data)
             db.session.add(daily)
             db.session.commit()
             return daily.to_dict()
@@ -60,16 +63,37 @@ def delete_daily(daily_id):
 @daily_routes.route('/<int:daily_id>/complete', methods=['GET','POST'])
 def complete_daily(daily_id):
     daily = Daily.query.get(daily_id)
+    next_date_due = daily.date_due()
+    print('next due date:', next_date_due)
+    streak = int(daily.streak)
     if daily.completed == 0:
         daily.completed = 1
-        daily.streak = daily.streak + 1
-        daily.due_date = date.today()
+
+        if daily.due_date < datetime.timestamp(datetime.now()):
+            streak = 0
+        else:
+            streak = streak + 1
+            
+        daily.streak = streak
+        daily.last_due_date = daily.due_date
+        daily.last_completed_date = daily.completed_date
+        daily.due_date = next_date_due
+        daily.completed_date = datetime.timestamp(datetime.now())
+        daily.date_timestamp = datetime.timestamp(datetime.now())
         db.session.add(daily)
         db.session.commit()
         return daily.to_dict()
     elif daily.completed == 1:
         daily.completed = 0
-        daily.streak = daily.streak - 1
+        daily.completed_date = daily.last_completed_date
+        daily.due_date = daily.last_due_date
+
+        if streak <= 0:
+            streak = 0
+        else:
+            streak = streak - 1
+
+        daily.streak = streak
         db.session.add(daily)
         db.session.commit()
         return daily.to_dict()
