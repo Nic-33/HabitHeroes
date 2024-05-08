@@ -1,20 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-import enum
-from sqlalchemy import Enum 
+from sqlalchemy import Enum
 from flask_login import UserMixin
-
-class RepeatFrequency(enum.Enum):
-    ONE='one'
-    TWO='two'
-    THREE='three'
-class RepeatFrame(enum.Enum):
-    ONE='one'
-    TWO='two'
-    THREE='three'
-class RepeatOn(enum.Enum):
-    ONE='one'
-    TWO='two'
-    THREE='three'
+from datetime import datetime, timedelta, time as datetimeTime
+from time import localtime, time
 
 class Daily(db.Model):
     __tablename__ = 'dailies'
@@ -27,16 +15,18 @@ class Daily(db.Model):
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     difficulty = db.Column(db.Integer(),nullable=False)
-    repeats_frequency = db.Column(db.String(25))
-    repeats_frame = db.Column(db.String(25))
-    repeats_on = db.Column(db.String())
-    date_to_reset = db.Column(db.Date())
-    streak = db.Column(db.Integer)
-    due_date = db.Column(db.Date())
+    repeat_days = db.Column(db.String())
+    date_timestamp = db.Column(db.Integer())
+    streak = db.Column(db.Integer())
+    due_date = db.Column(db.Integer())
+    last_due_date = db.Column(db.Integer())
     completed = db.Column(db.Boolean())
+    completed_date = db.Column(db.Integer())
+    last_completed_date = db.Column(db.Integer())
+
 
     users = db.relationship("User", back_populates="dailies")
-    
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -44,11 +34,32 @@ class Daily(db.Model):
             'title': self.title,
             'description':self.description,
             'difficulty':self.difficulty,
-            'frequency':self.frequency,
-            'date_to_reset':self.date_to_reset,
-            # 'strength':self.strength,
-            'pos':self.pos,
-            'neg':self.neg,
-            'pos_count':self.pos_count,
-            'neg_count':self.neg_count,
+            'frequency':self.repeat_days,
+            'date_timestamp':datetime.fromtimestamp(self.date_timestamp),
+            'due_date': datetime.fromtimestamp(self.due_date),
+            'streak' : self.streak,
+            'completed': self.completed,
+            'completed_date': self.completed_date
         }
+
+    def convert_set(self, data):
+        if isinstance(data, str):
+            return set(data)
+        elif isinstance(data, set):
+            return ''.join(data)
+
+    def date_due(self):
+        dueDates = sorted(set(self.repeat_days))
+        currentDate = time()
+        current_wday = localtime(currentDate).tm_wday
+        for date in dueDates:
+            date = int(date)
+            if date > current_wday:
+                next_wday = date
+                break
+            else:
+                next_wday = int(dueDates[0])
+        current = datetime.now()
+        nextDateDue = current + timedelta( (next_wday-current.weekday()) % 7 )
+        nextDateDue = datetime.combine(nextDateDue, datetimeTime.max)
+        return datetime.timestamp(nextDateDue)

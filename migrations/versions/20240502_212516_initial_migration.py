@@ -1,7 +1,7 @@
 """initial migration
 
 Revision ID: e7f91a9a98ab
-Revises: 
+Revises:
 Create Date: 2024-05-02 21:25:16.430502
 
 """
@@ -38,12 +38,13 @@ def upgrade():
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('description', sa.String(length=255), nullable=False),
     sa.Column('difficulty', sa.Integer(), nullable=False),
-    sa.Column('repeats_frequency', sa.Enum(), nullable=True),
-    sa.Column('repeats_frame', sa.Enum(), nullable=True),
-    sa.Column('repeats_on', sa.Enum(), nullable=True),
-    sa.Column('date_to_reset', sa.Date(), nullable=True),
-    sa.Column('streak', sa.Enum(), nullable=True),
-    sa.Column('due_date', sa.Date(), nullable=True),
+    sa.Column('repeat_days', sa.String(), nullable=True),
+    sa.Column('date_timestamp', sa.Integer(), nullable=True),
+    sa.Column('completed_date', sa.Integer(), nullable=True),
+    sa.Column('last_completed_date', sa.Integer(), nullable=True),
+    sa.Column('streak', sa.Integer(), nullable=True),
+    sa.Column('due_date', sa.Integer(), nullable=True),
+    sa.Column('last_due_date', sa.Integer(), nullable=True),
     sa.Column('completed', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
