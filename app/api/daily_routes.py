@@ -44,7 +44,9 @@ def update_daily(daily_id):
             daily.title= form.title.data
             daily.description = form.description.data
             daily.difficulty = form.difficulty.data
-            daily.repeat_days = daily.convert_set(form.repeat_days.data)
+            if daily.repeat_days != form.repeat_days.data:
+                daily.repeat_days = daily.convert_set(form.repeat_days.data)
+                daily.due_date = daily.date_due()
             db.session.add(daily)
             db.session.commit()
             return daily.to_dict()
@@ -73,7 +75,7 @@ def complete_daily(daily_id):
             streak = 0
         else:
             streak = streak + 1
-            
+
         daily.streak = streak
         daily.last_due_date = daily.due_date
         daily.last_completed_date = daily.completed_date
