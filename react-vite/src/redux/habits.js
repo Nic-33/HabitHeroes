@@ -1,9 +1,14 @@
 const SET_HABITS = 'habits/setHabits'
+const REMOVE_HABITS = 'habits/removeHabits'
 
 const setHabits = (habits) => ({
     type: SET_HABITS,
     payload: habits
 });
+
+export const removeHabits = () =>({
+    type:REMOVE_HABITS
+})
 
 export const thunkGetHabits = () => async (dispatch) => {
     const response = await fetch("/api/habits/");
@@ -41,6 +46,8 @@ function habitReducer(state = initialState, action) {
                 obj[element.id]=element;
             });
             return { ...obj}
+        case REMOVE_HABITS:
+            return {}
         default:
             return state;
     }

@@ -15,7 +15,7 @@ class Daily(db.Model):
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     difficulty = db.Column(db.Integer(),nullable=False)
-    repeat_days = db.Column(db.String())
+    repeat_days = db.Column(db.String()) # need to fix
     date_timestamp = db.Column(db.Integer())
     streak = db.Column(db.Integer())
     due_date = db.Column(db.Integer())
@@ -34,7 +34,7 @@ class Daily(db.Model):
             'title': self.title,
             'description':self.description,
             'difficulty':self.difficulty,
-            'frequency':self.repeat_days,
+            'frequency':self.repeat_days, # need to fix
             'date_timestamp':datetime.fromtimestamp(self.date_timestamp),
             'due_date': datetime.fromtimestamp(self.due_date),
             'streak' : self.streak,

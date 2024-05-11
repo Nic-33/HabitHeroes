@@ -1,20 +1,22 @@
 const SET_DAILIES = 'dailies/setDailies'
 
-export const thunkGetDailes = () => async (dispatch) => {
-    const response = await fetch("/api/dailes");
-    if (response.ok) {
-        const data = response.json();
-        if (data.errors) {
-            return;
-        }
-        dispatch(setDailies(data));
-    }
-}
-
 const setDailies = (dailies) => ({
     type: SET_DAILIES,
     payload: dailies
 });
+
+export const thunkGetDailies = () => async (dispatch) => {
+    const response = await fetch("/api/daily");
+    if (response.ok) {
+        const data = await response.json();
+        if (data.errors) {
+            return;
+        }
+        console.log("Dailies", data)
+        dispatch(setDailies(data));
+    }
+}
+
 
 // const SET_HABIT = 'habits/setHabit';
 // const REMOVE_HABIT = 'habits.removeHabit'
@@ -37,7 +39,7 @@ function dailyReducer(state = initialState, action) {
             action.payload.dailies.forEach(element => {
                 obj[element.id]=element;
             });
-            return { ...action.payload}
+            return { ...obj}
         default:
             return state;
     }

@@ -6,13 +6,19 @@ from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
 def seed_habits():
-    demo_habit = Habit(
+    demo_habit1 = Habit(
         user_id= 1,title='Excercise', description='Do some excercise', difficulty= 1, frequency='placeholder',date_to_reset=datetime.now(),pos=True,neg=True,pos_count=0,neg_count=0)
+    demo_habit2 = Habit(
+        user_id= 1,title='Excercise again', description='Do some excercise', difficulty= 1, frequency='placeholder',date_to_reset=datetime.now(),pos=True,neg=True,pos_count=0,neg_count=0)
+    demo_habit3 = Habit(
+        user_id= 2,title='Excercise once more', description='Do some excercise', difficulty= 1, frequency='placeholder',date_to_reset=datetime.now(),pos=True,neg=True,pos_count=0,neg_count=0)
    
     # bobbie = User(
     #     username='bobbie', email='bobbie@aa.io', password='password')
 
-    db.session.add(demo_habit)
+    db.session.add(demo_habit1)
+    db.session.add(demo_habit2)
+    db.session.add(demo_habit3)
     # db.session.add(marnie)
     # db.session.add(bobbie)
     db.session.commit()

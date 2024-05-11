@@ -18,7 +18,7 @@ def seed_dailies():
         completed=False)
 
     demo_daily2 = Daily(
-        user_id= 2,
+        user_id= 1,
         title='Daily seed2',
         description='This is the daily seed 2',
         difficulty= 1,
@@ -29,9 +29,9 @@ def seed_dailies():
         completed=False)
 
     demo_daily3 = Daily(
-        user_id= 2,
-        title='Daily seed2',
-        description='This is the daily seed 2',
+        user_id= 1,
+        title='Daily seed3',
+        description='This is the daily seed 3',
         difficulty= 1,
         repeat_days = '0',
         date_timestamp=datetime.timestamp(datetime.now()),
@@ -41,8 +41,8 @@ def seed_dailies():
 
     demo_daily4 = Daily(
         user_id= 2,
-        title='Daily seed2',
-        description='This is the daily seed 2',
+        title='Daily seed4',
+        description='This is the daily seed 4',
         difficulty= 1,
         repeat_days = '0',
         date_timestamp=datetime.timestamp(datetime.now()),

@@ -1,9 +1,15 @@
 const SET_TODOS = 'todos/setTodos'
 
+const setTodos = (todos) => ({
+    type: SET_TODOS,
+    payload: todos
+});
+
 export const thunkGetTodos = () => async (dispatch) => {
-    const response = await fetch("/api/todos");
+    const response = await fetch("/api/todo");
     if (response.ok) {
-        const data = response.json();
+        const data = await response.json();
+        console.log("Todo ok",data)
         if (data.errors) {
             return;
         }
@@ -11,10 +17,6 @@ export const thunkGetTodos = () => async (dispatch) => {
     }
 }
 
-const setTodos = (todos) => ({
-    type: SET_TODOS,
-    payload: todos
-});
 
 // const SET_HABIT = 'habits/setHabit';
 // const REMOVE_HABIT = 'habits.removeHabit'
@@ -37,7 +39,7 @@ function todoReducer(state = initialState, action) {
             action.payload.todos.forEach(element => {
                 obj[element.id] = element;
             });
-            return { ...action.payload }
+            return { ...obj }
         default:
             return state;
     }
