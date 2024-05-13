@@ -1,5 +1,3 @@
-import { header } from "express-validator";
-
 const SET_DAILIES = 'dailies/setDailies'
 const CREATE_DAILIES_FOR_USER = 'dailies/createDailiesForUser'
 const UPDATE_DAILIES_FOR_USER = 'dailies/updateDailiesForUser'
@@ -32,7 +30,7 @@ export const thunkGetDailies = () => async (dispatch) => {
 }
 
 export const thunkCreateDailies = (payload) => async (dispatch) => {
-    const response = await fetch(`/api/daily/`, {
+    const response = await fetch(`/api/daily`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -64,7 +62,7 @@ export const thunkCompleteDailies = (daily_id) => async (dispatch) => {
     const response = await fetch(`api/daily/${daily_id}/complete`)
     if (response.ok) {
         const daily = await response.json()
-        dispatch()
+        dispatch(updateDailies(daily))
     }
 }
 
@@ -90,6 +88,7 @@ function dailyReducer(state = initialState, action) {
                 obj[element.id]=element;
             });
             return { ...obj}
+
         case UPDATE_DAILIES_FOR_USER:{
             return {
                 ...state,
@@ -99,6 +98,7 @@ function dailyReducer(state = initialState, action) {
                 }
             }
         }
+
         case CREATE_DAILIES_FOR_USER:{
             return {
                 ...state,
@@ -108,13 +108,14 @@ function dailyReducer(state = initialState, action) {
                 }
             }
         }
+
         default:
             return state;
     }
 }
 
 export const deleteReview = (daily_id) => async (dispatch) => {
-    const response = await csrfFetch(`/api/daily/${daily_id}`, {
+    const response = await fetch(`/api/daily/${daily_id}`, {
         method: 'DELETE'
     });
     dispatch(deleteReview());

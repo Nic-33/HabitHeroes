@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux"
-import { useEffect, useState } from "react"
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import HabitSection from '../Habit/HabitSection';
 import TodoSection from '../Todo/TodoSection';
 import DailySection from '../Daily/DailySection';
