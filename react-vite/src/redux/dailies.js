@@ -114,11 +114,11 @@ function dailyReducer(state = initialState, action) {
     }
 }
 
-export const deleteReview = (daily_id) => async (dispatch) => {
+export const deleteDailies = (daily_id) => async (dispatch) => {
     const response = await fetch(`/api/daily/${daily_id}`, {
         method: 'DELETE'
     });
-    dispatch(deleteReview());
+    dispatch(deleteDailies());
     return response;
 };
 

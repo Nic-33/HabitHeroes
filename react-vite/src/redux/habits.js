@@ -1,13 +1,20 @@
 const SET_HABITS = 'habits/setHabits'
-const REMOVE_HABITS = 'habits/removeHabits'
+const CREATE_HABITS = 'habits/createHabits'
+const UPDATE_HABITS = 'habits/updateHabits'
 
 const setHabits = (habits) => ({
     type: SET_HABITS,
     payload: habits
 });
 
-export const removeHabits = () =>({
-    type:REMOVE_HABITS
+const createHabits = (habits) => ({
+    type: CREATE_HABITS,
+    payload: habits
+});
+
+const updateHabits = (habits) => ({
+    type: UPDATE_HABITS,
+    payload: habits
 })
 
 export const thunkGetHabits = () => async (dispatch) => {
@@ -22,6 +29,34 @@ export const thunkGetHabits = () => async (dispatch) => {
     }
 }
 
+export const thunkCreateHabits = (payload) => async (dispatch) => {
+    const response = await fetch(`/api/habits`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    if (response.ok){
+        const habit =await response.json()
+        dispatch(createHabits(habit))
+    }
+
+}
+
+export const thunkUpdateHabits = (payload, habit_id) => async (dispatch) => {
+    const response = await fetch(`api/habits/${habit_id}`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(payload)
+    })
+    if (response.ok){
+        const habit = await response.json()
+        dispatch(updateHabits(habit))
+    }
+}
 
 
 // const SET_HABIT = 'habits/setHabit';
@@ -46,11 +81,38 @@ function habitReducer(state = initialState, action) {
                 obj[element.id]=element;
             });
             return { ...obj}
-        case REMOVE_HABITS:
-            return {}
-        default:
-            return state;
+
+            case UPDATE_HABITS:{
+                return {
+                    ...state,
+                    [action.habits.id]: {
+                        ...state[action.habits.id],
+                        ...action.habits
+                    }
+                }
+            }
+
+            case CREATE_HABITS:{
+                return {
+                    ...state,
+                    [action.habits.Id]: {
+                        ...state[action.habits.Id],
+                        habits: [...state[action.habits.id],action.habits]
+                    }
+                }
+            }
+
+            default:
+                return state;
+        }
     }
-}
+
+    export const deleteHabits = (habit_id) => async (dispatch) => {
+        const response = await fetch(`/api/habits/${habit_id}`, {
+            method: 'DELETE'
+        });
+        dispatch(deleteHabits());
+        return response;
+    };
 
 export default habitReducer;
