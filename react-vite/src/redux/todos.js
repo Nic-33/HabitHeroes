@@ -30,7 +30,7 @@ export const thunkGetTodos = () => async (dispatch) => {
 }
 
 export const thunkCreateTodos = (payload) => async (dispatch) => {
-    const response = await fetch(`/api/todos`, {
+    const response = await fetch(`/api/todo`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export const thunkCreateTodos = (payload) => async (dispatch) => {
 }
 
 export const thunkUpdateTodos = (payload, todo_id) => async (dispatch) => {
-    const response = await fetch(`api/todos/${todo_id}`, {
+    const response = await fetch(`api/todo/${todo_id}`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -92,6 +92,7 @@ function todoReducer(state = initialState, action) {
             }
         }
 
+<<<<<<< HEAD
         case CREATE_TODOS: {
             return {
                 ...state,
@@ -114,5 +115,14 @@ export const deleteTodos = (todo_id) => async (dispatch) => {
     dispatch(deleteTodos());
     return response;
 };
+=======
+    export const deleteTodos = (todo_id) => async (dispatch) => {
+        const response = await fetch(`/api/todo/${todo_id}`, {
+            method: 'DELETE'
+        });
+        dispatch(deleteTodos());
+        return response;
+    };
+>>>>>>> 61594d71473aad1964b242cd276a5c34fa147326
 
 export default todoReducer;
