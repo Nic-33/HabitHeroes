@@ -6,7 +6,7 @@ const TodoInfo = ({ info_id }) => {
 
     const todoSlice = useSelector(state => state.todos)
     const [todo, setTodo] = useState(todoSlice[info_id])
-    const showDropMenu = false;
+    const [showDropMenu,setShowDropMenu] = useState(false)
 
     useEffect(() => {
         setTodo(todoSlice[info_id])
@@ -21,7 +21,7 @@ const TodoInfo = ({ info_id }) => {
                     <p>{todo.description}</p>
                 </div>
                 <div className="options_button">
-                    <button>b</button>
+                    <button onClick={()=>setShowDropMenu(!showDropMenu)}>b</button>
                     {showDropMenu ? <EditMenu /> : null}
                 </div>
 

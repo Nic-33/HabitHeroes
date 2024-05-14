@@ -42,10 +42,7 @@ export const thunkCreateHabits = (payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     })
     if (response.ok){
-        const habit =await response.json(
-         
-        )   
-
+        const habit =await response.json()   
         dispatch(createHabits(habit))
     }
 

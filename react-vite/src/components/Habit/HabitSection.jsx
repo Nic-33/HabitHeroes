@@ -29,7 +29,7 @@ const HabitSection = () => {
             // habitSlice[3] = obj
             // const payload = JSON.stringify(obj)
             await dispatch(thunkCreateHabits(obj))
-            console.log(habitSlice)
+            // console.log(habitSlice)
             //    console.log(await  dispatch(thunkCreateHabits(obj)))
             // dispatch(thunkCreateHabits(payload))
             // console.log(habitSlice)
