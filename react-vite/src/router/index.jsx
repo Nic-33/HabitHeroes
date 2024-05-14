@@ -3,14 +3,9 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 // import HabitInfo from '../components/Habit/HabitInfo';
-import HabitSection from '../components/Habit/HabitSection';
-<<<<<<< HEAD
+// import HabitSection from '../components/Habit/HabitSection';
 // import TodoSection from '../components/Todo/TodoSection';
 // import DailySection from '../components/Daily/DailySection';
-=======
-import TodoSection from '../components/Todo/TodoSection';
-import DailySection from '../components/Daily/DailySection';
->>>>>>> 61594d71473aad1964b242cd276a5c34fa147326
 import LandingPage from '../components/LandingPage';
 import MainPage from '../components/MainPage/MainPage';
 
@@ -44,8 +39,8 @@ export const router = createBrowserRouter([
         element: <LandingPage />
       },
       {
-        path:'test',
-        element:<HabitSection />
+        // path:'test',
+        // element:<HabitSection />
       }
 
     ],

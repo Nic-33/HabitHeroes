@@ -92,12 +92,11 @@ function todoReducer(state = initialState, action) {
             }
         }
 
-<<<<<<< HEAD
         case CREATE_TODOS: {
             return {
                 ...state,
-                [action.todos.Id]: {
-                    ...state[action.todos.Id],
+                [action.todos.id]: {
+                    ...state[action.todos.id],
                     todos: [...state[action.todos.id], action.todos]
                 }
             }
@@ -115,14 +114,5 @@ export const deleteTodos = (todo_id) => async (dispatch) => {
     dispatch(deleteTodos());
     return response;
 };
-=======
-    export const deleteTodos = (todo_id) => async (dispatch) => {
-        const response = await fetch(`/api/todo/${todo_id}`, {
-            method: 'DELETE'
-        });
-        dispatch(deleteTodos());
-        return response;
-    };
->>>>>>> 61594d71473aad1964b242cd276a5c34fa147326
 
 export default todoReducer;

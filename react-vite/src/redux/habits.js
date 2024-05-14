@@ -29,7 +29,6 @@ export const thunkGetHabits = () => async (dispatch) => {
         if (data.errors) {
             return;
         }
-        console.log("data:",data)
         dispatch(setHabits(data));
     }
 }
@@ -43,7 +42,10 @@ export const thunkCreateHabits = (payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     })
     if (response.ok){
-        const habit =await response.json()
+        const habit =await response.json(
+         
+        )   
+
         dispatch(createHabits(habit))
     }
 
@@ -60,6 +62,7 @@ export const thunkUpdateHabits = (payload, habit_id) => async (dispatch) => {
     if (response.ok){
         const habit = await response.json()
         dispatch(updateHabits(habit))
+
     }
 }
 
@@ -99,11 +102,7 @@ function habitReducer(state = initialState, action) {
 
             case CREATE_HABITS:{
                 return {
-                    ...state,
-                    [action.habits.Id]: {
-                        ...state[action.habits.Id],
-                        habits: [...state[action.habits.id],action.habits]
-                    }
+                   ...state,[action.payload.id]:action.payload  
                 }
             }
 
@@ -123,8 +122,6 @@ function habitReducer(state = initialState, action) {
         return response;
     };
 
-    export const removeHabits = () => {
-        
-    }
+   
 
 export default habitReducer;

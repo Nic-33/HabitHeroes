@@ -7,9 +7,9 @@ const HabitInfo = ({ info_id }) => {
 
     const habitSlice = useSelector(state => state.habits)
     const [habit, setHabit] = useState(habitSlice[info_id])
-    const showDropMenu = false;
+    let showDropMenu = false;
 
-    const toggleOptionMenu = () => !showDropMenu;
+    const toggleOptionMenu = () => showDropMenu= !showDropMenu;
     
     useEffect(() => {
         setHabit(habitSlice[info_id])

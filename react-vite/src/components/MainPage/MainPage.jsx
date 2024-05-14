@@ -13,20 +13,12 @@ const MainPage = () => {
     if (!sessionUser) return <Navigate to="landing" replace={true} />;
 
     return <div>
-<<<<<<< HEAD
         <h1>Hello World!</h1>
         <div className="task_sections">
             <HabitSection />
             <DailySection />
             <TodoSection />
         </div>
-
-=======
-    <h1>Hello World!</h1>
-    <HabitSection />
-    <DailySection />
-    <TodoSection  />
->>>>>>> 61594d71473aad1964b242cd276a5c34fa147326
     </div>
 }
 
