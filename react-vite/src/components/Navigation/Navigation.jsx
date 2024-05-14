@@ -34,15 +34,16 @@ function Navigation({ isLoaded }) {
     );
 
     return (
-        <nav>
+        <nav className="header">
             <div className="nav-bar">
                 <div className="nav-links-ctn">
                     <NavLink exact to="/" className="nav-home">
-                        Habitica Clone
+                        HABIT HEROES
                     </NavLink>
                     {sessionUser ? loggedInLinks : loggedOutLinks}
-                    {isLoaded && <ProfileButton user={sessionUser} />}
-
+                </div>
+                <div className="profile-button">
+                    <ProfileButton />
                 </div>
             </div>
         </nav>
