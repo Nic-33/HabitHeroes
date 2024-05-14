@@ -8,10 +8,19 @@ import Navigation from "../components/Navigation/Navigation";
 
 export default function Layout() {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [ isLoaded, setIsLoaded ] = useState(false);
+
   useEffect(() => {
+<<<<<<< HEAD
     dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
+=======
+    dispatch(thunkAuthenticate()).then(() => setIsLoaded( true ));
+    dispatch(thunkGetHabits());
+  }, [ dispatch ]);
+
+
+>>>>>>> navbar
   return (
     <>
       <ModalProvider>
