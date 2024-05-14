@@ -11,11 +11,12 @@ const TodoSection = () => {
     }, [dispatch])
     return <div>
         <h2>To Do&apos;s</h2>
-        <input type="text" placeholder="Add a todo"></input>
-        {Object.keys(todoSlice).map(element => {
-            return (<div key={element}> <TodoInfo info_id={element} /></div>)
-        })}
-
+        <div className="section">
+            <input type="text" placeholder="Add a todo"></input>
+            {Object.keys(todoSlice).map(element => {
+                return (<div key={element}> <TodoInfo info_id={element} /></div>)
+            })}
+        </div>
     </div>
 }
 

@@ -1,0 +1,7 @@
+.task_sections {
+    display: flex;
+    flex-direction: row;
+}
+.task_sections > div{
+    min-width:400px;
+}

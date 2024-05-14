@@ -7,24 +7,32 @@ const HabitInfo = ({ info_id }) => {
 
     const habitSlice = useSelector(state => state.habits)
     const [habit, setHabit] = useState(habitSlice[info_id])
+    const showDropMenu = false;
 
+    const toggleOptionMenu = () => !showDropMenu;
+    
     useEffect(() => {
         setHabit(habitSlice[info_id])
     }, [habitSlice, info_id])
-    return <div>
+    return <div className="item_section">
         <button type="button" >
             +
         </button>
-        {habit && <div>
-            <p>{habit.title} </p>
-            <p>{habit.description}</p>
-            <p>{habit.pos_count} </p>
-            <p>{habit.neg_count} </p>
-            <div> 
-                <button>b</button>
-                <EditMenu />
+        {habit && <div className="item_content">
+            <div className="item_details">
+                <div>
+                    <p>{habit.title} </p>
+                    <p>{habit.description}</p>
+                </ div>
+                <div className="options_button">
+                    <button onClick={toggleOptionMenu}>b</button>
+                    {showDropMenu ? <EditMenu /> : null}
+                </div>
             </div>
-           
+            <div className="streak_display">
+                <p>{habit.pos_count} </p>
+                <p>{habit.neg_count} </p>
+            </ div>
         </div>
         }
         <button>

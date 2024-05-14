@@ -1,9 +1,9 @@
-const SET_HABITS = 'habits/setHabits'
+const GET_HABITS = 'habits/setHabits'
 const CREATE_HABITS = 'habits/createHabits'
 const UPDATE_HABITS = 'habits/updateHabits'
 
 const setHabits = (habits) => ({
-    type: SET_HABITS,
+    type: GET_HABITS,
     payload: habits
 });
 
@@ -75,7 +75,7 @@ const initialState = {}
 let obj = {}
 function habitReducer(state = initialState, action) {
     switch (action.type) {
-        case SET_HABITS:
+        case GET_HABITS:
             obj = {}
             action.payload.habits.forEach(element => {
                 obj[element.id]=element;
@@ -114,5 +114,9 @@ function habitReducer(state = initialState, action) {
         dispatch(deleteHabits());
         return response;
     };
+
+    export const removeHabits = () => {
+        
+    }
 
 export default habitReducer;

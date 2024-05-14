@@ -18,13 +18,13 @@ const updateTodos = (todos) => ({
 })
 
 export const thunkGetTodos = () => async (dispatch) => {
-    const response = await fetch("/api/todos/");
+    const response = await fetch("/api/todo/");
     if (response.ok) {
         const data = await response.json();
         if (data.errors) {
             return;
         }
-        console.log("data:",data)
+        console.log("data:", data)
         dispatch(setTodos(data));
     }
 }
@@ -37,8 +37,8 @@ export const thunkCreateTodos = (payload) => async (dispatch) => {
         },
         body: JSON.stringify(payload)
     })
-    if (response.ok){
-        const todo =await response.json()
+    if (response.ok) {
+        const todo = await response.json()
         dispatch(createTodos(todo))
     }
 
@@ -50,9 +50,9 @@ export const thunkUpdateTodos = (payload, todo_id) => async (dispatch) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body:JSON.stringify(payload)
+        body: JSON.stringify(payload)
     })
-    if (response.ok){
+    if (response.ok) {
         const todo = await response.json()
         dispatch(updateTodos(todo))
     }
@@ -78,41 +78,41 @@ function todoReducer(state = initialState, action) {
         case SET_TODOS:
             obj = {}
             action.payload.todos.forEach(element => {
-                obj[element.id]=element;
+                obj[element.id] = element;
             });
-            return { ...obj}
+            return { ...obj }
 
-            case UPDATE_TODOS:{
-                return {
-                    ...state,
-                    [action.todos.id]: {
-                        ...state[action.todos.id],
-                        ...action.todos
-                    }
+        case UPDATE_TODOS: {
+            return {
+                ...state,
+                [action.todos.id]: {
+                    ...state[action.todos.id],
+                    ...action.todos
                 }
             }
-
-            case CREATE_TODOS:{
-                return {
-                    ...state,
-                    [action.todos.Id]: {
-                        ...state[action.todos.Id],
-                        todos: [...state[action.todos.id],action.todos]
-                    }
-                }
-            }
-
-            default:
-                return state;
         }
-    }
 
-    export const deleteTodos = (todo_id) => async (dispatch) => {
-        const response = await fetch(`/api/todos/${todo_id}`, {
-            method: 'DELETE'
-        });
-        dispatch(deleteTodos());
-        return response;
-    };
+        case CREATE_TODOS: {
+            return {
+                ...state,
+                [action.todos.Id]: {
+                    ...state[action.todos.Id],
+                    todos: [...state[action.todos.id], action.todos]
+                }
+            }
+        }
+
+        default:
+            return state;
+    }
+}
+
+export const deleteTodos = (todo_id) => async (dispatch) => {
+    const response = await fetch(`/api/todos/${todo_id}`, {
+        method: 'DELETE'
+    });
+    dispatch(deleteTodos());
+    return response;
+};
 
 export default todoReducer;

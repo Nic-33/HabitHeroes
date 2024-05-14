@@ -1,0 +1,26 @@
+.section {
+    display:flex;
+    flex-direction: column;
+}
+
+.item_section {
+    display: flex;
+ 
+}
+.item_content{
+    width:100%;
+}
+
+.item_details{
+    display: flex;   
+    width:100%;
+}
+.options_button{
+    margin-left: auto;
+}
+
+.streak_display{
+    display: flex;
+    justify-content: end;
+    margin-left: auto;
+}
