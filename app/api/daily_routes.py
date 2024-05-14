@@ -22,6 +22,7 @@ def get_all_daily_user():
 @daily_routes.route('/', methods=['POST'])
 def create_daily():
     form = DailyForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     user_id = current_user.to_dict()['id']
     if form.validate_on_submit():
         title = form.title.data
@@ -32,6 +33,7 @@ def create_daily():
         db.session.add(new_daily)
         db.session.commit()
         return new_daily.to_dict()
+    print(form.errors)
     return form.errors, 401
 
 @daily_routes.route('/<int:daily_id>', methods=["GET","POST"])

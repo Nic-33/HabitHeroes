@@ -35,7 +35,7 @@ def create_habit():
         db.session.commit()
         return new_habit.to_dict()
     # return new_habit.todict()
-    # return form.errors,401
+    return form.errors,401
 
 
 # update specific habit
