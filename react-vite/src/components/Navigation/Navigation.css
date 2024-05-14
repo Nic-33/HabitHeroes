@@ -88,9 +88,8 @@ hr {
 .profile-button {
     width: fit-content;
     font-size: 15px;
-    margin: 1px;
+    margin-left: auto;
     justify-content: flex-end;
     position: relative;
     padding: 10px;
 }
-

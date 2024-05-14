@@ -19,7 +19,7 @@ const DailySection = () => {
             const title = dailyInput.slice()
             const description = 'this is a place hold the description'
             const difficulty = 1
-            const frequency = 'daily'
+            const frequency = '0'
             const today = new Date(Date.now());
             const tomorrow = new Date(today);
             tomorrow.setDate(today.getDate() + 1);
