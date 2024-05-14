@@ -3,9 +3,9 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 // import HabitInfo from '../components/Habit/HabitInfo';
-// import HabitSection from '../components/Habit/HabitSection';
-// import TodoSection from '../components/Todo/TodoSection';
-// import DailySection from '../components/Daily/DailySection';
+import HabitSection from '../components/Habit/HabitSection';
+import TodoSection from '../components/Todo/TodoSection';
+import DailySection from '../components/Daily/DailySection';
 import LandingPage from '../components/LandingPage';
 import MainPage from '../components/MainPage/MainPage';
 
@@ -17,6 +17,12 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <MainPage />
+        // element: <div>
+        // <h1>Hello World!</h1>
+        // <HabitSection />
+        // <DailySection />
+        // <TodoSection  />
+        // </div>
       },
       {
         path: "login",

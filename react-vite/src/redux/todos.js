@@ -18,7 +18,7 @@ const updateTodos = (todos) => ({
 })
 
 export const thunkGetTodos = () => async (dispatch) => {
-    const response = await fetch("/api/todos/");
+    const response = await fetch("/api/todo/");
     if (response.ok) {
         const data = await response.json();
         if (data.errors) {
@@ -30,7 +30,7 @@ export const thunkGetTodos = () => async (dispatch) => {
 }
 
 export const thunkCreateTodos = (payload) => async (dispatch) => {
-    const response = await fetch(`/api/todos`, {
+    const response = await fetch(`/api/todo`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export const thunkCreateTodos = (payload) => async (dispatch) => {
 }
 
 export const thunkUpdateTodos = (payload, todo_id) => async (dispatch) => {
-    const response = await fetch(`api/todos/${todo_id}`, {
+    const response = await fetch(`api/todo/${todo_id}`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -108,7 +108,7 @@ function todoReducer(state = initialState, action) {
     }
 
     export const deleteTodos = (todo_id) => async (dispatch) => {
-        const response = await fetch(`/api/todos/${todo_id}`, {
+        const response = await fetch(`/api/todo/${todo_id}`, {
             method: 'DELETE'
         });
         dispatch(deleteTodos());

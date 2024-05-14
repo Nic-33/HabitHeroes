@@ -11,13 +11,12 @@ const MainPage = () => {
 
     if (!sessionUser) return <Navigate to="landing" replace={true} />;
 
-    return<div>
+    return <div>
     <h1>Hello World!</h1>
     <HabitSection />
     <DailySection />
     <TodoSection  />
     </div>
-
 }
 
 export default MainPage

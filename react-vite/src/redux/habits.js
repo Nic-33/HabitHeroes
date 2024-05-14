@@ -1,6 +1,7 @@
 const SET_HABITS = 'habits/setHabits'
 const CREATE_HABITS = 'habits/createHabits'
 const UPDATE_HABITS = 'habits/updateHabits'
+const REMOVE_HABITS = 'habits/removeHabits'
 
 const setHabits = (habits) => ({
     type: SET_HABITS,
@@ -15,6 +16,10 @@ const createHabits = (habits) => ({
 const updateHabits = (habits) => ({
     type: UPDATE_HABITS,
     payload: habits
+})
+
+export const removeHabits = () =>({
+    type:REMOVE_HABITS
 })
 
 export const thunkGetHabits = () => async (dispatch) => {
@@ -101,6 +106,9 @@ function habitReducer(state = initialState, action) {
                     }
                 }
             }
+
+            case REMOVE_HABITS:
+                return {}
 
             default:
                 return state;
