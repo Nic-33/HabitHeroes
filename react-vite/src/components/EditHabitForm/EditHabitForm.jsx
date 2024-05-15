@@ -63,7 +63,65 @@ function EditHabitForm({ habit, edit = true }) {
             </div>
 
             <form className="edit-habit-form" onSubmit={handleSubmit}>
-                
+                <div className="edit-form-top">
+                    <div className="edit-form-input">
+                        <label>Title</label>
+                        <input
+                            className="edit-form-top-input"
+                            type="text"
+                            value={title}
+                            placeholder="Add a title..."
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                        {errs.title}
+                    </div>
+
+                    <div className="habit-edit-input-ctn">
+                        <label>Notes</label>
+                        <textarea
+                            className="edit-form-top-input"
+                            type="text"
+                            value={description}
+                            placeholder="Add notes"
+                            onChange={(e) => setTitle(e.target.value)}
+                        ></textarea>
+                    </div>
+                </div>
+
+                <div className="edit-form-bottom">
+                    <div className="edit-habit-plus-and-minus">
+                        <div className="habit-btn-ctn">
+                            <button 
+                                className={`pos-neg-habit-btn ${pos ? 'selected' : null }`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setPos(!pos)
+                                }}
+                                >
+                                    <i className="fa-solid fa-plus"></i>
+                            </button>
+                            <div>Positive</div>
+                        </div>
+
+                        <div className="habit-btn-ctn">
+                            <button 
+                                className={`pos-neg-habit-btn ${neg ? 'selected' : null }`}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setPos(!neg)
+                                }}
+                                >
+                                    <i className="fa-solid fa-minus"></i>
+                            </button>
+                            <div>Negative</div>
+                        </div>
+
+
+
+                        
+                    </div>
+                    
+                </div>
             </form>
         </div>
     );
