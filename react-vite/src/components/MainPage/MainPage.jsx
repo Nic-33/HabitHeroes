@@ -10,10 +10,9 @@ const MainPage = () => {
 
     const sessionUser = useSelector((state) => state.session.user);
 
-    if (!sessionUser) return <Navigate to="landing" replace={true} />;
+    if (!sessionUser) return <Navigate to="/landing" replace={true} />;
 
     return <div>
-        <h1>Hello World!</h1>
         <div className="task_sections">
             <HabitSection />
             <DailySection />
