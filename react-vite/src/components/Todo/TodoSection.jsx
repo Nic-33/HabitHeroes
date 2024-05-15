@@ -1,18 +1,36 @@
 import TodoInfo from "./TodoInfo"
 import { useDispatch, useSelector } from "react-redux"
-import { thunkGetTodos } from "../../redux/todos"
-import { useEffect } from "react"
+import { thunkGetTodos, thunkCreateTodos } from "../../redux/todos"
+import { useEffect, useState } from "react"
 
 const TodoSection = () => {
     const dispatch = useDispatch()
     const todoSlice = useSelector(state => state.todos)
+    const [todoInput, setTodoInput] = useState('');
+
+    const handleTodoInput = (e) => {
+        setTodoInput(e)
+    }
+
+    const handleKeyPressEnter = async (e) => {
+        if (e.key === 'Enter') {
+            const title = todoInput.slice()
+            const description = 'desc'
+            const difficulty = 1
+            const due_date = new Date(Date.now());
+            const obj = { title, description, difficulty, due_date }
+
+            await dispatch(thunkCreateTodos(obj))
+        }
+    }
+
     useEffect(() => {
         dispatch(thunkGetTodos());
     }, [dispatch])
     return <div>
         <h2>To Do&apos;s</h2>
         <div className="section">
-            <input type="text" placeholder="Add a todo"></input>
+            <input type="text" value={todoInput} placeholder="Add a todo" onChange={(e) => handleTodoInput(e.target.value)} onKeyUpCapture={(e) => handleKeyPressEnter(e)}></input>
             {Object.keys(todoSlice).map(element => {
                 return (<div key={element}> <TodoInfo info_id={element} /></div>)
             })}

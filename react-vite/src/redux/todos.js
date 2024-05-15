@@ -1,6 +1,7 @@
 const SET_TODOS = 'todos/setTodos'
 const CREATE_TODOS = 'todos/createTodos'
 const UPDATE_TODOS = 'todos/updateTodos'
+const DELETE_TODOS = 'todos/deleteTodos'
 
 const setTodos = (todos) => ({
     type: SET_TODOS,
@@ -15,6 +16,11 @@ const createTodos = (todos) => ({
 const updateTodos = (todos) => ({
     type: UPDATE_TODOS,
     payload: todos
+})
+
+const deleteTodos = (todo_id) => ({
+    type: DELETE_TODOS,
+    payload: todo_id
 })
 
 export const thunkGetTodos = () => async (dispatch) => {
@@ -94,12 +100,13 @@ function todoReducer(state = initialState, action) {
 
         case CREATE_TODOS: {
             return {
-                ...state,
-                [action.todos.id]: {
-                    ...state[action.todos.id],
-                    todos: [...state[action.todos.id], action.todos]
-                }
+                ...state, [action.payload.id]: action.payload
             }
+        }
+        case DELETE_TODOS: {
+            obj = { ...state }
+            delete obj[action.payload]
+            return {...obj}
         }
 
         default:
@@ -107,11 +114,11 @@ function todoReducer(state = initialState, action) {
     }
 }
 
-export const deleteTodos = (todo_id) => async (dispatch) => {
-    const response = await fetch(`/api/todos/${todo_id}`, {
-        method: 'DELETE'
+export const thunkDeleteTodos = (todo_id) => async (dispatch) => {
+    const response = await fetch(`/api/todo/${todo_id}/delete`, {
+        method: 'POST'
     });
-    dispatch(deleteTodos());
+    dispatch(deleteTodos(todo_id));
     return response;
 };
 

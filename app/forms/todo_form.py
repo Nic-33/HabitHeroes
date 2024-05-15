@@ -7,6 +7,4 @@ class TodoForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     description = StringField('description', validators=[])
     difficulty = IntegerField('difficulty', validators=[DataRequired()])
-    due_date = DateField(validators=[DataRequired()])
-
-
+    # due_date = DateField(validators=[DataRequired()])

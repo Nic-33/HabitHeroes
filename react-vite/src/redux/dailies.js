@@ -1,6 +1,7 @@
 const SET_DAILIES = 'dailies/setDailies'
 const CREATE_DAILIES_FOR_USER = 'dailies/createDailiesForUser'
 const UPDATE_DAILIES_FOR_USER = 'dailies/updateDailiesForUser'
+const DELETE_DAILY = 'dalies/deleteDaily'
 
 const setDailies = (dailies) => ({
     type: SET_DAILIES,
@@ -15,6 +16,11 @@ const createDailies = (dailies) => ({
 const updateDailies = (dailies) => ({
     type: UPDATE_DAILIES_FOR_USER,
     payload: dailies
+})
+
+const deleteDailies = (daily_id) => ({
+    type: DELETE_DAILY,
+    payload: daily_id
 })
 
 export const thunkGetDailies = () => async (dispatch) => {
@@ -37,8 +43,8 @@ export const thunkCreateDailies = (payload) => async (dispatch) => {
         },
         body: JSON.stringify(payload)
     })
-    if (response.ok){
-        const daily =await response.json()
+    if (response.ok) {
+        const daily = await response.json()
         dispatch(createDailies(daily))
     }
 
@@ -50,9 +56,9 @@ export const thunkUpdateDailies = (payload, daily_id) => async (dispatch) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body:JSON.stringify(payload)
+        body: JSON.stringify(payload)
     })
-    if (response.ok){
+    if (response.ok) {
         const daily = await response.json()
         dispatch(updateDailies(daily))
     }
@@ -85,11 +91,11 @@ function dailyReducer(state = initialState, action) {
         case SET_DAILIES:
             obj = {}
             action.payload.dailies.forEach(element => {
-                obj[element.id]=element;
+                obj[element.id] = element;
             });
-            return { ...obj}
+            return { ...obj }
 
-        case UPDATE_DAILIES_FOR_USER:{
+        case UPDATE_DAILIES_FOR_USER: {
             return {
                 ...state,
                 [action.dailies.id]: {
@@ -99,14 +105,16 @@ function dailyReducer(state = initialState, action) {
             }
         }
 
-        case CREATE_DAILIES_FOR_USER:{
+        case CREATE_DAILIES_FOR_USER: {
             return {
-                ...state,
-                [action.dailies.Id]: {
-                    ...state[action.dailies.Id],
-                    dailies: [...state[action.dailies.id],action.dailies]
-                }
+                ...state, [action.payload.id]: action.payload
             }
+        }
+
+        case DELETE_DAILY: {
+            obj = { ...state }
+            delete obj[action.payload]
+            return { ...obj }
         }
 
         default:
@@ -114,11 +122,11 @@ function dailyReducer(state = initialState, action) {
     }
 }
 
-export const deleteDailies = (daily_id) => async (dispatch) => {
-    const response = await fetch(`/api/daily/${daily_id}`, {
-        method: 'DELETE'
+export const thunkDeleteDailies = (daily_id) => async (dispatch) => {
+    const response = await fetch(`/api/daily/${daily_id}/delete`, {
+        method: 'POST'
     });
-    dispatch(deleteDailies());
+    dispatch(deleteDailies(daily_id));
     return response;
 };
 

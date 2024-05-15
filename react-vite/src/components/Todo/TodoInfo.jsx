@@ -22,7 +22,7 @@ const TodoInfo = ({ info_id }) => {
                 </div>
                 <div className="options_button">
                     <button onClick={()=>setShowDropMenu(!showDropMenu)}>b</button>
-                    {showDropMenu ? <EditMenu /> : null}
+                    {showDropMenu ? <EditMenu type='Todo' id={info_id}/> : null}
                 </div>
 
             </div>

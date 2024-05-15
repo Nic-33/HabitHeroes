@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, Blueprint, jsonify, request
 from app.models import Todo, db
 from app.forms import TodoForm
 from flask_login import current_user
+from datetime import datetime # only here for testing, will delete later
 
 todo_routes = Blueprint('todo', __name__)
 
@@ -23,16 +24,19 @@ def get_all_todo_user():
 @todo_routes.route('/', methods=['POST'])
 def create_todo():
     form = TodoForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     user_id = current_user.to_dict()['id']
     if form.validate_on_submit():
         title = form.title.data
         description = form.description.data
         difficulty = form.difficulty.data
-        dueDate = form.due_data.data
+        dueDate = datetime.today()
+        # dueDate = form.due_date.data
         new_todo = Todo(user_id=user_id, title=title, description=description, difficulty=difficulty,due_date=dueDate, completed=0)
         db.session.add(new_todo)
         db.session.commit()
         return new_todo.to_dict()
+    print(form.errors)
     return form.errors, 401
 
 @todo_routes.route('/<int:todo_id>', methods=["GET","POST"])

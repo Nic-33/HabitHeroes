@@ -25,7 +25,7 @@ const HabitInfo = ({ info_id }) => {
                 </ div>
                 <div className="options_button">
                     <button onClick={()=>setShowDropMenu(!showDropMenu)}>b</button>
-                    {showDropMenu ? <EditMenu /> : null}
+                    {showDropMenu ? <EditMenu type='Habit' id={info_id}/> : null}
                 </div>
             </div>
             <div className="streak_display">

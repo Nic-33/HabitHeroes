@@ -7,7 +7,7 @@ const DailyInfo = ({ info_id }) => {
 
     const dailySlice = useSelector(state => state.dailies)
     const [daily, setDaily] = useState(dailySlice[info_id])
-    const [showDropMenu,setShowDropMenu] = useState(false)
+    const [showDropMenu, setShowDropMenu] = useState(false)
 
     useEffect(() => {
         setDaily(dailySlice[info_id])
@@ -22,8 +22,8 @@ const DailyInfo = ({ info_id }) => {
                     <p>{daily.description}</p>
                 </div>
                 <div className="options_button">
-                    <button onClick={()=>setShowDropMenu(!showDropMenu)}>b</button>
-                   {showDropMenu ? <EditMenu /> : null}
+                    <button onClick={() => setShowDropMenu(!showDropMenu)}>b</button>
+                    {showDropMenu ? <EditMenu type='Daily' id={info_id} /> : null}
                 </div>
             </div>
             <div className="streak_display">

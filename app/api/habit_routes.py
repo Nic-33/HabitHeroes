@@ -57,7 +57,7 @@ def habit(id):
 @login_required
 def delete_habit(id):
     habit = Habit.query.get(id)
-    if request.method == "Post":
+    if request.method == "POST":
         db.session.delete(habit)
         db.session.commit()
         return {'delete':'sucessful'},200
