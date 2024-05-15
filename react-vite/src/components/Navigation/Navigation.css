@@ -9,11 +9,13 @@
     color: #b5af8a;
     box-shadow: 3px 3px 10px rgb(41, 39, 39);
 }
+
 hr {
     background-color: #b5af8a;
     height: 1px;
     border: none;
 }
+
 .landingButton {
     color: white;
     background-color: #6f3dcb;
@@ -49,6 +51,7 @@ hr {
     transition: none 0s ease 0s;
     z-index: 1080;
 }
+
 /* .userButton {
     background-color: #36205d;
     color: white;
@@ -90,4 +93,11 @@ hr {
     justify-content: flex-end;
     position: relative;
     padding: 10px;
+}
+
+#logo {
+    margin-top: 1px;
+    max-height: 50px;
+    background-color: #eae8f1;
+    border-radius: 11px;
 }

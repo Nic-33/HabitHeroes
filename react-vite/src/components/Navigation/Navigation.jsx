@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
+import logo from '../../images/habitHeroes.png'
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
@@ -38,7 +39,7 @@ function Navigation({ isLoaded }) {
             <div className="nav-bar">
                 <div className="nav-links-ctn">
                     <NavLink exact to="/" className="nav-home">
-                        HABIT HEROES
+                        <img id='logo' src={logo} alt='home' />
                     </NavLink>
                     {sessionUser ? loggedInLinks : loggedOutLinks}
                 </div>
