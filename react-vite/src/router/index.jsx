@@ -8,6 +8,7 @@ import Layout from './Layout';
 // import DailySection from '../components/Daily/DailySection';
 import LandingPage from '../components/LandingPage';
 import MainPage from '../components/MainPage/MainPage';
+import EditAvatar from '../components/Avatar/EditAvatar';
 // import Avatar from '../components/Avatar/Avatar';
 
 
@@ -42,8 +43,8 @@ export const router = createBrowserRouter([
         element: <LandingPage />
       },
       {
-        // path:'test',
-        // element:<HabitSection />
+        path:'test',
+        element:<EditAvatar edit={true}/>
       }
 
     ],

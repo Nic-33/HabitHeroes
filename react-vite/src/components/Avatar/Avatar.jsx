@@ -24,7 +24,10 @@ const Avatar = ({ edit }) => {
     // }
 
     useEffect(() => {
-        if (!avatarSlice['eyes']) dispatch(thunkGetAvatar())
+        if (!avatarSlice['eyes']){
+             dispatch(thunkGetAvatar())
+             console.log("getting avatar")
+        }
     }, [dispatch])
 
     const selectColor = (num) => {

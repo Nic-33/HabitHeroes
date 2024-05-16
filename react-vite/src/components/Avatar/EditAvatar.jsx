@@ -1,19 +1,28 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { AvatarData } from "./AvatarData"
 import './Avatar.css'
 import { useDispatch, useSelector } from "react-redux"
-import { thunkUpdateAvatar } from "../../redux/avatars"
+import { thunkUpdateAvatar, thunkGetAvatar } from "../../redux/avatars"
 
 const EditAvatar = ({ edit }) => {
+
 
 
     const dispatch = useDispatch()
 
     const avatarSlice = useSelector(state => state.avatar)
+    console.table(avatarSlice)
 
     const [seed, setSeed] = useState(0)
     const [eyes, setEyes] = useState(0)
     const [mouth, setMouth] = useState(0)
+
+    useEffect(() => {
+        if (!avatarSlice['eyes']){
+             dispatch(thunkGetAvatar())
+             console.log("getting avatar")
+        }
+    }, [dispatch])
 
 
     const updateAvatar = () => {
@@ -61,6 +70,7 @@ const EditAvatar = ({ edit }) => {
     }
     return (
         <div>
+
             <img className="avatar"
                 src={`https://api.dicebear.com/8.x/fun-emoji/svg?seed=${AvatarData.seed[seed]}&eyes=${AvatarData.eyes[eyes]}&mouth=${AvatarData.mouth[mouth]}`}
                 alt="avatar" />

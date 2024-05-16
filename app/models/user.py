@@ -22,6 +22,7 @@ class User(db.Model, UserMixin):
     habits = db.relationship("Habit", back_populates="users")
     todos = db.relationship("Todo", back_populates="users")
     dailies = db.relationship("Daily", back_populates="users")
+    avatar = db.relationship("Avatar", back_populates="user")
 
     @property
     def password(self):
