@@ -244,3 +244,5 @@ function EditHabitForm({ habit, edit = true }) {
         </div>
     );
 }
+
+export default EditHabitForm
