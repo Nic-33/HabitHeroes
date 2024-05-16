@@ -42,7 +42,7 @@ export const thunkCreateHabits = (payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     })
     if (response.ok){
-        const habit =await response.json()   
+        const habit =await response.json()
         dispatch(createHabits(habit))
     }
 
@@ -59,7 +59,6 @@ export const thunkUpdateHabits = (payload, habit_id) => async (dispatch) => {
     if (response.ok){
         const habit = await response.json()
         dispatch(updateHabits(habit))
-
     }
 }
 
@@ -99,7 +98,7 @@ function habitReducer(state = initialState, action) {
 
             case CREATE_HABITS:{
                 return {
-                   ...state,[action.payload.id]:action.payload  
+                   ...state,[action.payload.id]:action.payload
                 }
             }
 
@@ -119,6 +118,6 @@ function habitReducer(state = initialState, action) {
         return response;
     };
 
-   
+
 
 export default habitReducer;
