@@ -18,6 +18,8 @@ const MainPage = () => {
     return <div>
         <div className="Main_page_Container">
             <div className="user_info_bar"><UserInfo /></div>
+            {/* <Avatar />
+            <EditAvatar edit={true}/> */}
             <div className="task_sections">
                 <HabitSection />
                 <DailySection />

@@ -13,8 +13,7 @@ import dailyReducer from "./dailies";
 import avatarReducer from "./avatars";
 
 const rootReducer = combineReducers({
-  // session: sessionReducer, habits: habitReducer, todos: todoReducer, dailies: dailyReducer, avatar:avatarReducer
-  session: sessionReducer, user: userReducer, habits: habitReducer, todos: todoReducer, dailies: dailyReducer
+  session: sessionReducer, user: userReducer, habits: habitReducer, todos: todoReducer, dailies: dailyReducer, avatar:avatarReducer
 });
 
 let enhancer;
