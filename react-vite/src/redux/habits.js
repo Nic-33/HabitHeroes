@@ -66,7 +66,6 @@ export const thunkUpdateHabits = (payload, habit_id) => async (dispatch) => {
     if (response.ok) {
         const habit = await response.json()
         dispatch(updateHabits(habit))
-
     }
 }
 
@@ -104,16 +103,11 @@ function habitReducer(state = initialState, action) {
             }
         }
 
-        case CREATE_HABITS: {
-            return {
-                ...state, [action.payload.id]: action.payload
+            case CREATE_HABITS:{
+                return {
+                   ...state,[action.payload.id]:action.payload
+                }
             }
-        }
-        case DELETE_HABIT: {
-            obj = { ...state }
-            delete obj[action.payload]
-            return { ...obj }
-        }
 
         case REMOVE_HABITS:
             return {}
