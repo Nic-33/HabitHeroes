@@ -1,7 +1,23 @@
+.Main_page_Container {
+    display: grid;
+    grid-template-areas:
+        'user_status'
+        'task_sections'
+    ;
+
+}
+
+.user_info_bar {
+    background-color: #6133b4;
+    grid-area: user_status
+}
+
 .task_sections {
+    grid-area: task_sections;
     display: flex;
     flex-direction: row;
 }
-.task_sections > div{
-    min-width:400px;
+
+.task_sections>div {
+    min-width: 400px;
 }
