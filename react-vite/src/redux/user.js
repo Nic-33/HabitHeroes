@@ -49,13 +49,7 @@ function userReducer(state = initialState, action) {
             return action.payload
 
         case UPDATE_USER_INFO: {
-            return {
-                ...state,
-                [action.habits.id]: {
-                    ...state[action.habits.id],
-                    ...action.payload
-                }
-            }
+            return action.payload
         }
 
         case REMOVE_USER_INFO:
