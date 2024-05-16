@@ -8,6 +8,8 @@ import Layout from './Layout';
 // import DailySection from '../components/Daily/DailySection';
 import LandingPage from '../components/LandingPage';
 import MainPage from '../components/MainPage/MainPage';
+// import Avatar from '../components/Avatar/Avatar';
+
 
 
 export const router = createBrowserRouter([
@@ -17,6 +19,7 @@ export const router = createBrowserRouter([
       {
         path: "/",
         // element: <Layout />
+        // element: <Avatar />
         element: <MainPage />
         // element: <div>
         // <h1>Hello World!</h1>

@@ -8,7 +8,7 @@ const EditMenu = ({ type, id }) => {
 
     const dispatch = useDispatch()
 
-    const handleClick = () => {
+    const handleDeleteClick = () => {
         if (type === 'Habit') dispatch(thunkDeleteHabits(id))
         if (type === 'Daily') dispatch(thunkDeleteDailies(id))
         if (type === 'Todo') dispatch(thunkDeleteTodos(id))
@@ -17,7 +17,7 @@ const EditMenu = ({ type, id }) => {
     return (
         <ul>
             <li><button>Edit</button></li>
-            <li><button onClick={() => handleClick()}>Delete</button></li>
+            <li><button onClick={() => handleDeleteClick()}>Delete</button></li>
         </ul>
     )
 }

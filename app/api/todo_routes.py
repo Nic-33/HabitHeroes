@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, Blueprint, jsonify, request
 from app.models import Todo, db
 from app.forms import TodoForm
-from flask_login import current_user
+from flask_login import login_required,current_user
 from datetime import datetime # only here for testing, will delete later
 
 todo_routes = Blueprint('todo', __name__)
@@ -22,6 +22,7 @@ def get_all_todo_user():
     return {'todos': [todo.to_dict() for todo in todos]}
 
 @todo_routes.route('/', methods=['POST'])
+@login_required
 def create_todo():
     form = TodoForm()
     form['csrf_token'].data = request.cookies['csrf_token']

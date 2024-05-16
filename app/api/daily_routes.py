@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import Daily, db
 from app.forms import DailyForm
-from flask_login import current_user
+# from flask_login import 
 from datetime import datetime
 
 daily_routes = Blueprint('daily', __name__)
@@ -29,7 +29,8 @@ def create_daily():
         description = form.description.data
         difficulty = form.difficulty.data
         new_daily = Daily(user_id=user_id, title=title, description=description, difficulty=difficulty, completed=0, streak=0, date_timestamp = datetime.timestamp(datetime.now()))
-        new_daily.due_date = new_daily.date_due()
+        new_daily.due_date = datetime.now()
+        # new_daily.due_date = new_daily.date_due()
         db.session.add(new_daily)
         db.session.commit()
         return new_daily.to_dict()
@@ -54,7 +55,7 @@ def update_daily(daily_id):
     elif request.method == "GET":
         return daily.to_dict()
 
-@daily_routes.route('/<int:daily_id>/delete', methods=['GET','POST'])
+@daily_routes.route('/<int:daily_id>/delete', methods=['GET','DELETE'])
 def delete_daily(daily_id):
     daily = Daily.query.get(daily_id)
     if request.method == "POST":

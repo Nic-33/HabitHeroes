@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 from .habits import seed_habits, undo_habits
 from .todos import seed_todos, undo_todos
 from .dailies import seed_dailies, undo_dailies
+from .avatars import seed_avatars,undo_avatars
 
 from app.models.db import db, environment, SCHEMA
 
@@ -23,11 +24,13 @@ def seed():
         undo_habits()
         undo_todos()
         undo_dailies()
+        undo_avatars()
 
     seed_users()
     seed_habits()
     seed_todos()
     seed_dailies()
+    seed_avatars()
     # Add other seed functions here
 
 
@@ -38,4 +41,5 @@ def undo():
     undo_habits()
     undo_todos()
     undo_dailies()
+    undo_avatars()
     # Add other undo functions here

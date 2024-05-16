@@ -131,13 +131,6 @@ export const thunkDeleteHabits = (habit_id) => async (dispatch) => {
     return response;
 };
 
-// export const deleteHabits = (habit_id) => async (dispatch) => {
-//     const response = await fetch(`/api/habits/${habit_id}`, {
-//         method: 'DELETE'
-//     });
-//     dispatch(deleteHabits());
-//     return response;
-// };
 
 
 

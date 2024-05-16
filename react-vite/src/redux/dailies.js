@@ -124,7 +124,7 @@ function dailyReducer(state = initialState, action) {
 
 export const thunkDeleteDailies = (daily_id) => async (dispatch) => {
     const response = await fetch(`/api/daily/${daily_id}/delete`, {
-        method: 'POST'
+        method: 'DELETE'
     });
     dispatch(deleteDailies(daily_id));
     return response;

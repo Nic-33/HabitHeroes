@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import Habit,db
 from app.forms import HabitForm
+from datetime import datetime
 
 habit_routes = Blueprint('habits', __name__)
 
@@ -29,7 +30,12 @@ def create_habit():
             user_id=current_user.to_dict()['id'],
             title=form.data['title'],
             description=form.data['description'],
-            difficulty=form.data['difficulty']
+            difficulty=form.data['difficulty'],
+            date_to_reset = datetime.strptime(form.date_to_reset.data,"%Y-%m-%d"),
+            pos_count = form.data['pos_count'],
+            neg_count = form.data['neg_count'],
+            pos = form.data['pos'],
+            neg = form.data['neg']
             )
         db.session.add(new_habit)
         db.session.commit()
