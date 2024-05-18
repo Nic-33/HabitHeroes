@@ -3,6 +3,8 @@ const CREATE_HABITS = 'habits/createHabits'
 const UPDATE_HABITS = 'habits/updateHabits'
 const DELETE_HABIT = 'habits/deleteHabits'
 
+const INCREMENT_HABIT_POS = 'habits/incrementHabitPos'
+const INCREMENT_HABIT_NEG = 'habits/incrementHabitNeg'
 
 
 const setHabits = (habits) => ({
@@ -24,6 +26,16 @@ const deleteHabits = (habit_id) => ({
     type: DELETE_HABIT,
     payload: habit_id
 })
+
+const incrementHabitPos = (habit) => ({
+    type: INCREMENT_HABIT_POS,
+    payload: habit
+})
+const incrementHabitNeg = (habit) => ({
+    type: INCREMENT_HABIT_NEG,
+    payload: habit
+})
+
 
 
 export const thunkGetHabits = () => async (dispatch) => {
@@ -54,7 +66,7 @@ export const thunkCreateHabits = (payload) => async (dispatch) => {
 
 export const thunkUpdateHabits = (payload, habit_id) => async (dispatch) => {
     const response = await fetch(`api/habits/${habit_id}`, {
-        method: "POST",
+        method: "PUT",
         headers: {
             'Content-Type': 'application/json'
         },
@@ -66,6 +78,20 @@ export const thunkUpdateHabits = (payload, habit_id) => async (dispatch) => {
     }
 }
 
+export const thunkIncrementHabitPos = (habit_id) => async (dispatch) => {
+    const response = await fetch(`api/habits/${habit_id}/pos`, { method: "PUT" })
+    if (response.ok) {
+        const habit = await response.json()
+        dispatch(incrementHabitPos(habit))
+    }
+}
+export const thunkIncrementHabitNeg = (habit_id) => async (dispatch) => {
+    const response = await fetch(`api/habits/${habit_id}/neg`, { method: "PUT" })
+    if (response.ok) {
+        const habit = await response.json()
+        dispatch(incrementHabitNeg(habit))
+    }
+}
 
 // const SET_HABIT = 'habits/setHabit';
 // const REMOVE_HABIT = 'habits.removeHabit'
@@ -92,11 +118,7 @@ function habitReducer(state = initialState, action) {
 
         case UPDATE_HABITS: {
             return {
-                ...state,
-                [action.habits.id]: {
-                    ...state[action.habits.id],
-                    ...action.habits
-                }
+                ...state, [action.payload.id]: action.payload
             }
         }
 
@@ -112,7 +134,14 @@ function habitReducer(state = initialState, action) {
             return { ...obj }
         }
 
-
+        case INCREMENT_HABIT_POS: {
+            console.log(action.payload)
+            return { ...state, [action.payload.id]: action.payload }
+        }
+        case INCREMENT_HABIT_NEG: {
+            console.log(action.payload)
+            return { ...state, [action.payload.id]: action.payload }
+        }
 
         default:
             return state;

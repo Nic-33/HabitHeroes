@@ -107,11 +107,7 @@ function todoReducer(state = initialState, action) {
 
         case UPDATE_TODOS: {
             return {
-                ...state,
-                [action.todos.id]: {
-                    ...state[action.todos.id],
-                    ...action.todos
-                }
+                ...state, [action.payload.id]: action.payload
             }
         }
 
