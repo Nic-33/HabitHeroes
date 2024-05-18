@@ -117,11 +117,7 @@ function dailyReducer(state = initialState, action) {
 
         case UPDATE_DAILIES_FOR_USER: {
             return {
-                ...state,
-                [action.dailies.id]: {
-                    ...state[action.dailies.id],
-                    ...action.dailies
-                }
+                ...state, [action.payload.id]: action.payload
             }
         }
 
