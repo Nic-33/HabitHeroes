@@ -75,6 +75,18 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table('avatars',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.String(length=40), nullable=False),
+    sa.Column('seed', sa.String(length=25), nullable=False),
+    sa.Column('eyes', sa.String(length=25), nullable=False),
+    sa.Column('mouth', sa.String(length=25), nullable=False),
+    sa.PrimaryKeyConstraint('id')
+    )
+    # with op.batch_alter_table('todos', schema=None) as batch_op:
+    #     batch_op.alter_column('description',
+    #            existing_type=sa.VARCHAR(length=255),
+    #            nullable=True)
     # ### end Alembic commands ###
 
 
@@ -84,4 +96,9 @@ def downgrade():
     op.drop_table('habits')
     op.drop_table('dailies')
     op.drop_table('users')
+    # with op.batch_alter_table('todos', schema=None) as batch_op:
+    #     batch_op.alter_column('description',
+    #            existing_type=sa.VARCHAR(length=255),
+    #            nullable=False)
+    op.drop_table('avatars')
     # ### end Alembic commands ###
