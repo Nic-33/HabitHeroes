@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from datetime import date
-from app.models import User, db
+from app.models import User,Avatar, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -58,9 +58,19 @@ def sign_up():
             password=form.data['password'],
             first_name=form.data['first_name'],
             last_name=form.data['last_name'],
-            last_login=date.today()
+            last_login=date.today(),
+            about=""
         )
         db.session.add(user)
+        db.session.commit()
+        print('UserID!!!!!!!!!!!:',user.id)
+        avatar = Avatar(
+            user_id = user.id,
+            seed = 0,
+            eyes = 0,
+            mouth = 0
+        )
+        db.session.add(avatar)
         db.session.commit()
         login_user(user)
         return user.to_dict()

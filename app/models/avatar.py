@@ -13,7 +13,7 @@ class Avatar(db.Model):
     seed = db.Column(db.Integer(),nullable=False)
     eyes = db.Column(db.Integer(),nullable=False)
     mouth = db.Column(db.Integer(),nullable=False)
-    
+
     def to_dict(self):
         return {
             'id': self.id,

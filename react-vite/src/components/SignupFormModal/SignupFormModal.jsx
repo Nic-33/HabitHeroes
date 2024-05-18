@@ -12,6 +12,7 @@ function SignupFormModal() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [first_name, setFirst_name] = useState("")
   const [last_name, setLast_name] = useState("")
+  const [about, setAbout] = useState("")
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
@@ -25,18 +26,21 @@ function SignupFormModal() {
       });
     }
 
-    const serverResponse = await dispatch(
+    const serverResponse1 = await dispatch(
       thunkSignup({
         email,
         username,
         password,
         first_name,
-        last_name
+        last_name,
+        about
       })
     );
 
-    if (serverResponse) {
-      setErrors(serverResponse);
+    if (serverResponse1) {
+      setErrors(serverResponse1);
+    // } else if (serverResponse2) {
+    //   setErrors(serverResponse2);
     } else {
       closeModal();
     }
