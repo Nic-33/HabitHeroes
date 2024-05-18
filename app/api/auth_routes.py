@@ -37,6 +37,21 @@ def login():
         return user.to_dict()
     return form.errors, 401
 
+# auth_routes.route('/backdoor', methods=['POST'])
+# def login_backdoor():
+#     """
+#     Logs a user in
+#     """
+#     form = LoginForm()
+#     # Get the csrf_token from the request cookie and put it into the
+#     # form manually to validate_on_submit can be used
+#         # Add the user to the session, we are logged in!
+#         user = User.query.filter(User.email == form.data['email']).first()
+#         # user.last_login = datetime.today()
+#         # db.session.commit()
+#         login_user(user)
+#         return user.to_dict()
+#     return form.errors, 401
 
 @auth_routes.route('/logout')
 def logout():
