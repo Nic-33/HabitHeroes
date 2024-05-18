@@ -30,7 +30,7 @@ export const thunkLogin = (credentials) => async dispatch => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(credentials)
   });
-  console.log ('post response thunklogin')
+  console.log('post response thunklogin')
   if (response.ok) {
     console.log('response ok')
     const data = await response.json();
@@ -45,7 +45,7 @@ export const thunkLogin = (credentials) => async dispatch => {
 
 export const thunkLoginBackDoor = (credentials) => async dispatch => {
   const response = await fetch("/api/auth/backdoor", {
-    method: "POST",
+    method: "GET",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(credentials)
   });
