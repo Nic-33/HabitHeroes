@@ -2,6 +2,8 @@ import TodoInfo from "./TodoInfo"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkGetTodos, thunkCreateTodos } from "../../redux/todos"
 import { useEffect, useState } from "react"
+import CreateTodoForm from "../CreateTodoForm/CreateTodoForm"
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem.jsx";
 
 const TodoSection = () => {
     const dispatch = useDispatch()
@@ -30,6 +32,10 @@ const TodoSection = () => {
     return <div className="section_container">
         <h2>To Do&apos;s</h2>
         <div className="section">
+        <li><OpenModalMenuItem
+                itemText="Create New To Do's"
+                modalComponent={<CreateTodoForm />}
+            /></li>
             <input className="quick_input hoverable" type="text" value={todoInput} placeholder="Add a todo" onChange={(e) => handleTodoInput(e.target.value)} onKeyUpCapture={(e) => handleKeyPressEnter(e)}></input>
             {Object.keys(todoSlice).map(element => {
                 return (<div  key={element}> <TodoInfo info_id={element} /></div>)
