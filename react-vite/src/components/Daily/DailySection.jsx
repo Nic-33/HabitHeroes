@@ -38,13 +38,13 @@ const DailySection = () => {
         dispatch(thunkGetDailies());
     }, [dispatch])
 
-    return <div>
+    return <div className="section_container">
         <h2>Dailies</h2>
         <div className="section">
-            <input type="text" value={dailyInput} placeholder="Add a daily" onChange={(e) => handleDailyInput(e.target.value)} onKeyUpCapture={(e) => handleKeyPressEnter(e)}></input>
+            <input className="quick_input hoverable" type="text" value={dailyInput} placeholder="Add a daily" onChange={(e) => handleDailyInput(e.target.value)} onKeyUpCapture={(e) => handleKeyPressEnter(e)}></input>
             <div>
                 {Object.keys(dailySlice).map(element => {
-                    return (<div key={element}> <DailyInfo info_id={element} /></div>)
+                    return (<div  key={element}> <DailyInfo info_id={element} /></div>)
                 })}
             </div>
         </div>

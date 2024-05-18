@@ -27,12 +27,12 @@ const TodoSection = () => {
     useEffect(() => {
         dispatch(thunkGetTodos());
     }, [dispatch])
-    return <div>
+    return <div className="section_container">
         <h2>To Do&apos;s</h2>
         <div className="section">
-            <input type="text" value={todoInput} placeholder="Add a todo" onChange={(e) => handleTodoInput(e.target.value)} onKeyUpCapture={(e) => handleKeyPressEnter(e)}></input>
+            <input className="quick_input hoverable" type="text" value={todoInput} placeholder="Add a todo" onChange={(e) => handleTodoInput(e.target.value)} onKeyUpCapture={(e) => handleKeyPressEnter(e)}></input>
             {Object.keys(todoSlice).map(element => {
-                return (<div key={element}> <TodoInfo info_id={element} /></div>)
+                return (<div  key={element}> <TodoInfo info_id={element} /></div>)
             })}
         </div>
     </div>

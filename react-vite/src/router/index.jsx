@@ -12,7 +12,9 @@ import EditAvatar from '../components/Avatar/EditAvatar';
 import EditHabitForm from '../components/EditHabitForm/EditHabitForm';
 // import Avatar from '../components/Avatar/Avatar';
 
+// import { useSelector } from 'react-redux';
 
+// const habitSlice = useSelector(state=> state.habits)
 
 export const router = createBrowserRouter([
   {
@@ -43,13 +45,13 @@ export const router = createBrowserRouter([
         // element: <Layout />
         element: <LandingPage />
       },
-      {
-        path:'test',
-        element:<>
-        
-        <EditAvatar edit={true}/>
-      </>
-      }
+      // {
+      //   path:'test',
+      //   element:<>
+      // <EditAvatar />
+      //   {/* <EditHabitForm habit={habitSlice[1]}/> */}
+      // </>
+      // }
 
     ],
   },

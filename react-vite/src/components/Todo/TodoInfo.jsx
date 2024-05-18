@@ -20,9 +20,11 @@ const TodoInfo = ({ info_id }) => {
         dispatch(thunkCompleteTodo(info_id))
     }
 
-    return <div className="item_section">
-        <input type="checkbox" checked={todoSlice[info_id].completed} onChange={(e) => completeTodo(e)}>
+    return <div className="item_section hoverable">
+        <div className="checkbox_container">
+        <input type="checkbox" className="select_box" checked={todoSlice[info_id].completed} onChange={(e) => completeTodo(e)}>
         </input>
+        </div>
         {todo && <div className="item_content">
             <div className="item_details">
                 <div>

@@ -21,9 +21,11 @@ const DailyInfo = ({ info_id }) => {
         dispatch(thunkCompleteDaily(info_id))
     }
 
-    return <div className="item_section">
-        <input checked={dailySlice[info_id].completed} type="checkbox" onChange={(e) => completeDaily(e)}>
+    return <div className="item_section hoverable">
+          <div className="checkbox_container">
+        <input checked={dailySlice[info_id].completed} type="checkbox" className="select_box" onChange={(e) => completeDaily(e)}>
         </input>
+        </div>
         {daily && <div className="item_content">
             <div className="item_details">
                 <div>

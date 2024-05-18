@@ -51,14 +51,14 @@ const HabitSection = () => {
         dispatch(thunkGetHabits());
     }, [dispatch])
 
-    return <div>
+    return <div className="section_container">
         <h2>Habits</h2>
         <div className="section">
-            <input type="text" value={habitInput} placeholder="Add a habit" onChange={(e) => handleHabitInput(e.target.value)} onKeyUpCapture={(e) => handleKeyPressEnter(e)}></input>
+            <input className="quick_input hoverable" type="text" value={habitInput} placeholder="Add a habit" onChange={(e) => handleHabitInput(e.target.value)} onKeyUpCapture={(e) => handleKeyPressEnter(e)}></input>
             {/* <button onClick={handleAddHabitClick}>add habit</button> */}
             <div >
                 {Object.keys(habitSlice).map(element => {
-                    return (<div key={element}> <HabitInfo info_id={element} /></div>)
+                    return (<div  key={element}> <HabitInfo info_id={element} /></div>)
                 })}
             </div>
         </div>

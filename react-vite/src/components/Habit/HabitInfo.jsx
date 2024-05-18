@@ -13,7 +13,7 @@ const HabitInfo = ({ info_id }) => {
     useEffect(() => {
         setHabit(habitSlice[info_id])
     }, [habitSlice, info_id])
-    return <div className="item_section">
+    return <div className="item_section hoverable">
         <button type="button" >
             +
         </button>
