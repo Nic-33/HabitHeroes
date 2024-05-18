@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkUpdateDailies, removeDaily } from "../../redux/dailies";
+import { thunkUpdateDailies, thunkDeleteDailies } from "../../redux/dailies";
 import "./DailyForm.css";
 
-function EditDailyForm(props, edit = true) {
+function EditDailyForm(props) {
     const { closeModal } = useModal();
     const daily_Id = props.props;
     const dispatch = useDispatch();
@@ -248,7 +248,7 @@ function EditDailyForm(props, edit = true) {
 
                         If the user choses yes then res will be true so we dispatch the action and close the edit modal
                         if (res) {
-                            dispatch(removeDaily(daily.id));
+                            dispatch(thunkDeleteDailies(daily.id));
                             closeModal();
                         }
                     }}
