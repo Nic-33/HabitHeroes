@@ -1,27 +1,34 @@
 import { useState } from "react";
 import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import { updateDaily, removeDaily } from "../../reux/daily";
+import { thunkUpdateDailies, removeDaily } from "../../redux/dailies";
+import "./DailyForm.css";
 
-function EditDailyForm({ daily }) {
+function EditDailyForm(props, edit = true) {
     const { closeModal } = useModal();
+    const daily_Id = props.props;
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.session.user);
+
+    let allDailies = useSelector((state) => state.dailies);
+    allDailies = Object.values(allDailies);
+    const daily = allDailies.filter((info) => info.id == daily_Id).pop();
 
     //form elements to build object to send to backend
     const [title, setTitle] = useState(daily.title);
     const [description, setDescription] = useState(daily.description);
-    const [strength, setStrength] = useState(daily.strength);
-    const [repeats_frame, setRepeats_frame] = useState(daily.repeats_frame);
-    const [repeats_frequency, setRepeats_frequency] = useState(
-        daily.repeats_frequency
-    );
-    const [streak, setStreak] = useState(daily.streak);
+    const [difficulty, setDifficulty] = useState(daily.difficulty);
+    // const [repeats_frame, setRepeats_frame] = useState(daily.repeats_frame);
+    // const [repeats_frequency, setRepeats_frequency] = useState(
+    //     daily.repeats_frequency
+    // );
+    // const [streak, setStreak] = useState(daily.streak);
     // to toggle advanced setting menu
     const [advanced, setAdvanced] = useState(false);
     // Errors from submit
     const [errors, setErrors] = useState();
 
-    async function handleSubmit(e) {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Build a dummy error object then set it when all the conditions are checked
@@ -43,26 +50,26 @@ function EditDailyForm({ daily }) {
         const newDaily = {
             title,
             description,
-            strength,
-            repeats_frame,
-            repeats_frequency,
-            streak: +streak,
+            difficulty,
+            // repeats_frame,
+            // repeats_frequency,
+            // streak: +streak,
         };
 
         // check if there are errors before dispatching
         if (!Object.values(issues).length) {
-            await dispatch(updateDaily(daily.id, newDaily));
+            await dispatch(thunkUpdateDailies(newDaily, daily_Id));
             closeModal();
         }
-    }
-
-    const getTimeframe = () => {
-        // converts a number into a string used to display length of time chosen
-        if (repeats_frame === "1") return "Days";
-        else if (repeats_frame === "7") return "Weeks";
-        else if (repeats_frame === "30") return "Months";
-        else if (repeats_frame === "365") return "Years";
     };
+
+    // const getTimeframe = () => {
+    //     // converts a number into a string used to display length of time chosen
+    //     if (repeats_frame === "1") return "Days";
+    //     else if (repeats_frame === "7") return "Weeks";
+    //     else if (repeats_frame === "30") return "Months";
+    //     else if (repeats_frame === "365") return "Years";
+    // };
 
     return (
         <div className="daily-edit-ctn">
@@ -129,8 +136,8 @@ function EditDailyForm({ daily }) {
                         <label id="gap">Difficulty</label>
 
                         <select
-                            value={strength}
-                            onChange={(e) => setStrength(e.target.value)}
+                            value={difficulty}
+                            onChange={(e) => setDifficulty(e.target.value)}
                         >
                             <option value="Trivial">Trivial</option>
                             <option value="Easy">Easy</option>
@@ -143,8 +150,8 @@ function EditDailyForm({ daily }) {
 
                     {/* This is where Start date will go when it is implimented */}
 
-                    <div className="edit-daily-select-ctn">
-                        {/* This is the repeats time frame input div */}
+                    {/* <div className="edit-daily-select-ctn">
+                        This is the repeats time frame input div
                         <label>Repeats</label>
 
                         <select
@@ -161,7 +168,7 @@ function EditDailyForm({ daily }) {
                     </div>
 
                     <div className="edit-daily-select-ctn">
-                        {/* This div is the number input for how many of time frame should pass before task becomes due again */}
+                        This div is the number input for how many of time frame should pass before task becomes due again
                         <label>Repeat Every</label>
 
                         <div>
@@ -173,7 +180,7 @@ function EditDailyForm({ daily }) {
                                     setRepeats_frequency(e.target.value)
                                 }
                             />
-                            {/* This is where the selected time frame is displayed (days, weeks, months, years) after the input field. &ensp; adds some spacing between the two */}
+                            This is where the selected time frame is displayed (days, weeks, months, years) after the input field. &ensp; adds some spacing between the two
                             &ensp;
                             <span className="timeFrame">{getTimeframe()}</span>
                         </div>
@@ -181,7 +188,7 @@ function EditDailyForm({ daily }) {
                         <div className="errors">
                             {errors?.repeats_frequency}
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* This is where the tags input will go when that feature is implimented  */}
 
@@ -209,7 +216,7 @@ function EditDailyForm({ daily }) {
                             <div className="advanced-options-menu">
                                 <label id="streakLabel">Adjust Streak</label>
 
-                                <div className="advanced-counters">
+                                {/* <div className="advanced-counters">
                                     <div className="streakIcon">
                                         <i className="fa-solid fa-forward icon-forward"></i>
                                         <input
@@ -221,16 +228,16 @@ function EditDailyForm({ daily }) {
                                             }}
                                         />
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         )}
-                        <div className="errors">{errors?.streak}</div>
+                        {/* <div className="errors">{errors?.streak}</div> */}
                     </div>
                 </div>
             </form>
 
             {/* This is the bottom section that contains the delete part */}
-            <div className="edit-daily-del">
+            {/* <div className="edit-daily-del">
                 <button
                     className="edit-daily-del-btn"
                     onClick={() => {
@@ -239,19 +246,19 @@ function EditDailyForm({ daily }) {
                             "Are you sure you want to delete this daily?"
                         );
 
-                        // If the user choses yes then res will be true so we dispatch the action and close the edit modal
+                        If the user choses yes then res will be true so we dispatch the action and close the edit modal
                         if (res) {
                             dispatch(removeDaily(daily.id));
                             closeModal();
                         }
                     }}
                 >
-                    {/* This is the trashcan Icon */}
+                    This is the trashcan Icon
                     <i className="fa-solid fa-trash-can"></i>
-                    {/* This is the text with &ensp; to add some spacing between the icon and the text */}
+                    This is the text with &ensp; to add some spacing between the icon and the text
                     &ensp;Delete this Daily
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 }

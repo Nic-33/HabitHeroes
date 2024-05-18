@@ -4,6 +4,7 @@ import { thunkDeleteDailies } from '../../redux/dailies'
 import { useDispatch } from 'react-redux'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem.jsx";
 import EditTodoForm from '../TodoFormModal/TodoForm'
+import EditDailyForm from '../DailyFormModal/DailyForm.jsx'
 
 
 const EditMenu = ({ type, id }) => {
@@ -18,6 +19,12 @@ const EditMenu = ({ type, id }) => {
     // if (type === 'Habit') modalComp = <EditHabitsForm props={id}/>
     // // if (type === 'Daily') modalComp = <EditDailiesForm props={id}/>
     if (type === 'Todo') modalComp = <EditTodoForm props={id}/>
+    
+    
+    
+    if (type === 'Daily') modalComp = <EditDailyForm props={id}/>
+
+
 
     return (
         <ul>
