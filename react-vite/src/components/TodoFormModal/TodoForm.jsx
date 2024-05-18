@@ -11,6 +11,7 @@ const EditTodoForm = (props) => {
     let allTodos = useSelector((state) => state.todos)
     allTodos = Object.values(allTodos)
     const todo = allTodos.filter(info => info.id == todo_Id).pop()
+    
     const [description, setDescription] = useState(todo.description)
     const [difficulty, setDifficulty] = useState(todo.difficulty)
     const [title, setTitle] = useState(todo.title)

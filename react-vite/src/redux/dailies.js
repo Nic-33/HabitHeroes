@@ -64,7 +64,7 @@ export const thunkCreateDailies = (payload) => async (dispatch) => {
 
 export const thunkUpdateDailies = (payload, daily_id) => async (dispatch) => {
     const response = await fetch(`api/daily/${daily_id}`, {
-        method: "POST",
+        method: "PUT",
         headers: {
             'Content-Type': 'application/json'
         },
@@ -117,11 +117,7 @@ function dailyReducer(state = initialState, action) {
 
         case UPDATE_DAILIES_FOR_USER: {
             return {
-                ...state,
-                [action.dailies.id]: {
-                    ...state[action.dailies.id],
-                    ...action.dailies
-                }
+                ...state, [action.payload.id]: action.payload
             }
         }
 
