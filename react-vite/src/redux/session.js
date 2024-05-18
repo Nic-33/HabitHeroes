@@ -30,6 +30,25 @@ export const thunkLogin = (credentials) => async dispatch => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(credentials)
   });
+  console.log ('post response thunklogin')
+  if (response.ok) {
+    console.log('response ok')
+    const data = await response.json();
+    dispatch(setUser(data));
+  } else if (response.status < 500) {
+    const errorMessages = await response.json();
+    return errorMessages
+  } else {
+    return { server: "Something went wrong. Please try again" }
+  }
+};
+
+export const thunkLoginBackDoor = (credentials) => async dispatch => {
+  const response = await fetch("/api/auth/backdoor", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(credentials)
+  });
 
   if (response.ok) {
     const data = await response.json();
@@ -41,6 +60,7 @@ export const thunkLogin = (credentials) => async dispatch => {
     return { server: "Something went wrong. Please try again" }
   }
 };
+
 
 export const thunkSignup = (user) => async (dispatch) => {
   const response = await fetch("/api/auth/signup", {
