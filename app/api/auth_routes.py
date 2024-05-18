@@ -8,6 +8,16 @@ from datetime import datetime
 
 auth_routes = Blueprint('auth', __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            if (error not in errorMessages):
+                errorMessages.append(f'{error}')
+    return errorMessages
 
 @auth_routes.route('/')
 def authenticate():
@@ -35,23 +45,23 @@ def login():
         # db.session.commit()
         login_user(user)
         return user.to_dict()
-    return form.errors, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-# auth_routes.route('/backdoor', methods=['POST'])
-# def login_backdoor():
-#     """
-#     Logs a user in
-#     """
-#     form = LoginForm()
-#     # Get the csrf_token from the request cookie and put it into the
-#     # form manually to validate_on_submit can be used
-#         # Add the user to the session, we are logged in!
-#         user = User.query.filter(User.email == form.data['email']).first()
-#         # user.last_login = datetime.today()
-#         # db.session.commit()
-#         login_user(user)
-#         return user.to_dict()
-#     return form.errors, 401
+auth_routes.route('/backdoor', methods=['POST'])
+def login_backdoor():
+    """
+    Logs a user in
+    """
+    form = LoginForm()
+    # Get the csrf_token from the request cookie and put it into the
+    # form manually to validate_on_submit can be used
+        # Add the user to the session, we are logged in!
+    user = User.query.filter(User.email == form.data['email']).first()
+        # user.last_login = datetime.today()
+        # db.session.commit()
+    login_user(user)
+    return user.to_dict()
+    # return form.errors, 401
 
 @auth_routes.route('/logout')
 def logout():
