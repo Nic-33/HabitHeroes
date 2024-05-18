@@ -8,15 +8,20 @@ import {
 } from "../../redux/habits";
 import "./EditHabitForm.css";
 
-function EditHabitForm({ habit, edit = true }) {
+function EditHabitForm(props, edit = true) {
+    const habit_Id = props.props
+    console.log('habit id:', habit_Id)
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
-
+    let allHabits = useSelector((state) => state.habits)
+    allHabits = Object.values(allHabits)
+    const habit = allHabits.filter(info => info.id == habit_Id).pop()
+    console.log('habit:', habit)
     const [title, setTitle] = useState(habit.title);
     const [description, setDescription] = useState(habit.description);
     const [difficulty, setDifficulty] = useState(habit.difficulty);
-    const [frequency, setFrequency] = useState(habit.frequency);
+    // const [frequency, setFrequency] = useState(habit.frequency);
     const [pos, setPos] = useState(habit.pos);
     const [neg, setNeg] = useState(habit.neg);
     const [pos_count, setPosCount] = useState(habit.pos_count);
@@ -24,7 +29,7 @@ function EditHabitForm({ habit, edit = true }) {
     const [advanced, setAdvanced] = useState(false);
     const [errs, setErrs] = useState({});
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const errors = {};
@@ -36,21 +41,20 @@ function EditHabitForm({ habit, edit = true }) {
         }
 
         const data = {
-            user_id: +user.id,
             title,
             description,
             difficulty,
-            frequency,
-            'pos_count': +pos_count,
-            'neg_count': +neg_count,
+            // frequency,
+            pos_count,
+            neg_count,
             pos,
             neg
         }
 
         if (edit) {
-            dispatch(thunkUpdateHabits(habit.id, data));
+            await dispatch(thunkUpdateHabits(data, habit_Id));
         } else {
-            dispatch(thunkCreateHabits(data));
+            await dispatch(thunkCreateHabits(data));
         }
         closeModal();
     };
@@ -58,7 +62,7 @@ function EditHabitForm({ habit, edit = true }) {
     return (
         <div className="habit-edit-ctn">
             <div className="habit-title-and-btn">
-                {edit ? <div>Edit Habit</div> : <div>Create Habit</div>}
+                <div>Edit Habit</div>
 
                 <div>
                     <button className="habit-edit cancel" onClick={closeModal}>
@@ -89,7 +93,7 @@ function EditHabitForm({ habit, edit = true }) {
                     </div>
 
                     <div className="habit-edit-input-ctn">
-                        <label>Notes</label>
+                        <label>Description</label>
                         <textarea
                             className="edit-form-top-input"
                             type="text"
@@ -104,9 +108,8 @@ function EditHabitForm({ habit, edit = true }) {
                     <div className="edit-habit-plus-and-minus">
                         <div className="habit-btn-ctn">
                             <button
-                                className={`pos-neg-habit-btn ${
-                                    pos ? "selected" : null
-                                }`}
+                                className={`pos-neg-habit-btn ${pos ? "selected" : null
+                                    }`}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setPos(!pos);
@@ -119,9 +122,8 @@ function EditHabitForm({ habit, edit = true }) {
 
                         <div className="habit-btn-ctn">
                             <button
-                                className={`pos-neg-habit-btn ${
-                                    neg ? "selected" : null
-                                }`}
+                                className={`pos-neg-habit-btn ${neg ? "selected" : null
+                                    }`}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setNeg(!neg);
@@ -157,7 +159,7 @@ function EditHabitForm({ habit, edit = true }) {
                     </select>
                 </div> */}
 
-                    <div className="edit-habit-select-ctn">
+                    {/* <div className="edit-habit-select-ctn">
                         <label>Reset Counter</label>
                         <select
                             value={frequency}
@@ -167,7 +169,7 @@ function EditHabitForm({ habit, edit = true }) {
                             <option value="weekly">Weekly</option>
                             <option value="monthly">Monthly</option>
                         </select>
-                    </div>
+                    </div> */}
 
                     {/* In order to show advanced options, habit must have at leaast one trait */}
                     {(pos || neg) && (
@@ -221,7 +223,7 @@ function EditHabitForm({ habit, edit = true }) {
                 </div>
             </form>
 
-            <div className="edit-habit-del">
+            {/* <div className="edit-habit-del">
                 {edit && (
                     <button
                         className="edit-habit-del-btn"
@@ -240,7 +242,7 @@ function EditHabitForm({ habit, edit = true }) {
                         Delete This Habit
                     </button>
                 )}
-            </div>
+            </div> */}
         </div>
     );
 }

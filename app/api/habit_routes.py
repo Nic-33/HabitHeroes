@@ -47,17 +47,17 @@ def create_habit():
 # update specific habit
 @habit_routes.route('/<int:id>',methods=['PUT'])
 @login_required
-def update_habit():
+def update_habit(id):
     form = HabitForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     # print(request.data)
     # user_id = current_user.to_dict()['id']
     if form.validate_on_submit():
         habit = Habit.query.get(id)
-        habit.title = form.data["title"] if form.data["title"] is not None else habit.title
-        habit.description = form.data["description"] if form.data["description"] is not None else habit.description
-        habit.difficulty = form.data["difficulty"] if form.data["difficulty"] is not None else habit.difficulty
-        habit.frequency = form.data["frequency"] if form.data["frequency"] is not None else habit.frequency
+        habit.title = form.data["title"]
+        habit.description = form.data["description"]
+        habit.difficulty = form.data["difficulty"]
+        # habit.frequency = form.data["frequency"]
         habit.pos = form.data["pos"] if form.data["pos"] is not None else habit.pos
         habit.neg = form.data["neg"] if form.data["neg"] is not None else habit.neg
         db.session.commit()
@@ -76,7 +76,7 @@ def habit(id):
 
 
 
-# delete specific habit 
+# delete specific habit
 @habit_routes.route('/<int:id>/delete',methods=['POST'])
 @login_required
 def delete_habit(id):
@@ -86,7 +86,7 @@ def delete_habit(id):
         db.session.commit()
         return {'delete':'sucessful'},200
     return{'delete':'Failed'},401
-    
+
 
 @habit_routes.route('/<int:id>/pos',methods=['PUT'])
 @login_required
