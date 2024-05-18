@@ -31,7 +31,7 @@ def create_habit():
             title=form.data['title'],
             description=form.data['description'],
             difficulty=form.data['difficulty'],
-            date_to_reset = datetime.strptime(form.date_to_reset.data,"%Y-%m-%d"),
+            # date_to_reset = datetime.strptime(form.date_to_reset.data,"%Y-%m-%d"),
             pos_count = form.data['pos_count'],
             neg_count = form.data['neg_count'],
             pos = form.data['pos'],
