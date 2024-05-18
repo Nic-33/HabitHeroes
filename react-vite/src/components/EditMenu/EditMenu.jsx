@@ -4,7 +4,12 @@ import { thunkDeleteDailies } from '../../redux/dailies'
 import { useDispatch } from 'react-redux'
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem.jsx";
 import EditTodoForm from '../TodoFormModal/TodoForm'
+
 import EditDailyForm from '../DailyFormModal/DailyForm.jsx'
+
+import EditHabitForm from '../EditHabitForm/EditHabitForm.jsx'
+
+
 
 
 const EditMenu = ({ type, id }) => {
@@ -16,9 +21,8 @@ const EditMenu = ({ type, id }) => {
         if (type === 'Daily') dispatch(thunkDeleteDailies(id))
         if (type === 'Todo') dispatch(thunkDeleteTodos(id))
     }
-    // if (type === 'Habit') modalComp = <EditHabitsForm props={id}/>
+    if (type === 'Habit') modalComp = <EditHabitForm props={id} />
     // // if (type === 'Daily') modalComp = <EditDailiesForm props={id}/>
-    if (type === 'Todo') modalComp = <EditTodoForm props={id}/>
     
     
     
@@ -26,14 +30,19 @@ const EditMenu = ({ type, id }) => {
 
 
 
+    if (type === 'Todo') modalComp = <EditTodoForm props={id} />
+
+
     return (
-        <ul>
+        // <div className='task_option_menu_container'>
+        <ul className='task_option_menu'>
             <li><OpenModalMenuItem
                 itemText="edit"
                 modalComponent={modalComp}
             /></li>
             <li><button onClick={() => handleDeleteClick()}>Delete</button></li>
         </ul>
+        /* </div> */
     )
 }
 
