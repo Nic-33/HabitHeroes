@@ -1,31 +1,21 @@
 import { useState } from "react";
 import { useModal } from "../../context/Modal";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
     thunkCreateHabits,
-    thunkUpdateHabits,
-    thunkDeleteHabits,
 } from "../../redux/habits";
-import "./EditHabitForm.css";
+import "./CreateHabitForm.css";
 
-function EditHabitForm(props, edit = true) {
-    const habit_Id = props.props
-    console.log('habit id:', habit_Id)
+function CreateHabitForm(create = true) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.session.user);
-    let allHabits = useSelector((state) => state.habits)
-    allHabits = Object.values(allHabits)
-    const habit = allHabits.filter(info => info.id == habit_Id).pop()
-    console.log('habit:', habit)
-    const [title, setTitle] = useState(habit.title);
-    const [description, setDescription] = useState(habit.description);
-    const [difficulty, setDifficulty] = useState(habit.difficulty);
-    // const [frequency, setFrequency] = useState(habit.frequency);
-    const [pos, setPos] = useState(habit.pos);
-    const [neg, setNeg] = useState(habit.neg);
-    const [pos_count, setPosCount] = useState(habit.pos_count);
-    const [neg_count, setNegCount] = useState(habit.neg_count);
+    const [title, setTitle] = useState();
+    const [description, setDescription] = useState();
+    const [difficulty, setDifficulty] = useState(1);
+    const [pos, setPos] = useState();
+    const [neg, setNeg] = useState();
+    const [pos_count, setPosCount] = useState(0);
+    const [neg_count, setNegCount] = useState(0);
     const [advanced, setAdvanced] = useState(false);
     const [errs, setErrs] = useState({});
 
@@ -44,33 +34,31 @@ function EditHabitForm(props, edit = true) {
             title,
             description,
             difficulty,
-            // frequency,
             pos_count,
             neg_count,
             pos,
             neg
         }
 
-        if (edit) {
-            await dispatch(thunkUpdateHabits(data, habit_Id));
-        } else {
+        if (create) {
             await dispatch(thunkCreateHabits(data));
+        } else {
         }
         closeModal();
     };
 
     return (
-        <div className="habit-edit-ctn">
+        <div className="habit-create-ctn">
             <div className="habit-title-and-btn">
-                <div>Edit Habit</div>
+                <div>Create Habit</div>
 
                 <div>
-                    <button className="habit-edit cancel" onClick={closeModal}>
+                    <button className="habit-create cancel" onClick={closeModal}>
                         Cancel
                     </button>
 
                     <button
-                        className="habit-edit save"
+                        className="habit-create save"
                         onClick={(e) => handleSubmit(e)}
                     >
                         Save
@@ -78,12 +66,12 @@ function EditHabitForm(props, edit = true) {
                 </div>
             </div>
 
-            <form className="edit-habit-form" onSubmit={handleSubmit}>
-                <div className="edit-form-top">
-                    <div className="edit-form-input">
+            <form className="create-habit-form" onSubmit={handleSubmit}>
+                <div className="create-form-top">
+                    <div className="create-form-input">
                         <label>Title</label>
                         <input
-                            className="edit-form-top-input"
+                            className="create-form-top-input"
                             type="text"
                             value={title}
                             placeholder="Add a title..."
@@ -92,10 +80,10 @@ function EditHabitForm(props, edit = true) {
                         {errs.title}
                     </div>
 
-                    <div className="habit-edit-input-ctn">
+                    <div className="habit-create-input-ctn">
                         <label>Description</label>
                         <textarea
-                            className="edit-form-top-input"
+                            className="create-form-top-input"
                             type="text"
                             value={description}
                             placeholder="Add notes"
@@ -104,8 +92,8 @@ function EditHabitForm(props, edit = true) {
                     </div>
                 </div>
 
-                <div className="edit-form-bottom">
-                    <div className="edit-habit-plus-and-minus">
+                <div className="create-form-bottom">
+                    <div className="create-habit-plus-and-minus">
                         <div className="habit-btn-ctn">
                             <button
                                 className={`pos-neg-habit-btn ${pos ? "selected" : null
@@ -135,21 +123,21 @@ function EditHabitForm(props, edit = true) {
                         </div>
                     </div>
 
-                    <div className="edit-habit-select-ctn">
+                    <div className="create-habit-select-ctn">
                         <label>Difficulty</label>
                         <select
                             value={difficulty}
                             onChange={(e) => setDifficulty(e.target.value)}
                         >
-                            <option value="1">Trivial</option>
-                            <option value="2">Easy</option>
-                            <option value="3">Medium</option>
-                            <option value="4">Hard</option>
+                            <option value={1}>Trivial</option>
+                            <option value={2}>Easy</option>
+                            <option value={3}>Medium</option>
+                            <option value={4}>Hard</option>
                         </select>
                     </div>
 
                     {/* Future Implementation */}
-                    {/* <div className="edit-habit-select-ctn">
+                    {/* <div className="create-habit-select-ctn">
                     <label>Tags</label>
                     <select>
                         <option>Need</option>
@@ -159,7 +147,7 @@ function EditHabitForm(props, edit = true) {
                     </select>
                 </div> */}
 
-                    {/* <div className="edit-habit-select-ctn">
+                    {/* <div className="create-habit-select-ctn">
                         <label>Reset Counter</label>
                         <select
                             value={frequency}
@@ -223,10 +211,10 @@ function EditHabitForm(props, edit = true) {
                 </div>
             </form>
 
-            {/* <div className="edit-habit-del">
-                {edit && (
+            {/* <div className="create-habit-del">
+                {create && (
                     <button
-                        className="edit-habit-del-btn"
+                        className="create-habit-del-btn"
                         onClick={() => {
                             if (
                                 window.confirm(
@@ -247,4 +235,4 @@ function EditHabitForm(props, edit = true) {
     );
 }
 
-export default EditHabitForm
+export default CreateHabitForm

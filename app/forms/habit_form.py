@@ -13,11 +13,10 @@ def testStuff(form,field):
 class HabitForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     description = StringField('description', validators=[])
-    difficulty = IntegerField('difficulty', validators=[DataRequired()])
+    difficulty = IntegerField('difficulty', validators=[])
     date_to_reset = StringField('date_to_reset',validators=[])
     pos_count = IntegerField('pos_count',validators=[])
     neg_count = IntegerField('neg_count',validators=[])
     pos= BooleanField('pos',validators=[])
     neg = BooleanField('neg',validators=[])
     # date_to_reset = DateField(validators=[DataRequired()])
-    
