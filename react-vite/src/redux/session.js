@@ -45,7 +45,7 @@ export const thunkLogin = (credentials) => async dispatch => {
 
 export const thunkLoginBackDoor = (credentials) => async dispatch => {
   const response = await fetch("/api/auth/backdoor", {
-    method: "GET",
+    method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(credentials)
   });

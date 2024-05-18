@@ -55,7 +55,7 @@ def upgrade():
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('description', sa.String(length=255), nullable=False),
     sa.Column('difficulty', sa.Integer(), nullable=False),
-    sa.Column('frequency', sa.Enum(), nullable=True),
+    sa.Column('frequency', sa.String(), nullable=True),
     sa.Column('date_to_reset', sa.Date(), nullable=True),
     sa.Column('pos', sa.Boolean(), nullable=True),
     sa.Column('neg', sa.Boolean(), nullable=True),
