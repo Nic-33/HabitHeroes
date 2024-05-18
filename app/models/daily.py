@@ -11,7 +11,7 @@ class Daily(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer(), primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     difficulty = db.Column(db.Integer(),nullable=False)
@@ -28,7 +28,7 @@ class Daily(db.Model):
     users = db.relationship("User", back_populates="dailies")
 
     def to_dict(self):
-         
+
         return {
             'id': self.id,
             'user_id': self.user_id,

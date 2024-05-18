@@ -9,13 +9,13 @@ class Avatar(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer(), primary_key=True)
-    user_id = db.Column(db.Integer(),  db.ForeignKey("users.id"),nullable=False,  unique=True)
+    user_id = db.Column(db.Integer(),  db.ForeignKey(add_prefix_for_prod("users.id")),nullable=False,  unique=True)
     seed = db.Column(db.Integer(),nullable=False)
     eyes = db.Column(db.Integer(),nullable=False)
     mouth = db.Column(db.Integer(),nullable=False)
 
-    user = db.relationship("User", back_populates="avatar")
-    
+    users = db.relationship("User", back_populates="avatar")
+
     def to_dict(self):
         return {
             'id': self.id,

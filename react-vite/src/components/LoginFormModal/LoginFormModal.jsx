@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { thunkLogin } from "../../redux/session";
+import { thunkLogin, thunkLoginBackDoor } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
@@ -10,6 +10,23 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+
+  const backdoor = async (e) => {
+    e.preventDefault();
+
+    const serverResponse = await dispatch(
+      thunkLoginBackDoor({
+        email,
+        password,
+      })
+    );
+
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      closeModal();
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,6 +75,12 @@ function LoginFormModal() {
           setEmail('demo@aa.io')
           setPassword('password')
         }}>Demo Loggin</button>
+      </form>
+      <form onSubmit={backdoor}>
+        <button type="submit" onClick={() => {
+          setEmail('demo@aa.io')
+          setPassword('password')
+        }}>backdoor Loggin</button>
       </form>
     </>
   );

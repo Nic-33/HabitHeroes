@@ -9,7 +9,7 @@ class Todo(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer(), primary_key=True)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"), nullable=False)
+    user_id = db.Column(db.Integer,db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.String(255))
     difficulty = db.Column(db.Integer(),nullable=False)
