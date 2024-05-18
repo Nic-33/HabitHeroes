@@ -2,6 +2,8 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 import { thunkGetUserInfo } from "../../redux/user"
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem.jsx";
+import EditUserForm from "../EditUserFormModal/EditUserForm.jsx";
 import Avatar from "../Avatar/Avatar"
 
 
@@ -18,6 +20,10 @@ const UserInfo = () => {
     return <div className="userinfo_container">
         < Avatar />
         <div id="userInfo">{userSlice.first_name} {userSlice.last_name} ({userSlice.username})</div>
+        <OpenModalMenuItem
+            itemText="edit"
+            modalComponent={<EditUserForm />}
+        />
     </div>
 
 }

@@ -7,28 +7,29 @@ import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector((state) => state.session.user);
+    let comingSoon = () => alert("Feature coming soon")
 
     const loggedInLinks = (
         <>
             <NavLink className="nav-links" exact to="/">Tasks</NavLink>
-            <NavLink className="nav-links" exact to="/inventory">Inventory</NavLink>
-            <NavLink className="nav-links" exact to="/shops">Shops</NavLink>
-            <NavLink className="nav-links" exact to="/party">Party</NavLink>
-            <NavLink className="nav-links" exact to="/groups">Group</NavLink>
-            <NavLink className="nav-links" exact to="/challenges">Challenges</NavLink>
-            <NavLink className="nav-links" exact to="/help">Help</NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>Inventory</NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>Shops</NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>Party</NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>Group</NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>Challenges</NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>Help</NavLink>
         </>
     );
 
     const loggedOutLinks = (
         <>
-            <NavLink className="nav-links" to="/">
+            <NavLink className="nav-links" onClick={comingSoon}>
                 Get Started
             </NavLink>
-            <NavLink className="nav-links" to="/">
+            <NavLink className="nav-links" onClick={comingSoon}>
                 Mobile Apps
             </NavLink>
-            <NavLink className="nav-links" to="/">
+            <NavLink className="nav-links" onClick={comingSoon}>
                 Learn More
             </NavLink>
         </>
