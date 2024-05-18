@@ -44,6 +44,7 @@ const EditUserForm = () => {
         if (index >= AvatarData.seed.length) {
             index = 0;
         }
+        index = parseInt(index)
         setSeed(index)
         console.log("color:", index)
 
@@ -57,6 +58,7 @@ const EditUserForm = () => {
         if (index >= AvatarData.eyes.length) {
             index = 0;
         }
+        index = parseInt(index)
         setEyes(index)
         console.log("eyes:", index)
 
@@ -70,6 +72,7 @@ const EditUserForm = () => {
         if (index >= AvatarData.mouth.length) {
             index = 0;
         }
+        index = parseInt(index)
         setMouth(index)
         console.log("mouth:", index)
     }
