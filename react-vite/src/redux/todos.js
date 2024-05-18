@@ -58,13 +58,15 @@ export const thunkCreateTodos = (payload) => async (dispatch) => {
 }
 
 export const thunkUpdateTodos = (payload, todo_id) => async (dispatch) => {
+    console.log(todo_id)
     const response = await fetch(`api/todo/${todo_id}`, {
-        method: "POST",
+        method: "PUT",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload)
     })
+    console.log('response!!!!:', response)
     if (response.ok) {
         const todo = await response.json()
         dispatch(updateTodos(todo))

@@ -20,6 +20,7 @@ const UserInfo = () => {
     return <div className="userinfo_container">
         < Avatar />
         <div id="userInfo">{userSlice.first_name} {userSlice.last_name} ({userSlice.username})</div>
+        <div id="about">About: {userSlice.about}</div>
         <OpenModalMenuItem
             itemText="edit"
             modalComponent={<EditUserForm />}

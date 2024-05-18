@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-import { thunkGetUserInfo, thunkUpdateUserInfo } from "../../redux/user";
-import { thunkGetAvatar, thunkUpdateAvatar } from "../../redux/avatars";
+import { thunkUpdateUserInfo } from "../../redux/user";
+import { thunkUpdateAvatar } from "../../redux/avatars";
 import { AvatarData } from "../Avatar/AvatarData";
 import "./EditUserForm.css";
-import EditAvatar from "../Avatar/EditAvatar";
 
 const EditUserForm = () => {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const user = useSelector((state) => state.user)
     const avatar = useSelector((state) => state.avatar)
     const [loaded, setLoaded] = useState(false)

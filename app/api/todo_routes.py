@@ -40,18 +40,21 @@ def create_todo():
     print(form.errors)
     return form.errors, 401
 
-@todo_routes.route('/<int:todo_id>', methods=["GET","POST"])
+@todo_routes.route('/<int:todo_id>', methods=["PUT"])
 def update_todo(todo_id):
     form = TodoForm()
+    print('Update_Todo is called!!!!')
     todo = Todo.query.get(todo_id)
-    if request.method == "POST":
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if request.method == "PUT":
         if form.validate_on_submit():
             todo.title= form.title.data
             todo.description = form.description.data
             todo.difficulty = form.difficulty.data
-            todo.due_date=form.due_data.data
+            # todo.due_date=form.due_date.data
             db.session.add(todo)
             db.session.commit()
+            # print('todo!!!!!!!!!!:',todo.to_dict())
             return todo.to_dict()
     elif request.method == "GET":
         return todo.to_dict()
