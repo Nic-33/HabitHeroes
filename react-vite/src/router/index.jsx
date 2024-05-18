@@ -9,6 +9,7 @@ import Layout from './Layout';
 import LandingPage from '../components/LandingPage';
 import MainPage from '../components/MainPage/MainPage';
 import EditAvatar from '../components/Avatar/EditAvatar';
+import EditHabitForm from '../components/EditHabitForm/EditHabitForm';
 // import Avatar from '../components/Avatar/Avatar';
 
 
@@ -44,7 +45,10 @@ export const router = createBrowserRouter([
       },
       {
         path:'test',
-        element:<EditAvatar edit={true}/>
+        element:<>
+        
+        <EditAvatar edit={true}/>
+      </>
       }
 
     ],

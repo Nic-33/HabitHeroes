@@ -1,19 +1,28 @@
 
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import EditMenu from "../EditMenu/EditMenu"
+import { thunkCompleteDaily } from "../../redux/dailies"
 
 const DailyInfo = ({ info_id }) => {
+
+    const dispatch = useDispatch()
 
     const dailySlice = useSelector(state => state.dailies)
     const [daily, setDaily] = useState(dailySlice[info_id])
     const [showDropMenu, setShowDropMenu] = useState(false)
-
+   
     useEffect(() => {
         setDaily(dailySlice[info_id])
     }, [dailySlice, info_id])
+
+    const completeDaily = async (e) => {
+      
+        dispatch(thunkCompleteDaily(info_id))
+    }
+
     return <div className="item_section">
-        <input type="checkbox" >
+        <input checked={dailySlice[info_id].completed} type="checkbox" onChange={(e) => completeDaily(e)}>
         </input>
         {daily && <div className="item_content">
             <div className="item_details">

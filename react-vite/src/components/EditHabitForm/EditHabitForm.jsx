@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     thunkCreateHabits,
     thunkUpdateHabits,
-    deleteHabits,
+    thunkDeleteHabits,
 } from "../../redux/habits";
-import ".EditHabitForm.css";
+import "./EditHabitForm.css";
 
 function EditHabitForm({ habit, edit = true }) {
     const { closeModal } = useModal();
@@ -231,7 +231,7 @@ function EditHabitForm({ habit, edit = true }) {
                                     "Are you sure you want to delete this habit?"
                                 )
                             ) {
-                                dispatch(deleteHabits(habit.id));
+                                dispatch(thunkDeleteHabits(habit.id));
                                 closeModal();
                             }
                         }}

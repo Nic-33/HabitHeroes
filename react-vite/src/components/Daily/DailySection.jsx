@@ -19,15 +19,17 @@ const DailySection = () => {
             const title = dailyInput.slice()
             const description = 'this is a place hold the description'
             const difficulty = 1
-            const repeat_days = '0'
-            const today = new Date(Date.now());
-            const tomorrow = new Date(today);
-            tomorrow.setDate(today.getDate() + 1);
-            const date_to_reset = tomorrow.toDateString()
-            const obj = { title, description, difficulty, repeat_days, date_to_reset }
+            const repeat_days = '0123456'
+            // const today = new Date(Date.now());
+            // const tomorrow = new Date(today);
+            // tomorrow.setDate(today.getDate() + 1);
+            // const due_date = new Date(Date.now()).getTime()/1000
+            // console.log(due_date)
+            const obj = { title, description, difficulty, repeat_days}
+            // const obj = { title, description, difficulty, repeat_days, due_date }
             await dispatch(thunkCreateDailies(obj))
             // dailySlice[8] = obj
-            console.log(dailySlice)
+            // console.log(dailySlice)
             setDailyInput('');
         }
     }

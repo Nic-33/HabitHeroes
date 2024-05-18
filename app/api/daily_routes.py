@@ -28,9 +28,19 @@ def create_daily():
         title = form.title.data
         description = form.description.data
         difficulty = form.difficulty.data
-        new_daily = Daily(user_id=user_id, title=title, description=description, difficulty=difficulty, completed=0, streak=0, date_timestamp = datetime.timestamp(datetime.now()))
-        new_daily.due_date = datetime.now()
+        repeat_days = form.data["repeat_days"]
+        # due_date = form.data["due_date"] if form.data["due_date"] is not False else None
+        new_daily = Daily(user_id=user_id, 
+                          title=title, 
+                          description=description, 
+                          difficulty=difficulty,
+                        #   due_date = due_date, 
+                          repeat_days=repeat_days, 
+                          completed=0, streak=0, 
+                          date_timestamp = datetime.timestamp(datetime.now()))
+        # new_daily.due_date = form.data["due_date"]
         # new_daily.due_date = new_daily.date_due()
+        new_daily.due_date = new_daily.date_due()
         db.session.add(new_daily)
         db.session.commit()
         return new_daily.to_dict()
@@ -58,7 +68,7 @@ def update_daily(daily_id):
 @daily_routes.route('/<int:daily_id>/delete', methods=['GET','DELETE'])
 def delete_daily(daily_id):
     daily = Daily.query.get(daily_id)
-    if request.method == "POST":
+    if request.method == "DELETE":
         db.session.delete(daily)
         db.session.commit()
         return {'delete': "successful"}, 200

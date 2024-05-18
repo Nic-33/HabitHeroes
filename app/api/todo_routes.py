@@ -56,10 +56,10 @@ def update_todo(todo_id):
     elif request.method == "GET":
         return todo.to_dict()
 
-@todo_routes.route('/<int:todo_id>/delete', methods=['GET','POST'])
+@todo_routes.route('/<int:todo_id>/delete', methods=['GET','DELETE'])
 def delete_todo(todo_id):
     todo = Todo.query.get(todo_id)
-    if request.method == "POST":
+    if request.method == "DELETE":
         db.session.delete(todo)
         db.session.commit()
         return {'delete': "successful"}, 200

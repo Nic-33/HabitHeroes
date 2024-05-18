@@ -28,6 +28,7 @@ class Daily(db.Model):
     users = db.relationship("User", back_populates="dailies")
 
     def to_dict(self):
+         
         return {
             'id': self.id,
             'user_id': self.user_id,
@@ -37,7 +38,7 @@ class Daily(db.Model):
             'frequency':self.repeat_days, # need to fix
             'date_timestamp':datetime.fromtimestamp(self.date_timestamp),
             'due_date': self.due_date,
-            # 'due_date': datetime.fromtimestamp(self.due_date),
+            'due_date': datetime.fromtimestamp(self.due_date) if self.due_date is not None else None,
             'streak' : self.streak,
             'completed': self.completed,
             'completed_date': self.completed_date

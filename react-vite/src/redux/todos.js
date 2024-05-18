@@ -3,6 +3,13 @@ const CREATE_TODOS = 'todos/createTodos'
 const UPDATE_TODOS = 'todos/updateTodos'
 const DELETE_TODOS = 'todos/deleteTodos'
 
+const COMPLETE_TODO = 'todos/completeTodo'
+
+const completeTodo = (todo_id) => ({
+    type: COMPLETE_TODO,
+    payload: todo_id
+});
+
 const setTodos = (todos) => ({
     type: SET_TODOS,
     payload: todos
@@ -64,6 +71,14 @@ export const thunkUpdateTodos = (payload, todo_id) => async (dispatch) => {
     }
 }
 
+export const thunkCompleteTodo = (todo_id) => async (dispatch) => {
+    const response = await fetch(`api/todo/${todo_id}/complete`)
+    if (response.ok) {
+        const todo = await response.json()
+        dispatch(completeTodo(todo))
+    }
+}
+
 
 // const SET_TODO = 'todos/setTodo';
 // const REMOVE_TODO = 'todos.removeTodo'
@@ -106,7 +121,11 @@ function todoReducer(state = initialState, action) {
         case DELETE_TODOS: {
             obj = { ...state }
             delete obj[action.payload]
-            return {...obj}
+            return { ...obj }
+        }
+
+        case COMPLETE_TODO: {
+            return { ...state, [action.payload.id]: action.payload }
         }
 
         default:
@@ -116,7 +135,7 @@ function todoReducer(state = initialState, action) {
 
 export const thunkDeleteTodos = (todo_id) => async (dispatch) => {
     const response = await fetch(`/api/todo/${todo_id}/delete`, {
-        method: 'POST'
+        method: 'DELETE'
     });
     dispatch(deleteTodos(todo_id));
     return response;

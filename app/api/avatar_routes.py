@@ -36,15 +36,12 @@ def update_avatar():
     form = AvatarForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     avatar = Avatar.query.filter(current_user.to_dict()['id'] == Avatar.user_id).first()
-
-    print(form.seed)
     if form.seed.data is not None:
         avatar.seed = form.seed.data
     if form.eyes.data is not None:
         avatar.eyes = form.eyes.data
     if form.mouth.data is not None:
         avatar.mouth = form.mouth.data
-    print(avatar.to_dict())
     # db.session.add(avatar)
     db.session.commit()
     return avatar.to_dict()

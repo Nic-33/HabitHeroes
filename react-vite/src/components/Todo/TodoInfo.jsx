@@ -1,18 +1,27 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import EditMenu from "../EditMenu/EditMenu"
+import { thunkCompleteTodo } from "../../redux/todos"
 
 const TodoInfo = ({ info_id }) => {
 
+
+    const dispatch = useDispatch()
+
     const todoSlice = useSelector(state => state.todos)
     const [todo, setTodo] = useState(todoSlice[info_id])
-    const [showDropMenu,setShowDropMenu] = useState(false)
+    const [showDropMenu, setShowDropMenu] = useState(false)
 
     useEffect(() => {
         setTodo(todoSlice[info_id])
     }, [todoSlice, info_id])
+
+    const completeTodo = async (e) => {
+        dispatch(thunkCompleteTodo(info_id))
+    }
+
     return <div className="item_section">
-        <input type="checkbox" >
+        <input type="checkbox" checked={todoSlice[info_id].completed} onChange={(e) => completeTodo(e)}>
         </input>
         {todo && <div className="item_content">
             <div className="item_details">
@@ -21,8 +30,8 @@ const TodoInfo = ({ info_id }) => {
                     <p>{todo.description}</p>
                 </div>
                 <div className="options_button">
-                    <button onClick={()=>setShowDropMenu(!showDropMenu)}>b</button>
-                    {showDropMenu ? <EditMenu type='Todo' id={info_id}/> : null}
+                    <button onClick={() => setShowDropMenu(!showDropMenu)}>b</button>
+                    {showDropMenu ? <EditMenu type='Todo' id={info_id} /> : null}
                 </div>
 
             </div>
