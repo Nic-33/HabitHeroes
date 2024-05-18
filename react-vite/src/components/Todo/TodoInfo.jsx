@@ -23,7 +23,8 @@ const TodoInfo = ({ info_id }) => {
     return <div className="item_section hoverable">
         <div className="checkbox_container">
         <input type="checkbox" className="select_box" checked={todoSlice[info_id].completed} onChange={(e) => completeTodo(e)}>
-        </input>
+          
+        </input>  
         </div>
         {todo && <div className="item_content">
             <div className="item_details">
