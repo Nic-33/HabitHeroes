@@ -54,11 +54,11 @@ def create_daily():
     return form.errors, 401
 
 
-@daily_routes.route("/<int:daily_id>", methods=["GET", "POST"])
+@daily_routes.route("/<int:daily_id>", methods=["GET", "PUT"])
 def update_daily(daily_id):
     form = DailyForm()
     daily = Daily.query.get(daily_id)
-    if request.method == "POST":
+    if request.method == "PUT":
         if form.validate_on_submit():
             daily.title = form.title.data
             daily.description = form.description.data
