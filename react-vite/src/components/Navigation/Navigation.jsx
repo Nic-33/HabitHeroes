@@ -1,19 +1,55 @@
-import { NavLink } from "react-router-dom";
+import React from "react";
+import { NavLink, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
+import logo from '../../images/habitHeroes.png'
 import "./Navigation.css";
 
-function Navigation() {
-  return (
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
+function Navigation({ isLoaded }) {
+    const sessionUser = useSelector((state) => state.session.user);
+    let comingSoon = () => alert("Feature coming soon")
 
-      <li>
-        <ProfileButton />
-      </li>
-    </ul>
-  );
+    const loggedInLinks = (
+        <>
+            <NavLink className="nav-links" exact to="/">Tasks</NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>Inventory</NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>Shops</NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>Party</NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>Group</NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>Challenges</NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>Help</NavLink>
+        </>
+    );
+
+    const loggedOutLinks = (
+        <>
+            <NavLink className="nav-links" onClick={comingSoon}>
+                Get Started
+            </NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>
+                Mobile Apps
+            </NavLink>
+            <NavLink className="nav-links" onClick={comingSoon}>
+                Learn More
+            </NavLink>
+        </>
+    );
+
+    return (
+        <nav className="header">
+            <div className="nav-bar">
+                <div className="nav-links-ctn">
+                    <NavLink exact to="/" className="nav-home">
+                        <img id='logo' src={logo} alt='home' />
+                    </NavLink>
+                    {sessionUser ? loggedInLinks : loggedOutLinks}
+                </div>
+                <div className="profile-button">
+                    <ProfileButton />
+                </div>
+            </div>
+        </nav>
+    );
 }
 
 export default Navigation;

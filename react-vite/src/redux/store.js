@@ -5,10 +5,15 @@ import {
   combineReducers,
 } from "redux";
 import thunk from "redux-thunk";
+import userReducer from "./user";
 import sessionReducer from "./session";
+import habitReducer from "./habits";
+import todoReducer from "./todos";
+import dailyReducer from "./dailies";
+import avatarReducer from "./avatars";
 
 const rootReducer = combineReducers({
-  session: sessionReducer,
+  session: sessionReducer, user: userReducer, habits: habitReducer, todos: todoReducer, dailies: dailyReducer, avatar: avatarReducer
 });
 
 let enhancer;

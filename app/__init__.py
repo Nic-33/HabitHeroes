@@ -7,6 +7,10 @@ from flask_login import LoginManager
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.habit_routes import habit_routes
+from .api.todo_routes import todo_routes
+from .api.daily_routes import daily_routes
+from .api.avatar_routes import avatar_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -28,6 +32,10 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(habit_routes, url_prefix='/api/habits')
+app.register_blueprint(todo_routes, url_prefix='/api/todo')
+app.register_blueprint(daily_routes, url_prefix='/api/daily')
+app.register_blueprint(avatar_routes,url_prefix='/api/avatars')
 db.init_app(app)
 Migrate(app, db)
 
@@ -72,6 +80,10 @@ def api_help():
                     for rule in app.url_map.iter_rules() if rule.endpoint != 'static' }
     return route_list
 
+# @app.route("/api/users/<int:user_id>")
+# def get_users(user_id):
+#     user = User.query.filter_by(id=user_id).first()
+#     return user
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')

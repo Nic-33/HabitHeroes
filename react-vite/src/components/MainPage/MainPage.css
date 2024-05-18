@@ -1,0 +1,39 @@
+body {
+    background-color: #f9f9f9;
+}
+.Main_page_Container {
+    display: grid;
+    grid-template-areas:
+        'user_status'
+        'task_sections'
+    ;
+    /* margin-inline: 16px; */
+    background-color: #f9f9f9;
+}
+
+.user_info_bar {
+    background-color: #6133b4;
+    grid-area: user_status
+}
+
+.task_sections {
+    grid-area: task_sections;
+    display: flex;
+    flex-direction: row;
+    margin-inline: auto;
+    border-radius: 5px;
+}
+
+.task_sections>div {
+    min-width: 400px;
+    margin-top: 16px;
+    border-radius: 5px;
+    padding:8px;
+}
+
+.section_container{
+    /* margin-inline: auto; */
+    background-color: #edecee;
+    margin-inline: 32px;
+    border-radius: 5px;
+}

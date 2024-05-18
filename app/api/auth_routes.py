@@ -1,8 +1,10 @@
 from flask import Blueprint, request
-from app.models import User, db
+from datetime import date
+from app.models import User,Avatar, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from datetime import datetime
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -29,6 +31,8 @@ def login():
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
+        user.last_login = datetime.today()
+        db.session.commit()
         login_user(user)
         return user.to_dict()
     return form.errors, 401
@@ -54,9 +58,22 @@ def sign_up():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
+            last_login=date.today(),
+            about=""
         )
         db.session.add(user)
+        db.session.commit()
+        print('UserID!!!!!!!!!!!:',user.id)
+        avatar = Avatar(
+            user_id = user.id,
+            seed = 0,
+            eyes = 0,
+            mouth = 0
+        )
+        db.session.add(avatar)
         db.session.commit()
         login_user(user)
         return user.to_dict()
