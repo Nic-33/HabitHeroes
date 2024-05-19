@@ -28,11 +28,17 @@ def authenticate():
         return current_user.to_dict()
     return {'errors': {'message': 'Unauthorized'}}, 401
 
-@auth_routes.route('/avatars', methods=['GET'])
+@auth_routes.route('/avatars', methods=['PUT'])
 def User_Avatar():
     user_id = current_user.to_dict()['id']
-    avatars = Avatar.query.filter(Avatar.user_id==user_id).first()
-    return avatars.to_dict()
+    avatars = User.query.filter(User.id==user_id).first()
+    form = LoginForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        avatars.avatar_url = form.avatar_url.data
+        db.session.commit()
+        return avatars.to_dict()
+    return {'errors': {'message': 'failed'}}, 401
 
 @auth_routes.route('/login', methods=['POST'])
 def login():
@@ -92,7 +98,8 @@ def sign_up():
             first_name=form.data['first_name'],
             last_name=form.data['last_name'],
             last_login=date.today(),
-            about=""
+            about="",
+            avatar_url="https://api.dicebear.com/8.x/fun-emoji/svg?seed=socks&eyes=cute&mouth=cute"
         )
         db.session.add(user)
         db.session.commit()
