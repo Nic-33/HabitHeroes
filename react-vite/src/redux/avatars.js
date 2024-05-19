@@ -26,6 +26,7 @@ export const thunkGetAvatar = () => async (dispatch) => {
         console.log('No Errors!!!!!')
         dispatch(getAvatar(data));
     }
+    console.log('Avatar Data Not OK!!!')
 }
 
 export const thunkUpdateAvatar = (payload) => async (dispatch) => {
