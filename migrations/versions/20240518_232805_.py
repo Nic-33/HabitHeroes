@@ -1,8 +1,8 @@
-"""initial migration
+"""empty message
 
-Revision ID: e7f91a9a98ab
-Revises:
-Create Date: 2024-05-02 21:25:16.430502
+Revision ID: 948015f9c038
+Revises: 
+Create Date: 2024-05-18 23:28:05.393304
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e7f91a9a98ab'
+revision = '948015f9c038'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,12 +25,22 @@ def upgrade():
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('first_name', sa.String(length=40), nullable=False),
     sa.Column('last_name', sa.String(length=40), nullable=False),
-    sa.Column('last_login', sa.Date(), nullable=False),
+    sa.Column('last_login', sa.Integer(), nullable=False),
     sa.Column('avatar_url', sa.String(), nullable=True),
     sa.Column('about', sa.String(length=255), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
+    )
+    op.create_table('avatars',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('seed', sa.Integer(), nullable=False),
+    sa.Column('eyes', sa.Integer(), nullable=False),
+    sa.Column('mouth', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('user_id')
     )
     op.create_table('dailies',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -40,12 +50,12 @@ def upgrade():
     sa.Column('difficulty', sa.Integer(), nullable=False),
     sa.Column('repeat_days', sa.String(), nullable=True),
     sa.Column('date_timestamp', sa.Integer(), nullable=True),
-    sa.Column('completed_date', sa.Integer(), nullable=True),
-    sa.Column('last_completed_date', sa.Integer(), nullable=True),
     sa.Column('streak', sa.Integer(), nullable=True),
     sa.Column('due_date', sa.Integer(), nullable=True),
     sa.Column('last_due_date', sa.Integer(), nullable=True),
     sa.Column('completed', sa.Boolean(), nullable=True),
+    sa.Column('completed_date', sa.Integer(), nullable=True),
+    sa.Column('last_completed_date', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -55,7 +65,7 @@ def upgrade():
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('description', sa.String(length=255), nullable=False),
     sa.Column('difficulty', sa.Integer(), nullable=False),
-    sa.Column('frequency', sa.String(), nullable=True),
+    sa.Column('frequency', sa.String(length=25), nullable=True),
     sa.Column('date_to_reset', sa.Date(), nullable=True),
     sa.Column('pos', sa.Boolean(), nullable=True),
     sa.Column('neg', sa.Boolean(), nullable=True),
@@ -68,25 +78,13 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=255), nullable=False),
-    sa.Column('description', sa.String(length=255), nullable=False),
+    sa.Column('description', sa.String(length=255), nullable=True),
     sa.Column('difficulty', sa.Integer(), nullable=False),
     sa.Column('due_date', sa.Date(), nullable=False),
     sa.Column('completed', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_table('avatars',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.String(length=40), nullable=False),
-    sa.Column('seed', sa.String(length=25), nullable=False),
-    sa.Column('eyes', sa.String(length=25), nullable=False),
-    sa.Column('mouth', sa.String(length=25), nullable=False),
-    sa.PrimaryKeyConstraint('id')
-    )
-    # with op.batch_alter_table('todos', schema=None) as batch_op:
-    #     batch_op.alter_column('description',
-    #            existing_type=sa.VARCHAR(length=255),
-    #            nullable=True)
     # ### end Alembic commands ###
 
 
@@ -95,10 +93,6 @@ def downgrade():
     op.drop_table('todos')
     op.drop_table('habits')
     op.drop_table('dailies')
-    op.drop_table('users')
-    # with op.batch_alter_table('todos', schema=None) as batch_op:
-    #     batch_op.alter_column('description',
-    #            existing_type=sa.VARCHAR(length=255),
-    #            nullable=False)
     op.drop_table('avatars')
+    op.drop_table('users')
     # ### end Alembic commands ###

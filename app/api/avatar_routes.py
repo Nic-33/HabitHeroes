@@ -10,9 +10,6 @@ avatar_routes = Blueprint('avatars', __name__)
 
 @avatar_routes.route('/')
 def get_avatar():
-    # """
-    # Query for all habits and returns them in a list of user dictionaries
-    # """
     user_id = current_user.to_dict()['id']
     avatar = Avatar.query.filter(Avatar.user_id==user_id).all()
     return avatar.to_dict()
