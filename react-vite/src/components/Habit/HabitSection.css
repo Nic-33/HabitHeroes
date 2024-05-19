@@ -71,7 +71,7 @@ button:hover {
 .task_option_menu {
     position: absolute;
     background-color: #f5f5f5;
-    right:0px;
+    right: 0px;
 }
 
 .task_option_menu_container {
@@ -81,5 +81,15 @@ button:hover {
 
 .options_button {
     position: relative;
+    margin-left: auto;
+}
+
+
+.filter_button {
+    border:none;
+    background-color: rgba(245, 255, 250, 0);
+}
+
+.create_button{
     margin-left: auto;
 }

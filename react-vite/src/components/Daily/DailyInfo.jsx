@@ -17,7 +17,6 @@ const DailyInfo = ({ info_id }) => {
     }, [dailySlice, info_id])
 
     const completeDaily = async (e) => {
-      
         dispatch(thunkCompleteDaily(info_id))
     }
 
