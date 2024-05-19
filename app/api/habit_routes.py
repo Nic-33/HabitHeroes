@@ -13,9 +13,9 @@ def habits():
     """
     Query for all habits and returns them in a list of user dictionaries
     """
-    # user_id = current_user.to_dict()['id']
-    # habits = Habit.query.filter(Habit.user_id==user_id).all()
-    habits = Habit.query.all()
+    user_id = current_user.to_dict()['id']
+    habits = Habit.query.filter(Habit.user_id==user_id).all()
+    # habits = Habit.query.all()
     return {'habits': [habit.to_dict() for habit in habits]}
 
 # create new habit
