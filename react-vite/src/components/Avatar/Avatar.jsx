@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { AvatarData } from "./AvatarData"
 import './Avatar.css'
 import { useDispatch, useSelector } from "react-redux"
-import { thunkGetAvatar } from "../../redux/avatars.jsx"
+import { thunkGetAvatar } from "../../redux/avatars"
 
 const Avatar = ({ edit }) => {
 
@@ -24,9 +24,9 @@ const Avatar = ({ edit }) => {
     // }
 
     useEffect(() => {
-        if (!avatarSlice['eyes']){
-             dispatch(thunkGetAvatar())
-             console.log("getting avatar")
+        if (!avatarSlice['eyes']) {
+            dispatch(thunkGetAvatar())
+            console.log("getting avatar")
         }
     }, [dispatch])
 
