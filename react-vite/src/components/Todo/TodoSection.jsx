@@ -5,10 +5,16 @@ import { useEffect, useState } from "react"
 import CreateTodoForm from "../CreateTodoForm/CreateTodoForm"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem.jsx";
 
+
+// <FontAwesomeIcon icon="fa-regular fa-square" />
+// <FontAwesomeIcon icon="fa-solid fa-square-check" />
+
 const TodoSection = () => {
     const dispatch = useDispatch()
     const todoSlice = useSelector(state => state.todos)
     const [todoInput, setTodoInput] = useState('');
+    const [toggleCompleted, setToggleCompleted] = useState(false)
+    const [showAll, setShowAll] = useState(true)
 
     const handleTodoInput = (e) => {
         setTodoInput(e)
@@ -31,14 +37,27 @@ const TodoSection = () => {
     }, [dispatch])
     return <div className="section_container">
         <h2>To Do&apos;s</h2>
+        <div className="create_button"> <OpenModalMenuItem
+            itemText="Create New To Do's"
+            modalComponent={<CreateTodoForm />}
+        /></div>
+        <button className="filter_button" style={{ color: showAll ? "black" : "grey" }} onClick={() => setShowAll(true)}>Show All</button>
+        <button className="filter_button" style={{ color: !showAll && !toggleCompleted ? "black" : "grey" }} onClick={() => {
+            setToggleCompleted(false)
+            setShowAll(false)
+        }}>Not Completed</button>
+        <button className="filter_button" style={{ color: !showAll && toggleCompleted ? "black" : "grey" }} onClick={() => {
+            setToggleCompleted(true)
+            setShowAll(false)
+        }}>Completed</button>
+
         <div className="section">
-        <li><OpenModalMenuItem
-                itemText="Create New To Do's"
-                modalComponent={<CreateTodoForm />}
-            /></li>
+
             <input className="quick_input hoverable" type="text" value={todoInput} placeholder="Add a todo" onChange={(e) => handleTodoInput(e.target.value)} onKeyUpCapture={(e) => handleKeyPressEnter(e)}></input>
-            {Object.keys(todoSlice).map(element => {
-                return (<div  key={element}> <TodoInfo info_id={element} /></div>)
+            {showAll ? Object.keys(todoSlice).map(element => {
+                return (<div key={element}> <TodoInfo info_id={element} /></div>)
+            }) : Object.keys(todoSlice).map(element => {
+                if (todoSlice[element].completed === toggleCompleted) return (<div key={element}> <TodoInfo info_id={element} /></div>)
             })}
         </div>
     </div>

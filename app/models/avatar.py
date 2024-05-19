@@ -14,7 +14,7 @@ class Avatar(db.Model):
     eyes = db.Column(db.Integer(),nullable=False)
     mouth = db.Column(db.Integer(),nullable=False)
 
-    users = db.relationship("User", back_populates="avatar")
+    users = db.relationship("User", back_populates="avatars")
 
     def to_dict(self):
         return {

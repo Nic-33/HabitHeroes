@@ -18,7 +18,7 @@ const UserInfo = () => {
     }, [dispatch])
 
     return <div className="userinfo_container">
-        < Avatar />
+        <img className="avatar" src={userSlice.avatar_url} ></img>
         <div id="userInfo">{userSlice.first_name} {userSlice.last_name} ({userSlice.username})</div>
         <div id="about">About: {userSlice.about}</div>
         <OpenModalMenuItem

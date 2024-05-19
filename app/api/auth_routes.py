@@ -40,6 +40,8 @@ def User_Avatar():
         return avatars.to_dict()
     return {'errors': {'message': 'failed'}}, 401
 
+
+
 @auth_routes.route('/login', methods=['POST'])
 def login():
     """
@@ -52,8 +54,8 @@ def login():
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
-        user.last_login = datetime.today()
-        db.session.commit()
+        # user.last_login = datetime.today()
+        # db.session.commit()
         login_user(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

@@ -56,11 +56,14 @@ const HabitSection = () => {
 
     return <div className="section_container">
         <h2>Habits</h2>
-        <div className="section">
-            <li><OpenModalMenuItem
+        <div className="create_button">
+            <OpenModalMenuItem
                 itemText="Create New Habit"
                 modalComponent={<CreateHabitForm />}
-            /></li>
+            />
+        </div>
+        <div className="section">
+
             <input className="quick_input hoverable" type="text" value={habitInput} placeholder="Add a habit" onChange={(e) => handleHabitInput(e.target.value)} onKeyUpCapture={(e) => handleKeyPressEnter(e)}></input>
             {/* <button onClick={handleAddHabitClick}>add habit</button> */}
             <div >
