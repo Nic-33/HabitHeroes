@@ -15,6 +15,7 @@ const updateAvatar = (avatar) => ({
 export const thunkGetAvatar = () => async (dispatch) => {
     console.log('thunkGetAvatar running')
     const response = await fetch(`/api/users/avatars`);
+    console.log('response:', response)
     if (response.ok) {
         const data = await response.json();
         if (data.errors) {
