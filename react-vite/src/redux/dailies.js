@@ -63,7 +63,7 @@ export const thunkCreateDailies = (payload) => async (dispatch) => {
 }
 
 export const thunkUpdateDailies = (payload, daily_id) => async (dispatch) => {
-    const response = await fetch(`api/daily/${daily_id}`, {
+    const response = await fetch(`/api/daily/${daily_id}`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json'

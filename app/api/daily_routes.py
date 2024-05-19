@@ -54,19 +54,21 @@ def create_daily():
     return form.errors, 401
 
 
-@daily_routes.route("/<int:daily_id>", methods=["GET", "PUT"])
+@daily_routes.route("/<int:daily_id>", methods=[ "PUT"])
 def update_daily(daily_id):
     form = DailyForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     daily = Daily.query.get(daily_id)
     if request.method == "PUT":
         if form.validate_on_submit():
-            daily.title = form.title.data
-            daily.description = form.description.data
-            daily.difficulty = form.difficulty.data
-            if daily.repeat_days != form.repeat_days.data:
-                daily.repeat_days = daily.convert_set(form.repeat_days.data)
-                daily.due_date = daily.date_due()
-            db.session.add(daily)
+            daily.title = form.title.data if form.data["title"] is not None else daily.title
+            daily.description = form.description.data  if form.data["description"] is not None else daily.description
+            daily.difficulty = form.difficulty.data  if form.data["difficulty"] is not None else daily.difficulty
+            daily.repeat_days = form.repeat_days.data  if form.data["repeat_days"] is not None else daily.repeat_days
+            # if daily.repeat_days != form.repeat_days.data:
+            #     daily.repeat_days = daily.convert_set(form.repeat_days.data)
+            daily.due_date = daily.date_due()
+            # db.session.add(daily)
             db.session.commit()
             return daily.to_dict()
     elif request.method == "GET":

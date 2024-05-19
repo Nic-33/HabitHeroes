@@ -48,9 +48,10 @@ function EditDailyForm(props) {
 
         // build a daily object with all the information gathered from the form. +streak ensures streak is an integer
         const newDaily = {
-            title,
+            title:"new title",
             description,
             difficulty,
+            repeat_days :"0123"
             // repeats_frame,
             // repeats_frequency,
             // streak: +streak,
