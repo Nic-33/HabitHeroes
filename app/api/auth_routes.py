@@ -32,7 +32,7 @@ def authenticate():
 def User_Avatar():
     user_id = current_user.to_dict()['id']
     avatars = Avatar.query.filter(Avatar.user_id==user_id).all()
-    return {'avatar': [avatars.to_dict() for avatar in avatars]}
+    return {'avatar': [avatar.to_dict() for avatar in avatars]}
 
 @auth_routes.route('/login', methods=['POST'])
 def login():
