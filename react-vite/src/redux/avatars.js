@@ -11,6 +11,7 @@ const updateAvatar = (avatar) => ({
     payload: avatar
 })
 
+
 export const thunkGetAvatar = () => async (dispatch) => {
     console.log('thunkGetAvatar running')
     const response = await fetch(`/api/avatars`);
