@@ -39,6 +39,6 @@ def update_user ():
     form = UserForm()
     user.about=form.about.data
     user.username=form.username.data
-    db.session.add(user)
+    user.avatar_url=form.avatar_url.data
     db.session.commit()
     return user.to_dict()

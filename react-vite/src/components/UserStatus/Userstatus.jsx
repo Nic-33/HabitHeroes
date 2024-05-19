@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { thunkGetUserInfo } from "../../redux/user"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem.jsx";
 import EditUserForm from "../EditUserFormModal/EditUserForm.jsx";
-import Avatar from "../Avatar/Avatar"
 
 
 
@@ -18,7 +17,7 @@ const UserInfo = () => {
     }, [dispatch])
 
     return <div className="userinfo_container">
-        < Avatar />
+        <img className="avatar" src={userSlice.avatar_url} ></img>
         <div id="userInfo">{userSlice.first_name} {userSlice.last_name} ({userSlice.username})</div>
         <div id="about">About: {userSlice.about}</div>
         <OpenModalMenuItem

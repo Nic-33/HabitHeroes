@@ -3,38 +3,68 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { thunkUpdateUserInfo } from "../../redux/user";
-import { thunkUpdateAvatar } from "../../redux/avatars";
 import { AvatarData } from "../Avatar/AvatarData";
 import "./EditUserForm.css";
 
 const EditUserForm = () => {
+
+    const parseQueryValues = (route) => {
+        console.log('route in:', route)
+        const obj = {}
+        const seedIndex = route.indexOf("seed=")
+        const eyesIndex = route.indexOf("eyes=")
+        const mouthIndex = route.indexOf("mouth=")
+        const seed = route.slice(seedIndex + 5, (eyesIndex - 1))
+        const eyes = route.slice(eyesIndex + 5, (mouthIndex - 1))
+        const mouth = route.slice(mouthIndex + 6)
+        obj["seed"] = seed
+        obj["eyes"] = eyes
+        obj["mouth"] = mouth
+        console.log('route out:', obj)
+        return obj
+    }
+
     const dispatch = useDispatch()
     const user = useSelector((state) => state.user)
-    const avatar = useSelector((state) => state.avatar)
+    const avatarValues = parseQueryValues(user.avatar_url)
+    console.table(avatarValues)
     const [loaded, setLoaded] = useState(false)
     const [about, setAbout] = useState(user.about)
     const [username, setUserName] = useState(user.username)
-    const [seed, setSeed] = useState(avatar.seed)
-    const [eyes, setEyes] = useState(avatar.eyes)
-    const [mouth, setMouth] = useState(avatar.mouth)
+    const [seed, setSeed] = useState(AvatarData.seedIndex(AvatarData, avatarValues.seed))
+    console.log(seed)
+    const [eyes, setEyes] = useState(AvatarData.eyesIndex(AvatarData, avatarValues.eyes))
+    const [mouth, setMouth] = useState(AvatarData.mouthIndex(AvatarData, avatarValues.mouth))
     const { closeModal } = useModal();
-
     const updateAbout = (e) => setAbout(e.target.value)
     const updateUserName = (e) => setUserName(e.target.value)
+
+    const createAvatarRoute = (seed, eyes, mouth) => {
+        let route = 'https://api.dicebear.com/8.x/fun-emoji/svg?seed=%seed%&eyes=%eyes%&mouth=%mouth%'
+        route = route.replace('%seed%', seed)
+        route = route.replace('%eyes%', eyes)
+        route = route.replace('%mouth%', mouth)
+        console.log(route)
+        return route
+    }
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const avatar_url = createAvatarRoute(AvatarData['seed'[seed]], AvatarData['eyes'[eyes]], AvatarData['mouth'[mouth]])
+        console.log('avatar url:', avatar_url)
         const updateUser = {
             username,
-            about
+            about,
+            avatar_url
         }
         console.log('UpdateUser!!!!!!!', updateUser)
-        const obj = { seed, eyes, mouth }
-        await dispatch(thunkUpdateAvatar(obj))
         await dispatch(thunkUpdateUserInfo(updateUser))
         closeModal()
     }
+
+
+
 
     const selectColor = (num) => {
         let index = seed + num
@@ -44,6 +74,7 @@ const EditUserForm = () => {
         if (index >= AvatarData.seed.length) {
             index = 0;
         }
+        index = parseInt(index)
         setSeed(index)
         console.log("color:", index)
 
@@ -57,6 +88,7 @@ const EditUserForm = () => {
         if (index >= AvatarData.eyes.length) {
             index = 0;
         }
+        index = parseInt(index)
         setEyes(index)
         console.log("eyes:", index)
 
@@ -70,6 +102,7 @@ const EditUserForm = () => {
         if (index >= AvatarData.mouth.length) {
             index = 0;
         }
+        index = parseInt(index)
         setMouth(index)
         console.log("mouth:", index)
     }
