@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
-import { thunkUpdateUserInfo, thunkUpdateUserAvatar } from "../../redux/user";
-import { thunkUpdateAvatar } from "../../redux/avatars";
+import { thunkUpdateUserInfo } from "../../redux/user";
 import { AvatarData } from "../Avatar/AvatarData";
 import "./EditUserForm.css";
 
 const EditUserForm = () => {
 
     const parseQueryValues = (route) => {
+        console.log('route in:', route)
         const obj = {}
         const seedIndex = route.indexOf("seed=")
         const eyesIndex = route.indexOf("eyes=")
@@ -20,6 +20,7 @@ const EditUserForm = () => {
         obj["seed"] = seed
         obj["eyes"] = eyes
         obj["mouth"] = mouth
+        console.log('route out:', obj)
         return obj
     }
 
@@ -43,17 +44,19 @@ const EditUserForm = () => {
         route = route.replace('%seed%', seed)
         route = route.replace('%eyes%', eyes)
         route = route.replace('%mouth%', mouth)
+        console.log(route)
         return route
     }
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const newUrl = createAvatarRoute(seed, eyes, mouth)
+        const avatar_url = createAvatarRoute(seed, eyes, mouth)
+        console.log('avatar url:', avatar_url)
         const updateUser = {
             username,
             about,
-            newUrl
+            avatar_url
         }
         console.log('UpdateUser!!!!!!!', updateUser)
         await dispatch(thunkUpdateUserInfo(updateUser))
