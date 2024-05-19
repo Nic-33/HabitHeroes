@@ -51,7 +51,7 @@ const EditUserForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const avatar_url = createAvatarRoute(seed, eyes, mouth)
+        const avatar_url = createAvatarRoute(AvatarData['seed'[seed]], AvatarData['eyes'[eyes]], AvatarData['mouth'[mouth]])
         console.log('avatar url:', avatar_url)
         const updateUser = {
             username,
