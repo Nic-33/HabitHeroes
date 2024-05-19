@@ -57,6 +57,7 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #797979;
 }
 
 .select_box {
@@ -92,4 +93,40 @@ button:hover {
 
 .create_button{
     margin-left: auto;
+}
+
+.checkbox_icon{
+    width:50px;
+    margin-inline:8px;
+    background-color:#797979
+}
+.checkbox_icon:hover{
+    cursor: pointer;
+}
+.option_icon{
+    width:25px;
+    height:15px;
+}
+.options_button button{
+    border-radius: 50px;
+    border-style: solid;
+    border-color: #b9b8b8;
+    border-width: 1px;
+    padding:0px;
+    margin-right:4px;
+    margin-top: 4px;
+    /* box-shadow: 2px 2px 2px grey; */
+}
+
+.item_content p{
+margin-inline:4px;
+}
+.pos_neg_button{
+    width:25px;
+    background-color: #c9c9c9;
+}
+
+.border_false{
+    border-style:none;
+    background-color: #c9c9c9;
 }

@@ -5,6 +5,10 @@ import { useEffect, useState } from "react"
 import CreateTodoForm from "../CreateTodoForm/CreateTodoForm"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem.jsx";
 
+
+// <FontAwesomeIcon icon="fa-regular fa-square" />
+// <FontAwesomeIcon icon="fa-solid fa-square-check" />
+
 const TodoSection = () => {
     const dispatch = useDispatch()
     const todoSlice = useSelector(state => state.todos)
@@ -33,20 +37,22 @@ const TodoSection = () => {
     }, [dispatch])
     return <div className="section_container">
         <h2>To Do&apos;s</h2>
+        <div className="create_button"> <OpenModalMenuItem
+            itemText="Create New To Do's"
+            modalComponent={<CreateTodoForm />}
+        /></div>
         <button className="filter_button" style={{ color: showAll ? "black" : "grey" }} onClick={() => setShowAll(true)}>Show All</button>
-        <button className="filter_button" style={{ color: !showAll && !toggleCompleted  ? "black" : "grey" }} onClick={() => {
+        <button className="filter_button" style={{ color: !showAll && !toggleCompleted ? "black" : "grey" }} onClick={() => {
             setToggleCompleted(false)
             setShowAll(false)
         }}>Not Completed</button>
-        <button className="filter_button" style={{ color: !showAll && toggleCompleted  ? "black" : "grey" }} onClick={() => {
-            setToggleCompleted(false)
+        <button className="filter_button" style={{ color: !showAll && toggleCompleted ? "black" : "grey" }} onClick={() => {
             setToggleCompleted(true)
+            setShowAll(false)
         }}>Completed</button>
-        <span className="create_button"> <OpenModalMenuItem
-            itemText="Create New To Do's"
-            modalComponent={<CreateTodoForm />}
-        /></span>
+
         <div className="section">
+
             <input className="quick_input hoverable" type="text" value={todoInput} placeholder="Add a todo" onChange={(e) => handleTodoInput(e.target.value)} onKeyUpCapture={(e) => handleKeyPressEnter(e)}></input>
             {showAll ? Object.keys(todoSlice).map(element => {
                 return (<div key={element}> <TodoInfo info_id={element} /></div>)
