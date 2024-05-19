@@ -16,6 +16,7 @@ export const thunkGetAvatar = () => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         if (data.errors) {
+            console.log(data.errors)
             return;
         }
         dispatch(getAvatar(data));
@@ -45,10 +46,10 @@ const initialState = {}
 
 function avatarReducer(state = initialState, action) {
     switch (action.type) {
-        case GET_AVATAR:{
+        case GET_AVATAR: {
             return { ...action.payload }
         }
-        case UPDATE_AVATAR:{
+        case UPDATE_AVATAR: {
             return { ...action.payload }
         }
         default:

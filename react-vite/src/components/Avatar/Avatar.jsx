@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { AvatarData } from "./AvatarData"
 import './Avatar.css'
 import { useDispatch, useSelector } from "react-redux"
-import { thunkGetAvatar } from "../../redux/avatars"
+import { thunkGetAvatar } from "../../redux/avatars.jsx"
 
 const Avatar = ({ edit }) => {
 
