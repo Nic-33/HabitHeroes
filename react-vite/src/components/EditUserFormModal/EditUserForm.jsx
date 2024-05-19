@@ -5,10 +5,10 @@ import { useModal } from "../../context/Modal";
 import { thunkUpdateUserInfo, thunkUpdateUserAvatar } from "../../redux/user";
 import { thunkUpdateAvatar } from "../../redux/avatars";
 import { AvatarData } from "../Avatar/AvatarData";
-
 import "./EditUserForm.css";
 
 const EditUserForm = () => {
+
     const parseQueryValues = (route) => {
         const obj = {}
         const seedIndex = route.indexOf("seed=")
@@ -26,12 +26,14 @@ const EditUserForm = () => {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.user)
     const avatarValues = parseQueryValues(user.avatar_url)
+    console.table(avatarValues)
     const [loaded, setLoaded] = useState(false)
     const [about, setAbout] = useState(user.about)
     const [username, setUserName] = useState(user.username)
-    const [seed, setSeed] = useState(0)
-    const [eyes, setEyes] = useState(0)
-    const [mouth, setMouth] = useState(0)
+    const [seed, setSeed] = useState(AvatarData.seedIndex(AvatarData, avatarValues.seed))
+    console.log(seed)
+    const [eyes, setEyes] = useState(AvatarData.eyesIndex(AvatarData, avatarValues.eyes))
+    const [mouth, setMouth] = useState(AvatarData.mouthIndex(AvatarData, avatarValues.mouth))
     const { closeModal } = useModal();
     console.table(avatar)
     const updateAbout = (e) => setAbout(e.target.value)
