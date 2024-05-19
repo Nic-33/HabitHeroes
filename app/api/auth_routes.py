@@ -31,8 +31,8 @@ def authenticate():
 @auth_routes.route('/avatars', methods=['GET'])
 def User_Avatar():
     user_id = current_user.to_dict()['id']
-    avatars = Avatar.query.filter(Avatar.user_id==user_id).all()
-    return {'avatar': [avatar.to_dict() for avatar in avatars]}
+    avatars = Avatar.query.filter(Avatar.user_id==user_id).first()
+    return avatars.to_dict()
 
 @auth_routes.route('/login', methods=['POST'])
 def login():
