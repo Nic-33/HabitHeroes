@@ -18,6 +18,7 @@ export const thunkGetAvatar = () => async (dispatch) => {
     console.log('response:', response)
     if (response.ok) {
         const data = await response.json();
+        console.log('avatar data:', data)
         if (data.errors) {
             console.log('Errors!!!!!!:', data.errors)
             return;
