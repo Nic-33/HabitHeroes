@@ -16,9 +16,10 @@ export const thunkGetAvatar = () => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         if (data.errors) {
-            console.log(data.errors)
+            console.log('Errors!!!!!!:', data.errors)
             return;
         }
+        console.log('No Errors!!!!!')
         dispatch(getAvatar(data));
     }
 }
