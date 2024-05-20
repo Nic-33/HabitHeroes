@@ -1,0 +1,99 @@
+.ct {
+    text-align: center;
+}
+
+.landing-page {
+    background-image: url("https://habitica.com/static/svg/cce576f817758fa4398dadf559199d47.svg");
+    background-color: #6133B4;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    color: white;
+    font-family: 'Varela Round', sans-serif;
+    padding: 70px 12px;
+}
+
+
+
+.landing-sec-1, .landing-sec-4 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.landing-header > img, .landing-hilight > img, .landing-sec-4 > div > img {
+    width: 100%;
+}
+
+.landing-header {
+    padding: 0 12px;
+}
+
+.hilight-ctn {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.landing-hilight {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 12px;
+}
+
+.sec2MainCont{
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+
+
+}
+.landing-sec-2{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.landing-sec-3{
+    margin-bottom: 100px;
+}
+
+
+#l-4-pic{
+    max-height: 80%;
+    max-width: 80%;
+}
+
+.sec4Content{
+    margin-top: 100px;
+}
+
+
+.bottomJoin{
+    cursor: pointer;
+    background-color: #392066;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: 2px 2px 5px black;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 450px) {
+    .landing-sec-1{
+        display: flex;
+        flex-direction: column;
+    }
+    .hilight-ctn{
+        display: flex;
+        flex-direction: column;
+    }
+    .landing-sec-4 {
+        display: flex;
+        flex-direction: column;
+    }
+    .bottomJoin{
+        width: 80%
+    }
+}
