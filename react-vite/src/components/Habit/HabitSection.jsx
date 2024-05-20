@@ -12,7 +12,7 @@ const HabitSection = () => {
     const dispatch = useDispatch()
     const habitSlice = useSelector(state => state.habits)
     const [habitInput, setHabitInput] = useState('');
-
+    const [positive, setPositive] = useState(true)
     const handleHabitInput = (e) => {
         setHabitInput(e)
     }
@@ -68,8 +68,19 @@ const HabitSection = () => {
             {/* <button onClick={handleAddHabitClick}>add habit</button> */}
             <div >
                 {Object.keys(habitSlice).map(element => {
-                    return (<div key={element}> <HabitInfo info_id={element} /></div>)
+                    let progress = () => {
+                        if (habitSlice[element].pos_count > habitSlice[element].neg_count) return 'positive'
+                        if (habitSlice[element].pos_count < habitSlice[element].neg_count) return 'negative'
+                        if (habitSlice[element].pos_count === habitSlice[element].neg_count) return 'neutral'
+                    }
+                    return (<div key={element}> <HabitInfo info_id={element} progress={progress()} /></div>)
                 })}
+                {/* {positive ? Object.keys(habitSlice).sort((a,b)=>habitSlice[b].pos_count - habitSlice[a].pos_count).map(element => {
+                    return (<div key={element}> <HabitInfo info_id={element} /></div>)
+                }):
+                Object.keys(habitSlice).sort((a,b)=>habitSlice[b].neg_count - habitSlice[a].neg_count).map(element => {
+                    return (<div key={element}> <HabitInfo info_id={element} /></div>)
+                })} */}
             </div>
         </div>
     </div>

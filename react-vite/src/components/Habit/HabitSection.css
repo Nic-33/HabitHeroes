@@ -130,3 +130,16 @@ margin-inline:4px;
     border-style:none;
     background-color: #c9c9c9;
 }
+
+
+.positive{
+    background-color: rgb(105, 180, 91);
+}
+
+.negative{
+    background-color: rgb(160, 85, 85);
+}
+
+.neutral{
+    background-color: rgb(247, 185, 72);
+}
