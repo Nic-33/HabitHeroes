@@ -69,6 +69,33 @@ const Avatar = ({ edit }) => {
         console.log("mouth:", index)
         return
     }
+
+    const createAvatarRoute = (seed, eyes, mouth) => {
+        let route = 'https://api.dicebear.com/8.x/fun-emoji/svg?seed=%seed%&eyes=%eyes%&mouth=%mouth%'
+        route = route.replace('%seed%', seed)
+        route = route.replace('%eyes%', eyes)
+        route = route.replace('%seed%', mouth)
+        return route
+    }
+
+    const parseQueryValues = (route) => {
+        const obj = {}
+        const seedIndex = route.indexOf("seed=")
+        const eyesIndex = route.indexOf("eyes=")
+        const mouthIndex = route.indexOf("mouth=")
+        const seed = route.slice(seedIndex + 5, (eyesIndex - seedIndex - 5))
+        const eyes = route.slice(eyesIndex + 5, (moutIndex - eyesIndex - 5))
+        const mouth = route.slice(mouthIndex + 5)
+        obj["seed"] = seed
+        obj["eyes"] = eyes
+        obj["mouth"] = mouth
+        return obj
+    }
+
+    const mapQueryValuesToIndex = ()=>{
+        
+    }
+
     return (
         <div>
             <img className="avatar"

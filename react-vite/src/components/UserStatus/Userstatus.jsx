@@ -5,6 +5,10 @@ import { thunkGetUserInfo } from "../../redux/user"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem.jsx";
 import EditUserForm from "../EditUserFormModal/EditUserForm.jsx";
 
+// import Avatar from "../Avatar/Avatar"
+import Avatar from "../Avatar/Avatar.jsx";
+
+
 
 
 const UserInfo = () => {

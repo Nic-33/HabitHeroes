@@ -37,7 +37,7 @@ const EditMenu = ({ type, id }) => {
         // <div className='task_option_menu_container'>
         <ul className='task_option_menu'>
             <li><OpenModalMenuItem
-                itemText="edit"
+                itemText="Edit"
                 modalComponent={modalComp}
             /></li>
             <li><button onClick={() => handleDeleteClick()}>Delete</button></li>
