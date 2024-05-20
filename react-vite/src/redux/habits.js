@@ -38,6 +38,7 @@ const incrementHabitNeg = (habit) => ({
 
 
 
+
 export const thunkGetHabits = () => async (dispatch) => {
     const response = await fetch("/api/habits/");
     if (response.ok) {

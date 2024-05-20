@@ -11,15 +11,22 @@ const updateAvatar = (avatar) => ({
     payload: avatar
 })
 
+
 export const thunkGetAvatar = () => async (dispatch) => {
-    const response = await fetch(`/api/avatars`);
+    console.log('thunkGetAvatar running')
+    const response = await fetch(`/api/users/avatars`);
+    console.log('avatar response:', response)
     if (response.ok) {
         const data = await response.json();
+        console.log('avatar data:', data)
         if (data.errors) {
+            console.log('Errors!!!!!!:', data.errors)
             return;
         }
+        console.log('No Errors!!!!!')
         dispatch(getAvatar(data));
     }
+    console.log('Avatar Data Not OK!!!')
 }
 
 export const thunkUpdateAvatar = (payload) => async (dispatch) => {
@@ -45,10 +52,10 @@ const initialState = {}
 
 function avatarReducer(state = initialState, action) {
     switch (action.type) {
-        case GET_AVATAR:{
+        case GET_AVATAR: {
             return { ...action.payload }
         }
-        case UPDATE_AVATAR:{
+        case UPDATE_AVATAR: {
             return { ...action.payload }
         }
         default:

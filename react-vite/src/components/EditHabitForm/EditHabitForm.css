@@ -1,23 +1,35 @@
 .habit-edit-ctn {
-    width: 400px;
-    color: #C6C1BA;
+    width: 25rem;
+
+    /* color: #C6C1BA; */
     /* overflow-y: scroll; */
     /* max-height: 90vh; */
 
     /* padding: 24px 12px; */
     /* box-sizing: border-box; */
     /* background-color: black; */
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
 }
 
 /* Title and buttons */
-.habit-title-and-btns {
-    background-color: #9E4000;
-    color: #FFAB73;
+.habit-title-and-btn {
+    /* background-color: #9E4000; */
+
     box-sizing: border-box;
-    padding: 24px;
+    padding: 0;
     display: flex;
+    flex-direction: row;
+
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
+}
+
+.btn-save-cancel {
+    /* margin-top: auto; */
+    align-content: center;
 }
 
 .habit-edit {
@@ -27,28 +39,47 @@
 .habit-edit.cancel {
     background-color: transparent;
     border: none;
-    color: #FFAB73;
+    /* color: #FFAB73; */
 }
 
 .habit-edit.save {
-    background-color: #181A1b;
-    border: none;
-    color: #FFAB73;
+    align-items: center;
+    appearance: button;
+    background-color: #ffffff;
+    border: 1px solid rgba(146, 92, 243, 0.847);
+    border-radius: 4px;
+    box-shadow: rgba(26, 24, 29, 0.024) 0px 0.462809px 0.925618px 0px,
+        rgba(26, 24, 29, 0.035) 0px 0.462809px 0.925618px 0px;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    /* justify-content: center;
+      padding: 4px 12px; */
+    transition: color 0.15s ease-in-out 0s,
+        background-color 0.15s ease-in-out 0s, border-color 0.15s ease-in-out 0s,
+        box-shadow 0.15s ease-in-out 0s, -webkit-box-shadow 0.15s ease-in-out 0s;
+    user-select: none;
+    vertical-align: middle;
 }
 
 /* Top of form */
 .edit-form-top {
-    background-color: #9E4000;
+    background-color: #ffbe5d;
+    border-radius: 8px 8px 0px 0px;
+    box-sizing: border-box;
+    padding: 24px;
+    transition: none 0s ease 0s;
+
     padding: 0 24px 24px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+
 }
 
 .edit-form-top-input {
-    background-color: #5b2d0e;
+    background-color: #ffdeae;
     width: 100%;
-    color: white;
+
     padding: 12px;
     box-sizing: border-box;
 }
@@ -61,17 +92,24 @@
     gap: 6px;
 }
 
-.habit-edit-input-ctn > label {
+.edit {
+    color: #794b00;
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
 }
 
 /* Bottom of form */
 .edit-form-bottom {
     padding: 0 24px 24px;
-    background-color: #181A1b;
+    background-color: white;
     display: flex;
     flex-direction: column;
     gap: 24px;
+    box-sizing: border-box;
+    transition: none 0s ease 0s;
+    border-radius: 0px 0px 8px 8px;
 }
 
 /* Habit Type Buttons */
@@ -88,17 +126,18 @@
     justify-content: center;
     align-items: center;
     padding: 12px 0;
+    border-color: #a5a1ac;
 }
 
-.pos-neg-habit-btn {
+.edit-pos-neg-habit-btn {
     border-radius: 100%;
     width: 40px;
     height: 40px;
-    background-color: #181A1b;
 }
 
-.pos-neg-habit-btn.selected {
-    background-color: #9E4000;
+.edit-pos-neg-habit-btn.selected {
+    background-color: #ffbe5d;
+
 }
 
 /* Habit Select Inputs */
@@ -137,7 +176,8 @@
     width: 100%;
 }
 
-.fa-square-minus, .fa-square-plus {
+.fa-square-minus,
+.fa-square-plus {
     font-size: 20px;
 }
 
@@ -154,4 +194,14 @@
     color: red;
     background-color: transparent;
     border: none;
+}
+
+.edit-form-top > div > label {
+    color: #794b00;
+    cursor: default;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 23.94px;
+    text-align: left;
 }
