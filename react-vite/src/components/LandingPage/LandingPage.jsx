@@ -32,12 +32,12 @@ function LandingPage() {
             <div id='upper_right_side'>
               <OpenModalMenuItem
                 itemText="Join us"
-                modalComponent={<LoginFormModal />} />
+                modalComponent={<SignupFormModal />} />
             </div>
             <div id="lower_right_side">
               <OpenModalMenuItem
                 itemText="Welcome Back"
-                modalComponent={<SignupFormModal />} />
+                modalComponent={<LoginFormModal />} />
             </div>
           </div>
         </div>

@@ -39,14 +39,14 @@ const TodoInfo = ({ info_id }) => {
                 </div>
                 <div className="options_button">
                     <button className="options_button" onClick={() => setShowDropMenu(!showDropMenu)}>
-                    <svg className="option_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512"><path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/></svg>
-                    {/* <svg onClick={(e) => completeTodo(e)} className="checkbox_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" /></svg> */}
+                        <svg className="option_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512"><path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z" /></svg>
+                        {/* <svg onClick={(e) => completeTodo(e)} className="checkbox_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" /></svg> */}
                     </button>
                     {showDropMenu ? <EditMenu type='Todo' id={info_id} /> : null}
                 </div>
 
             </div>
-            <p>{todo.due_date} </p>
+            {/* <p>{todo.due_date} </p> */}
         </div>
         }
     </div>
