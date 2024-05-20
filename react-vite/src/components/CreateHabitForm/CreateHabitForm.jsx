@@ -50,7 +50,7 @@ function CreateHabitForm(create = true) {
             <form className="create-habit-form" onSubmit={handleSubmit}>
                 <div className="create-form-top">
                     <div className="habit-title-and-btn">
-                        <div><p className="create">Create Habit</p></div>
+                        <div><p className="create-habit-p">Create Habit</p></div>
 
                         <div className="btn-save-cancel">
                             <button
