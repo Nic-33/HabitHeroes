@@ -3,6 +3,8 @@ import { Navigate } from "react-router-dom";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal/SignupFormModal.jsx";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem.jsx";
+import { useModal } from "../../context/Modal";
+
 import "./LandingPage.css";
 
 
