@@ -31,10 +31,10 @@ const EditUserForm = () => {
     const [loaded, setLoaded] = useState(false)
     const [about, setAbout] = useState(user.about)
     const [username, setUserName] = useState(user.username)
-    const [seed, setSeed] = useState(AvatarData.seedIndex(AvatarData, avatarValues.seed))
+    const [seed, setSeed] = useState(AvatarData.seedIndex(AvatarData, avatarValues['seed']))
     console.log(seed)
-    const [eyes, setEyes] = useState(AvatarData.eyesIndex(AvatarData, avatarValues.eyes))
-    const [mouth, setMouth] = useState(AvatarData.mouthIndex(AvatarData, avatarValues.mouth))
+    const [eyes, setEyes] = useState(AvatarData.eyesIndex(AvatarData, avatarValues['eyes']))
+    const [mouth, setMouth] = useState(AvatarData.mouthIndex(AvatarData, avatarValues['mouth']))
     const { closeModal } = useModal();
     const updateAbout = (e) => setAbout(e.target.value)
     const updateUserName = (e) => setUserName(e.target.value)

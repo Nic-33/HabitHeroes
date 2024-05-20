@@ -1,8 +1,14 @@
 """empty message
 
+<<<<<<< HEAD:migrations/versions/20240519_191534_.py
 Revision ID: 665cf5d1e4f8
 Revises: 
 Create Date: 2024-05-19 19:15:34.084869
+=======
+Revision ID: 948015f9c038
+Revises:
+Create Date: 2024-05-18 23:28:05.393304
+>>>>>>> 7f2b3eebf2fe762ed5474b5accaaf81786fe70eb:migrations/versions/20240518_232805_.py
 
 """
 from alembic import op
@@ -25,7 +31,7 @@ def upgrade():
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('first_name', sa.String(length=40), nullable=False),
     sa.Column('last_name', sa.String(length=40), nullable=False),
-    sa.Column('last_login', sa.Integer(), nullable=False),
+    sa.Column('last_login', sa.Date(), nullable=False),
     sa.Column('avatar_url', sa.String(), nullable=True),
     sa.Column('about', sa.String(length=255), nullable=True),
     sa.PrimaryKeyConstraint('id'),
