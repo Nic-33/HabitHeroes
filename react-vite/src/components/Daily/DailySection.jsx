@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { thunkGetDailies, thunkCreateDailies } from "../../redux/dailies"
 import { useEffect, useState } from "react"
 import './DailySection.css'
+import CreateDailyForm from "../CreateDailyForm/CreateDailyForm"
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem"
 
 const DailySection = () => {
     const dispatch = useDispatch()
@@ -44,6 +46,12 @@ const DailySection = () => {
 
     return <div className="section_container">
         <h2>Dailies</h2>
+        <div className="create_button">
+            <OpenModalMenuItem
+                itemText="Create New Daily"
+                modalComponent={<CreateDailyForm />}
+            />
+        </div>
         <button className="filter_button" onClick={() => setShowAll(true)} style={{ color: showAll ? "black" : "grey" }}>Show All</button>
         <button className="filter_button" style={{ color: !showAll && !toggleCompleted ? "black" : "grey" }} onClick={() => {
             setShowAll(false)
