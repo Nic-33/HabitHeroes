@@ -35,7 +35,7 @@ const EditUserForm = () => {
     const [eyes, setEyes] = useState(AvatarData.eyesIndex(AvatarData, avatarValues.eyes))
     const [mouth, setMouth] = useState(AvatarData.mouthIndex(AvatarData, avatarValues.mouth))
     const { closeModal } = useModal();
-    console.table(avatar)
+    // console.table(avatar)
     const updateAbout = (e) => setAbout(e.target.value)
     const updateUserName = (e) => setUserName(e.target.value)
 

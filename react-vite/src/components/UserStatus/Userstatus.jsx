@@ -4,15 +4,10 @@ import { useEffect, useState } from "react"
 import { thunkGetUserInfo } from "../../redux/user"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem.jsx";
 import EditUserForm from "../EditUserFormModal/EditUserForm.jsx";
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 // import Avatar from "../Avatar/Avatar"
 import Avatar from "../Avatar/Avatar.jsx";
-=======
->>>>>>> ea58ddb0d717e388de806789c72a4b0daab09ba8
-=======
-import Avatar from "../Avatar/Avatar.jsx"
->>>>>>> ed1ec09d1fd9b11d6a895944004e5f71cabdd045
+
 
 
 
