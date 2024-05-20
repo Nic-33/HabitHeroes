@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     first_name = db.Column(db.String(40),nullable=False)
     last_name = db.Column(db.String(40),nullable=False)
-    last_login = db.Column(db.Integer(),nullable=False)
+    last_login = db.Column(db.Date(),nullable=False)
     avatar_url = db.Column(db.String(255))
     about = db.Column(db.String(255))
 
