@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(40),nullable=False)
     last_name = db.Column(db.String(40),nullable=False)
     last_login = db.Column(db.Date(),nullable=False)
-    avatar_url = db.Column(db.String(255))
+    avatar_url = db.Column(db.String())
     about = db.Column(db.String(255))
 
     habits = db.relationship("Habit", back_populates="users")

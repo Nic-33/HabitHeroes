@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkUpdateDailies, thunkDeleteDailies } from "../../redux/dailies";
-import "./DailyForm.css";
+import { thunkCreateDailies } from "../../redux/dailies";
+import "./CreateDailyForm.css";
 
-function EditDailyForm(props) {
+function CreateDailyForm(props) {
     const { closeModal } = useModal();
     const daily_Id = props.props;
     const dispatch = useDispatch();
@@ -15,9 +15,9 @@ function EditDailyForm(props) {
     const daily = allDailies.filter((info) => info.id == daily_Id).pop();
 
     //form elements to build object to send to backend
-    const [title, setTitle] = useState(daily.title);
-    const [description, setDescription] = useState(daily.description);
-    const [difficulty, setDifficulty] = useState(daily.difficulty);
+    const [title, setTitle] = useState();
+    const [description, setDescription] = useState();
+    const [difficulty, setDifficulty] = useState();
     // const [repeats_frame, setRepeats_frame] = useState(daily.repeats_frame);
     // const [repeats_frequency, setRepeats_frequency] = useState(
     //     daily.repeats_frequency
@@ -59,7 +59,7 @@ function EditDailyForm(props) {
 
         // check if there are errors before dispatching
         if (!Object.values(issues).length) {
-            await dispatch(thunkUpdateDailies(newDaily, daily_Id));
+            await dispatch(thunkCreateDailies(newDaily, daily_Id));
             closeModal();
         }
     };
@@ -73,20 +73,18 @@ function EditDailyForm(props) {
     // };
 
     return (
-        <div className="daily-edit-ctn">
-            <form className="edit-daily-habit-form" onSubmit={handleSubmit}>
+        <div className="daily-create-ctn">
+            <form className="create-daily-habit-form" onSubmit={handleSubmit}>
                 {/* this div covers the top section to give it its styling */}
-                <div className="daily-edit-form-top">
-                    <div className="edit-daily-title-and-btns">
+                <div className="daily-create-form-top">
+                    <div className="create-daily-title-and-btns">
                         {/* Title */}
-                        <div>
-                            <p className="edit-daily-p">Edit Daily</p>
-                        </div>
+                        <div><p className="create-daily-p">Create Daily</p></div>
 
                         {/* Buttons */}
-                        <div className="edit-daily-btn-save-cancel">
+                        <div className="create-daily-btn-save-cancel">
                             <button
-                                className="daily-edit cancel"
+                                className="daily-create cancel"
                                 onClick={closeModal}
                             >
                                 Cancel
@@ -95,13 +93,14 @@ function EditDailyForm(props) {
                                 onClick={(e) => {
                                     handleSubmit(e);
                                 }}
-                                className="daily-edit save"
+                                className="daily-create save"
                             >
                                 Save
                             </button>
                         </div>
                     </div>
-                    <div className="daily-edit-input-ctn">
+
+                    <div className="daily-create-input-ctn">
                         {/* This div is for the title input */}
                         <label>Title</label>
 
@@ -109,20 +108,20 @@ function EditDailyForm(props) {
                             type="text"
                             value={title}
                             placeholder="Add a title"
-                            className="daily-edit-form-top-input"
+                            className="daily-create-form-top-input"
                             onChange={(e) => setTitle(e.target.value)}
                         />
 
                         <div className="errors">{errors?.title}</div>
                     </div>
 
-                    <div className="daily-edit-input-ctn">
+                    <div className="daily-create-input-ctn">
                         {/* This div is for the description input */}
                         <label>Notes</label>
 
                         <textarea
                             placeholder="Add notes"
-                            className="daily-edit-form-top-input"
+                            className="daily-create-form-top-input"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
@@ -133,10 +132,10 @@ function EditDailyForm(props) {
                     {/* End of top of form */}
                 </div>
 
-                <div className="daily-edit-form-bottom">
+                <div className="daily-create-form-bottom">
                     {/* This is where checklist input will go in the future */}
 
-                    <div className="edit-daily-select-ctn">
+                    <div className="create-daily-select-ctn">
                         {/* Difficulty selector div */}
                         <label id="gap">Difficulty</label>
 
@@ -155,7 +154,7 @@ function EditDailyForm(props) {
 
                     {/* This is where Start date will go when it is implimented */}
 
-                    {/* <div className="edit-daily-select-ctn">
+                    {/* <div className="create-daily-select-ctn">
                         This is the repeats time frame input div
                         <label>Repeats</label>
 
@@ -172,7 +171,7 @@ function EditDailyForm(props) {
                         <div className="errors">{errors?.repeats_frame}</div>
                     </div>
 
-                    <div className="edit-daily-select-ctn">
+                    <div className="create-daily-select-ctn">
                         This div is the number input for how many of time frame should pass before task becomes due again
                         <label>Repeat Every</label>
 
@@ -242,16 +241,16 @@ function EditDailyForm(props) {
             </form>
 
             {/* This is the bottom section that contains the delete part */}
-            {/* <div className="edit-daily-del">
+            {/* <div className="create-daily-del">
                 <button
-                    className="edit-daily-del-btn"
+                    className="create-daily-del-btn"
                     onClick={() => {
                         // This pops up an alert when the button is clicked
                         const res = window.confirm(
                             "Are you sure you want to delete this daily?"
                         );
 
-                        If the user choses yes then res will be true so we dispatch the action and close the edit modal
+                        If the user choses yes then res will be true so we dispatch the action and close the create modal
                         if (res) {
                             dispatch(thunkDeleteDailies(daily.id));
                             closeModal();
@@ -268,4 +267,4 @@ function EditDailyForm(props) {
     );
 }
 
-export default EditDailyForm;
+export default CreateDailyForm;
