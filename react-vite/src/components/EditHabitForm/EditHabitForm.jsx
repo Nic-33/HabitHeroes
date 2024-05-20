@@ -9,15 +9,15 @@ import {
 import "./EditHabitForm.css";
 
 function EditHabitForm(props, edit = true) {
-    const habit_Id = props.props
-    console.log('habit id:', habit_Id)
+    const habit_Id = props.props;
+    console.log("habit id:", habit_Id);
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
-    let allHabits = useSelector((state) => state.habits)
-    allHabits = Object.values(allHabits)
-    const habit = allHabits.filter(info => info.id == habit_Id).pop()
-    console.log('habit:', habit)
+    let allHabits = useSelector((state) => state.habits);
+    allHabits = Object.values(allHabits);
+    const habit = allHabits.filter((info) => info.id == habit_Id).pop();
+    console.log("habit:", habit);
     const [title, setTitle] = useState(habit.title);
     const [description, setDescription] = useState(habit.description);
     const [difficulty, setDifficulty] = useState(habit.difficulty);
@@ -48,8 +48,8 @@ function EditHabitForm(props, edit = true) {
             pos_count,
             neg_count,
             pos,
-            neg
-        }
+            neg,
+        };
 
         if (edit) {
             await dispatch(thunkUpdateHabits(data, habit_Id));
@@ -61,27 +61,31 @@ function EditHabitForm(props, edit = true) {
 
     return (
         <div className="habit-edit-ctn">
-            <div className="habit-title-and-btn">
-                <div>Edit Habit</div>
-
-                <div>
-                    <button className="habit-edit cancel" onClick={closeModal}>
-                        Cancel
-                    </button>
-
-                    <button
-                        className="habit-edit save"
-                        onClick={(e) => handleSubmit(e)}
-                    >
-                        Save
-                    </button>
-                </div>
-            </div>
-
             <form className="edit-habit-form" onSubmit={handleSubmit}>
                 <div className="edit-form-top">
+                    <div className="habit-title-and-btn">
+                        <div>
+                            <p className="edit">Edit Habit</p>
+                        </div>
+
+                        <div className="btn-save-cancel">
+                            <button
+                                className="habit-edit cancel"
+                                onClick={closeModal}
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                className="habit-edit save"
+                                onClick={(e) => handleSubmit(e)}
+                            >
+                                Save
+                            </button>
+                        </div>
+                    </div>
                     <div className="edit-form-input">
-                        <label>Title</label>
+                        <label>Title*</label>
                         <input
                             className="edit-form-top-input"
                             type="text"
@@ -93,7 +97,7 @@ function EditHabitForm(props, edit = true) {
                     </div>
 
                     <div className="habit-edit-input-ctn">
-                        <label>Description</label>
+                        <label>Notes</label>
                         <textarea
                             className="edit-form-top-input"
                             type="text"
@@ -108,13 +112,14 @@ function EditHabitForm(props, edit = true) {
                     <div className="edit-habit-plus-and-minus">
                         <div className="habit-btn-ctn">
                             <button
-                                className={`pos-neg-habit-btn ${pos ? "selected" : null
-                                    }`}
+                                className={`edit-pos-neg-habit-btn ${
+                                    pos ? "selected" : null
+                                }`}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setPos(!pos);
                                 }}
-                            >
+                            > +
                                 <i className="fa-solid fa-plus"></i>
                             </button>
                             <div>Positive</div>
@@ -122,13 +127,14 @@ function EditHabitForm(props, edit = true) {
 
                         <div className="habit-btn-ctn">
                             <button
-                                className={`pos-neg-habit-btn ${neg ? "selected" : null
-                                    }`}
+                                className={`edit-pos-neg-habit-btn ${
+                                    neg ? "selected" : null
+                                }`}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setNeg(!neg);
                                 }}
-                            >
+                            > -
                                 <i className="fa-solid fa-minus"></i>
                             </button>
                             <div>Negative</div>
@@ -247,4 +253,4 @@ function EditHabitForm(props, edit = true) {
     );
 }
 
-export default EditHabitForm
+export default EditHabitForm;

@@ -6,9 +6,25 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password',first_name="demo",last_name="lition",last_login= datetime.today(),avatar_url="https://api.dicebear.com/8.x/fun-emoji/svg?seed=socks&eyes=cute&mouth=cute",about="something about me")
+        username="Demo",
+        email="demo@aa.io",
+        password="password",
+        first_name="demo",
+        last_name="lition",
+        last_login=datetime.today(),
+        avatar_url="https://api.dicebear.com/8.x/fun-emoji/svg?seed=socks&eyes=cute&mouth=cute",
+        about="something about me",
+    )
     marnie = User(
-          username='MarnMarn', email='Marnie@aa.io', password='password',first_name="Marnie",last_name="Narnie",last_login=datetime.today(),avatar_url="https://api.dicebear.com/8.x/fun-emoji/svg?seed=socks&eyes=cute&mouth=cute",about="something about Marnie")
+        username="MarnMarn",
+        email="Marnie@aa.io",
+        password="password",
+        first_name="Marnie",
+        last_name="Narnie",
+        last_login=datetime.today(),
+        avatar_url="https://api.dicebear.com/8.x/fun-emoji/svg?seed=socks&eyes=cute&mouth=cute",
+        about="something about Marnie",
+    )
     # bobbie = User(
     #     username='bobbie', email='bobbie@aa.io', password='password')
 
