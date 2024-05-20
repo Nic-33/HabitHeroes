@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
-import {
-    thunkCreateHabits,
-} from "../../redux/habits";
+import { thunkCreateHabits } from "../../redux/habits";
 import "./CreateHabitForm.css";
 
 function CreateHabitForm(create = true) {
@@ -37,8 +35,8 @@ function CreateHabitForm(create = true) {
             pos_count,
             neg_count,
             pos,
-            neg
-        }
+            neg,
+        };
 
         if (create) {
             await dispatch(thunkCreateHabits(data));
@@ -49,27 +47,29 @@ function CreateHabitForm(create = true) {
 
     return (
         <div className="habit-create-ctn">
-            <div className="habit-title-and-btn">
-                <div>Create Habit</div>
-
-                <div>
-                    <button className="habit-create cancel" onClick={closeModal}>
-                        Cancel
-                    </button>
-
-                    <button
-                        className="habit-create save"
-                        onClick={(e) => handleSubmit(e)}
-                    >
-                        Save
-                    </button>
-                </div>
-            </div>
-
             <form className="create-habit-form" onSubmit={handleSubmit}>
                 <div className="create-form-top">
+                    <div className="habit-title-and-btn">
+                        <div><p className="create-habit-p">Create Habit</p></div>
+
+                        <div className="btn-save-cancel">
+                            <button
+                                className="habit-create cancel"
+                                onClick={closeModal}
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                className="habit-create save"
+                                onClick={(e) => handleSubmit(e)}
+                            >
+                                Save
+                            </button>
+                        </div>
+                    </div>
                     <div className="create-form-input">
-                        <label>Title</label>
+                        <label>Title*</label>
                         <input
                             className="create-form-top-input"
                             type="text"
@@ -81,7 +81,7 @@ function CreateHabitForm(create = true) {
                     </div>
 
                     <div className="habit-create-input-ctn">
-                        <label>Description</label>
+                        <label>Notes</label>
                         <textarea
                             className="create-form-top-input"
                             type="text"
@@ -96,13 +96,14 @@ function CreateHabitForm(create = true) {
                     <div className="create-habit-plus-and-minus">
                         <div className="habit-btn-ctn">
                             <button
-                                className={`pos-neg-habit-btn ${pos ? "selected" : null
-                                    }`}
+                                className={`create-pos-neg-habit-btn ${
+                                    pos ? "selected" : null
+                                }`}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setPos(!pos);
                                 }}
-                            >
+                            > +
                                 <i className="fa-solid fa-plus"></i>
                             </button>
                             <div>Positive</div>
@@ -110,13 +111,14 @@ function CreateHabitForm(create = true) {
 
                         <div className="habit-btn-ctn">
                             <button
-                                className={`pos-neg-habit-btn ${neg ? "selected" : null
-                                    }`}
+                                className={`create-pos-neg-habit-btn ${
+                                    neg ? "selected" : null
+                                }`}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setNeg(!neg);
                                 }}
-                            >
+                            > -
                                 <i className="fa-solid fa-minus"></i>
                             </button>
                             <div>Negative</div>
@@ -235,4 +237,4 @@ function CreateHabitForm(create = true) {
     );
 }
 
-export default CreateHabitForm
+export default CreateHabitForm;

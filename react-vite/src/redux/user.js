@@ -29,7 +29,6 @@ const updateUserAvatar = (user) => ({
     payload: user
 })
 
-
 export const thunkGetUserInfo = () => async (dispatch) => {
     const response = await fetch("/api/users/");
     if (response.ok) {

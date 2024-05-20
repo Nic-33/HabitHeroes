@@ -4,13 +4,14 @@ import './Avatar.css'
 import { useDispatch, useSelector } from "react-redux"
 import { thunkGetAvatar } from "../../redux/avatars"
 
+
 const Avatar = ({ edit }) => {
 
 
     const dispatch = useDispatch()
 
-    const avatarSlice = useSelector(state => state.avatar)
-
+    const avatarSlice = useSelector(state => state.user.avatar_url)
+    console.log(avatarSlice)
 
 
     const [seed, setSeed] = useState(0)

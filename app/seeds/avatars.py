@@ -19,7 +19,7 @@ def seed_avatars():
         eyes =3,
         mouth = 7
         )
- 
+
 
     # bobbie = User(
     #     username='bobbie', email='bobbie@aa.io', password='password')
@@ -38,7 +38,7 @@ def seed_avatars():
 # it will reset the primary keys for you as well.
 def undo_avatars():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.avatars RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM avatars"))
 
