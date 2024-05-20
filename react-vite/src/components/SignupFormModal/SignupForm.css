@@ -1,0 +1,36 @@
+.signup_form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    padding: 8px;
+}
+
+.signup_form>label {
+    display: flex;
+    flex-direction: column;
+    margin-block: 8px;
+}
+
+.signup_form>label>input {
+    height: 24px;
+}
+
+.signup_form>button {
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    border-style: none;
+    box-shadow: 2px 2px 2px gray;
+    background-color: rgb(199, 199, 199);
+}
+
+.signup-modal-container {
+    border-radius: 50%;
+}
+
+.signup-modal-container>h1 {
+    margin: 0px;
+    padding: 24px;
+    color: white;
+    background-color: rgb(54, 41, 92);
+}
