@@ -1,62 +1,42 @@
-# group_project
-crud
+HabitHeroes README
+Table of Contents
+Introduction
+Getting Started
+Features
+Using HabitHeroes
+Contributing
 
-![alt text](image.png)
+Introduction
+Welcome to HabitHeroes! HabitHeroes is an innovative productivity app that turns your daily goals and habits into an engaging game. Whether you're looking to improve your productivity, develop good habits, or simply enjoy a gamified approach to task management, HabitHeroes is here to help you achieve your goals in a fun and interactive way.
 
-1. profile
-    - create an account
-    - edit account
-    - view account
-    - delete account
+Getting Started
+Installation
+HabitHeroes is available on multiple platforms:
 
-2. habits
-    -
-    -
-
-3. dailies
-    - reset everyday
-
-4. to do's
-    - goals setup for the day
-    -
-
-stretch goals
-
-1. rewards
-
-2. custom avatars
-
-3. Level Up
-    - Users should be able to gain experience by completing tasks.
-    - Users should be able to level up and see their level change.
-    - consecutive multiplyer for daily streak
+Web: Access the app directly through your browser at https://habitheroes.onrender.com/.
+Creating an Account
+Open HabitHeroes on your preferred platform.
+Click on "Sign Up" to create a new account.
+Fill in your details and verify your email address.
+Log in with your new credentials.
+Setting Up Your Profile
+Customize your avatar to represent your in-game character.
+Set up your initial habits, daily tasks, and to-dos.
+Features
+Habit Tracking: Create and manage habits, daily tasks, and to-dos.
+Customizable Avatars: Personalize your character with various outfits and gear.
+Using HabitHeroes
+Creating and Managing Tasks
+Habits: Add habits you want to build or break. Assign positive and/or negative points.
+Dailies: Add tasks that you need to complete daily or on specific days.
+To-Dos: List one-time tasks with deadlines.
 
 
+Contributing
+We welcome contributions from the community! Here's how you can help:
 
-User Avatars
-Users should be able to view their custom avatar.
-Users should be able to create their custom avatar.
-Users should be able to edit their custom avatar.
-Users should be able to delete their custom avatar.
+Report Bugs: Use the issue tracker on our GitHub page to report bugs.
+Suggest Features: Submit feature requests and improvements.
 
-Habits
-Users should be able to view their created habits.
-Users should be able to create new habits.
-Users should be able to update their habits.
-Users should be able to delete their habits.
 
-Dailies
-Users should be able to view their created dailies.
-Users should be able to create new dailies.
-Users should be able to update their dailies.
-Users should be able to delete their dailies.
-
-To-dos
-Users should be able to view their created to-dos.
-Users should be able to create new to-dos.
-Users should be able to update their to-dos.
-Users should be able to delete their to-dos.
-
-Bonus: Level Up
-Users should be able to gain experience by completing tasks.
-Users should be able to level up and see their level change.
+Thank you for choosing HabitHeroes! We hope you enjoy your journey to better habits and productivity. Happy questing!
