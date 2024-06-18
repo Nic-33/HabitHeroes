@@ -11,7 +11,7 @@ const Avatar = ({ edit }) => {
     const dispatch = useDispatch()
 
     const avatarSlice = useSelector(state => state.user.avatar_url)
-    console.log(avatarSlice)
+
 
 
     const [seed, setSeed] = useState(0)
@@ -27,7 +27,7 @@ const Avatar = ({ edit }) => {
     useEffect(() => {
         if (!avatarSlice['eyes']) {
             dispatch(thunkGetAvatar())
-            console.log("getting avatar")
+
         }
     }, [dispatch])
 
@@ -40,7 +40,7 @@ const Avatar = ({ edit }) => {
             index = 0;
         }
         setSeed(index)
-        console.log("color:", index)
+
         return
     }
 
@@ -53,7 +53,7 @@ const Avatar = ({ edit }) => {
             index = 0;
         }
         setEyes(index)
-        console.log("eyes:", index)
+
         return
     }
 
@@ -66,7 +66,7 @@ const Avatar = ({ edit }) => {
             index = 0;
         }
         setMouth(index)
-        console.log("mouth:", index)
+
         return
     }
 
@@ -92,8 +92,8 @@ const Avatar = ({ edit }) => {
         return obj
     }
 
-    const mapQueryValuesToIndex = ()=>{
-        
+    const mapQueryValuesToIndex = () => {
+
     }
 
     return (

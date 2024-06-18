@@ -6,7 +6,7 @@ export const AvatarData = {
     seedIndex: (data, seed) => {
         for (let i = 0; i < data.seed.length; i++)
             if (data.seed[i].toLowerCase() === seed.toLowerCase()) {
-                console.log(i)
+
                 return i
             }
     },

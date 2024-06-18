@@ -18,9 +18,9 @@ const EditAvatar = ({ edit }) => {
     const [mouth, setMouth] = useState(0)
 
     useEffect(() => {
-        if (!avatarSlice['eyes']){
-             dispatch(thunkGetAvatar())
-             console.log("getting avatar")
+        if (!avatarSlice['eyes']) {
+            dispatch(thunkGetAvatar())
+
         }
     }, [dispatch])
 
@@ -39,7 +39,7 @@ const EditAvatar = ({ edit }) => {
             index = 0;
         }
         setSeed(index)
-        console.log("color:", index)
+
         return
     }
 
@@ -52,7 +52,7 @@ const EditAvatar = ({ edit }) => {
             index = 0;
         }
         setEyes(index)
-        console.log("eyes:", index)
+
         return
     }
 
@@ -65,7 +65,7 @@ const EditAvatar = ({ edit }) => {
             index = 0;
         }
         setMouth(index)
-        console.log("mouth:", index)
+
         return
     }
     return (

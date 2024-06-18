@@ -9,7 +9,7 @@ import "./EditUserForm.css";
 const EditUserForm = () => {
 
     const parseQueryValues = (route) => {
-        console.log('route in:', route)
+
         const obj = {}
         const seedIndex = route.indexOf("seed=")
         const eyesIndex = route.indexOf("eyes=")
@@ -20,7 +20,7 @@ const EditUserForm = () => {
         obj["seed"] = seed
         obj["eyes"] = eyes
         obj["mouth"] = mouth
-        console.log('route out:', obj)
+
         return obj
     }
 
@@ -32,7 +32,7 @@ const EditUserForm = () => {
     const [about, setAbout] = useState(user.about)
     const [username, setUserName] = useState(user.username)
     const [seed, setSeed] = useState(AvatarData.seedIndex(AvatarData, avatarValues['seed']))
-    console.log(seed)
+
     const [eyes, setEyes] = useState(AvatarData.eyesIndex(AvatarData, avatarValues['eyes']))
     const [mouth, setMouth] = useState(AvatarData.mouthIndex(AvatarData, avatarValues['mouth']))
     const { closeModal } = useModal();
@@ -45,7 +45,7 @@ const EditUserForm = () => {
         route = route.replace('%seed%', seed)
         route = route.replace('%eyes%', eyes)
         route = route.replace('%mouth%', mouth)
-        console.log(route)
+
         return route
     }
 
@@ -53,13 +53,13 @@ const EditUserForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const avatar_url = createAvatarRoute(AvatarData['seed'][seed], AvatarData['eyes'][eyes], AvatarData['mouth'][mouth])
-        console.log('avatar url:', avatar_url)
+
         const updateUser = {
             username,
             about,
             avatar_url
         }
-        console.log('UpdateUser!!!!!!!', updateUser)
+
         await dispatch(thunkUpdateUserInfo(updateUser))
         closeModal()
     }
@@ -77,7 +77,7 @@ const EditUserForm = () => {
         }
         index = parseInt(index)
         setSeed(index)
-        console.log("color:", index)
+
 
     }
 
@@ -91,7 +91,7 @@ const EditUserForm = () => {
         }
         index = parseInt(index)
         setEyes(index)
-        console.log("eyes:", index)
+
 
     }
 
@@ -105,9 +105,9 @@ const EditUserForm = () => {
         }
         index = parseInt(index)
         setMouth(index)
-        console.log("mouth:", index)
+
     }
-    console.log(user)
+
     return (
         <>
             <div>

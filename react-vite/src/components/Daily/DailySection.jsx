@@ -28,12 +28,12 @@ const DailySection = () => {
             // const tomorrow = new Date(today);
             // tomorrow.setDate(today.getDate() + 1);
             // const due_date = new Date(Date.now()).getTime()/1000
-            // console.log(due_date)
+            //
             const obj = { title, description, difficulty, repeat_days }
             // const obj = { title, description, difficulty, repeat_days, due_date }
             await dispatch(thunkCreateDailies(obj))
             // dailySlice[8] = obj
-            // console.log(dailySlice)
+            //
             setDailyInput('');
         }
     }

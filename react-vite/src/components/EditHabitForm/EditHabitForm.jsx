@@ -10,14 +10,14 @@ import "./EditHabitForm.css";
 
 function EditHabitForm(props, edit = true) {
     const habit_Id = props.props;
-    console.log("habit id:", habit_Id);
+
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.session.user);
     let allHabits = useSelector((state) => state.habits);
     allHabits = Object.values(allHabits);
     const habit = allHabits.filter((info) => info.id == habit_Id).pop();
-    console.log("habit:", habit);
+
     const [title, setTitle] = useState(habit.title);
     const [description, setDescription] = useState(habit.description);
     const [difficulty, setDifficulty] = useState(habit.difficulty);
@@ -112,9 +112,8 @@ function EditHabitForm(props, edit = true) {
                     <div className="edit-habit-plus-and-minus">
                         <div className="habit-btn-ctn">
                             <button
-                                className={`edit-pos-neg-habit-btn ${
-                                    pos ? "selected" : null
-                                }`}
+                                className={`edit-pos-neg-habit-btn ${pos ? "selected" : null
+                                    }`}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setPos(!pos);
@@ -127,9 +126,8 @@ function EditHabitForm(props, edit = true) {
 
                         <div className="habit-btn-ctn">
                             <button
-                                className={`edit-pos-neg-habit-btn ${
-                                    neg ? "selected" : null
-                                }`}
+                                className={`edit-pos-neg-habit-btn ${neg ? "selected" : null
+                                    }`}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setNeg(!neg);
@@ -177,7 +175,7 @@ function EditHabitForm(props, edit = true) {
                         </select>
                     </div> */}
 
-                    {/* In order to show advanced options, habit must have at leaast one trait */}
+                    {/* In order to show advanced options, habit must have at least one trait */}
                     {(pos || neg) && (
                         <div
                             className="advanced-options-ctn"

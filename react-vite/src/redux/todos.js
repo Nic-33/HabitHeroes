@@ -37,7 +37,7 @@ export const thunkGetTodos = () => async (dispatch) => {
         if (data.errors) {
             return;
         }
-        console.log("data:", data)
+
         dispatch(setTodos(data));
     }
 }
@@ -58,7 +58,7 @@ export const thunkCreateTodos = (payload) => async (dispatch) => {
 }
 
 export const thunkUpdateTodos = (payload, todo_id) => async (dispatch) => {
-    console.log(todo_id)
+
     const response = await fetch(`api/todo/${todo_id}`, {
         method: "PUT",
         headers: {
@@ -66,7 +66,7 @@ export const thunkUpdateTodos = (payload, todo_id) => async (dispatch) => {
         },
         body: JSON.stringify(payload)
     })
-    console.log('response!!!!:', response)
+
     if (response.ok) {
         const todo = await response.json()
         dispatch(updateTodos(todo))

@@ -42,7 +42,7 @@ export const thunkGetDailies = () => async (dispatch) => {
         if (data.errors) {
             return;
         }
-        console.log("Dailies", data)
+
         dispatch(setDailies(data));
     }
 }

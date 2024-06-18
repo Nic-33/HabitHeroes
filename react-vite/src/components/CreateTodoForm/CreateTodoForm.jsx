@@ -40,7 +40,7 @@ const CreateTodoForm = () => {
 
         if (error) {
             const serverResponse1 = await dispatch(thunkCreateTodos(updateTodo))
-            console.log('server response:', serverResponse1)
+
             closeModal()
         }
 

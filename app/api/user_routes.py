@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import User, db
 from app.forms import UserForm
@@ -42,3 +42,12 @@ def update_user ():
     user.avatar_url=form.avatar_url.data
     db.session.commit()
     return user.to_dict()
+
+@user_routes.route('/<int:user_id>/delete', methods=['GET','DELETE'])
+def delete_user(user_id):
+    user = User.query.get(user_id)
+    if request.method == "DELETE":
+        db.session.delete(user)
+        db.session.commit()
+        return {'delete': "successful"}, 200
+    return {'delete':'Failed'},401

@@ -136,11 +136,11 @@ function habitReducer(state = initialState, action) {
         }
 
         case INCREMENT_HABIT_POS: {
-            console.log(action.payload)
+
             return { ...state, [action.payload.id]: action.payload }
         }
         case INCREMENT_HABIT_NEG: {
-            console.log(action.payload)
+
             return { ...state, [action.payload.id]: action.payload }
         }
 

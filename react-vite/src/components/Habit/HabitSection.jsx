@@ -29,24 +29,24 @@ const HabitSection = () => {
             // const today = new Date(Date.now());
             // const tomorrow = new Date(today);
             // tomorrow.setDate(today.getDate() + 1);
-            // console.log(today.getFullYear())
-            // console.log(today.getMonth()+1)
-            // console.log(today.getDate())
-            // console.log(new Date(Date.now()))
+            //
+            //
+            //
+            //
 
             // const date_to_reset = `${tomorrow.getFullYear()}-${tomorrow.getMonth()+1}-${tomorrow.getDate()+1}`
             const date_to_reset = months.calcTomorrow(months.length)
-            console.log(date_to_reset)
+
             // const date_to_reset = new Date(Date.now())
             const obj = { title, description, difficulty, frequency, date_to_reset, pos_count, neg_count }
             setHabitInput('');
             // habitSlice[3] = obj
             // const payload = JSON.stringify(obj)
             await dispatch(thunkCreateHabits(obj))
-            // console.log(habitSlice)
-            //    console.log(await  dispatch(thunkCreateHabits(obj)))
+            //
+            //
             // dispatch(thunkCreateHabits(payload))
-            // console.log(habitSlice)
+            //
         }
     }
 
