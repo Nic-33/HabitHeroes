@@ -14,11 +14,9 @@ import { useState } from 'react';
 
 
 const EditMenu = ({ type, id }) => {
-    const navigate = useNavigate()
     let modalComp
     const dispatch = useDispatch()
-    const [state, setState] = useState()
-    const session = useSelector((state) => state.session)
+
 
 
     const handleDeleteClick = async () => {
