@@ -43,10 +43,11 @@ def update_user ():
     db.session.commit()
     return user.to_dict()
 
-@user_routes.route('/<int:user_id>/delete', methods=['GET','DELETE'])
-def delete_user(user_id):
+@user_routes.route('/delete', methods=['POST'])
+def delete_user():
+    user_id = current_user.to_dict()['id']
     user = User.query.get(user_id)
-    if request.method == "DELETE":
+    if request.method == "POST":
         db.session.delete(user)
         db.session.commit()
         return {'delete': "successful"}, 200
