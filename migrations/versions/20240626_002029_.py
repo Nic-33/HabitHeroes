@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<< HEAD:migrations/versions/20240519_191534_.py
-Revision ID: 665cf5d1e4f8
+Revision ID: bbc724e916a8
 Revises: 
-Create Date: 2024-05-19 19:15:34.084869
-=======
-Revision ID: 948015f9c038
-Revises:
-Create Date: 2024-05-18 23:28:05.393304
->>>>>>> 7f2b3eebf2fe762ed5474b5accaaf81786fe70eb:migrations/versions/20240518_232805_.py
+Create Date: 2024-06-26 00:20:29.468788
 
 """
 from alembic import op
@@ -16,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '665cf5d1e4f8'
+revision = 'bbc724e916a8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -44,7 +38,7 @@ def upgrade():
     sa.Column('seed', sa.Integer(), nullable=False),
     sa.Column('eyes', sa.Integer(), nullable=False),
     sa.Column('mouth', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('dailies',
@@ -61,7 +55,7 @@ def upgrade():
     sa.Column('completed', sa.Boolean(), nullable=True),
     sa.Column('completed_date', sa.Integer(), nullable=True),
     sa.Column('last_completed_date', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('habits',
@@ -76,7 +70,7 @@ def upgrade():
     sa.Column('neg', sa.Boolean(), nullable=True),
     sa.Column('pos_count', sa.Integer(), nullable=True),
     sa.Column('neg_count', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('todos',
@@ -87,7 +81,7 @@ def upgrade():
     sa.Column('difficulty', sa.Integer(), nullable=False),
     sa.Column('due_date', sa.Date(), nullable=False),
     sa.Column('completed', sa.Boolean(), nullable=True),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
