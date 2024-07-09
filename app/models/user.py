@@ -2,6 +2,8 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime, timedelta, time as datetimeTime
+from sqlalchemy.sql import func
+from sqlalchemy.types import DateTime
 
 
 class User(db.Model, UserMixin):
@@ -19,6 +21,8 @@ class User(db.Model, UserMixin):
     last_login = db.Column(db.Date(),nullable=False)
     avatar_url = db.Column(db.String())
     about = db.Column(db.String(255))
+    created_at = db.Column(DateTime(timezone=True), server_default=func.now())
+
 
     habits = db.relationship("Habit", back_populates="users",cascade='all,delete')
     todos = db.relationship("Todo", back_populates="users",cascade='all,delete')
@@ -45,5 +49,6 @@ class User(db.Model, UserMixin):
             'last_name':self.last_name,
             'last_login':self.last_login,
             'avatar_url':self.avatar_url,
-            'about':self.about
+            'about':self.about,
+            "created_at": self.created_at,
         }
