@@ -1,13 +1,13 @@
 .profile-dropdown {
     position: absolute;
-
-    right: 10px;
-    top: 30px;
-    margin: 10px;
-    padding: 10px;
-    /* background-color: #181a1b; */
-    color: #b5af8a;
-    box-shadow: 3px 3px 10px rgb(41, 39, 39);
+    padding: 20px;
+    width: 175px;
+    background-color: #FFFBF6;
+    right: 0;
+    left: inherit;
+    margin-top: 50px;
+    border-radius: 5px;
+    z-index: 2;
 }
 
 hr {
@@ -87,12 +87,46 @@ hr {
 }
 
 .profile-button {
-    width: fit-content;
-    font-size: 15px;
+    font-size: x-large;
+    color: rgba(255, 255, 255, 0.837);
     margin-left: auto;
     justify-content: flex-end;
     position: relative;
     padding: 10px;
+
+    border: none;
+    cursor: pointer;
+    
+}
+
+.profile-button:hover {
+    color: white;
+}
+
+.login-signup-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #6133b4; 
+    color: white;
+    cursor: pointer;
+}
+
+.rightNavButtons button {
+    width: 6rem;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #9A62FF; 
+    color: white;
+    cursor: pointer;
+}
+
+.rightNavButtons button:hover {
+    background-color: #6133b4;
 }
 
 #logo {
