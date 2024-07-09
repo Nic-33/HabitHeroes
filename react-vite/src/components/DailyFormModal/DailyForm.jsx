@@ -48,9 +48,9 @@ function EditDailyForm(props) {
 
         // build a daily object with all the information gathered from the form. +streak ensures streak is an integer
         const newDaily = {
-            title: "new title",
-            description,
-            difficulty,
+            title: title,
+            description: description,
+            difficulty: difficulty,
             repeat_days: "0123",
             // repeats_frame,
             // repeats_frequency,
@@ -144,10 +144,10 @@ function EditDailyForm(props) {
                             value={difficulty}
                             onChange={(e) => setDifficulty(e.target.value)}
                         >
-                            <option value="Trivial">Trivial</option>
-                            <option value="Easy">Easy</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Hard">Hard</option>
+                            <option value={1}>Trivial</option>
+                            <option value={2}>Easy</option>
+                            <option value={3}>Medium</option>
+                            <option value={4}>Hard</option>
                         </select>
 
                         <div className="errors">{errors?.difficulty}</div>

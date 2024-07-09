@@ -46,22 +46,24 @@ function LoginFormModal() {
   };
 
   return (
-    <>
+    <div className="login-form-modal-container">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Email
           <input
+            className="login-form-modal-input"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p className="errors">{errors.email}</p>}
         <label>
           Password
           <input
+            className="login-form-modal-input"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -69,12 +71,12 @@ function LoginFormModal() {
           />
         </label>
 
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
-        <button type="submit" onClick={() => {
+        {errors.password && <p className="errors">{errors.password}</p>}
+        <button className="login-form-modal-button" type="submit">Log In</button>
+        <button className="demo" type="submit" onClick={() => {
           setEmail('demo@aa.io')
           setPassword('password')
-        }}>Demo Loggin</button>
+        }}>Demo Login</button>
       </form>
       {/* <form onSubmit={backdoor}>
         <button type="submit" onClick={() => {
@@ -82,7 +84,7 @@ function LoginFormModal() {
           setPassword('password')
         }}>backdoor Loggin</button> */}
       {/* </form> */}
-    </>
+    </div>
   );
 }
 
