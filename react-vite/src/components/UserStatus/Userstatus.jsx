@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { thunkGetUserInfo } from "../../redux/user";
 import EditMenu from "../EditMenu/EditMenu.jsx";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem.jsx";
+import OpenModalButton from "../OpenModalButton/OpenModalButton.jsx";
 import EditUserForm from "../EditUserFormModal/EditUserForm.jsx";
 import "./Userstatus.css";
 
@@ -32,16 +33,22 @@ const UserInfo = () => {
                 <img className="avatar" src={userSlice.avatar_url}></img>
                 <div className="about-info">
                     <div id="userInfo">{userSlice.username}</div>
-                    <div id="about">About Me: {userSlice.about}</div>
+
+                    <div id="about"> <span style={{fontWeight:800}}>About Me:</span> {userSlice.about}</div>
+
                     <div id="details-time" className="details-indiv">
-                        <h4>Member Since</h4>
-                        <div>{getDate(userSlice.created_at)}</div>
+                        <div className="member-word">Member Since:</div>
+                        <div className="date">
+                            {getDate(userSlice.created_at)}
+                        </div>
                     </div>
-                    <div className="options_button">
-                        <button
-                            className="options_button"
+
+                    <div className="edit-avatar">
+                        {/* <button
+                            className="edit-avatar-button"
                             onClick={() => setShowDropMenu(!showDropMenu)}
                         >
+                            <div>My Avatar</div>
                             <svg
                                 className="option_icon"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -49,8 +56,13 @@ const UserInfo = () => {
                             >
                                 <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z" />
                             </svg>
-                        </button>
-                        {showDropMenu ? <EditMenu type="user" /> : null}
+                        </button> */}
+                        <div className="edit-avatar-menu">
+                            <OpenModalMenuItem
+                                itemText="Edit Profile"
+                                modalComponent={<EditUserForm />}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

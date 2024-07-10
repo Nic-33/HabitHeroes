@@ -1,7 +1,8 @@
-.avatar{
-    width:200px;
-    height:auto;
+.avatar {
+    width: 200px;
+    height: auto;
     border-radius: 15%;
+    padding: 15px;
 }
 
 .avatar-info-container {
@@ -10,7 +11,6 @@
 }
 
 .about-info {
-
     margin-left: 2rem;
     padding: 20px 40px 20px 20px;
     border-radius: 15%;
@@ -18,9 +18,43 @@
 
 #userInfo {
     color: aliceblue;
+    font-weight: 800;
 }
 
 #about {
     color: aliceblue;
     padding-top: 10px;
+}
+
+#details-time {
+    color: aliceblue;
+}
+
+.member-word {
+    padding: 30px 0 10px 0;
+    font-weight: 800;
+}
+
+.date {
+    margin-bottom: 25px;
+}
+
+.edit-avatar-button {
+    background-color: #9a62ff;
+    color: aliceblue;
+    width: 10rem;
+    height: 2rem;
+    border-radius: .5rem;
+    border: none;
+    
+}
+
+.edit-avatar-menu button{
+    background-color: #9a62ff;
+    color: aliceblue;
+    width: 10rem;
+    height: 2rem;
+    border-radius: .5rem;
+    border: none;
+    
 }
