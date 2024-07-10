@@ -67,6 +67,8 @@ function CreateHabitForm(create = true) {
                                 Save
                             </button>
                         </div>
+
+                        
                     </div>
                     <div className="create-form-input">
                         <label>Title*</label>

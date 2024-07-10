@@ -20,77 +20,129 @@ const EditTodoForm = (props) => {
     const { closeModal } = useModal();
 
 
-    const updateDescription = (e) => setDescription(e.target.value)
-    const updateDifficulty = (e) => setDifficulty(e.target.value)
-    const updateTitle = (e) => setTitle(e.target.value)
-    const updateDueDate = (e) => setDueDate(e.target.value)
+    const [errors, setErrors] = useState();
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        let updateTodo = {
-            title,
-            description,
-            difficulty,
-            // dueDate,
+        e.preventDefault();
+
+        // Build a dummy error object then set it when all the conditions are checked
+        const issues = {};
+        if (!title.length) {
+            issues.title = "Title is required";
+        }
+        if (title && (title.length < 3 || title.length > 50)) {
+            issues.title = "Title must be between 3 and 50 characters";
+        }
+        if (Object.values(issues).length) {
+            setErrors(issues);
+            return;
+        } else {
+            setErrors({});
         }
 
-        let error = true
-        setDescriptionError("hidden")
+        // build a daily object with all the information gathered from the form. +streak ensures streak is an integer
+        const updateTodo = {
+            title: title,
+            description: description,
+            difficulty: difficulty,
+            repeat_days: "0123",
+            // repeats_frame,
+            // repeats_frequency,
+            // streak: +streak,
+        };
 
-
-        // if (description.length < 1) {
-        //     setDescriptionError('visible')
-        //     error = false
-        // }
-
-
-        if (error) {
-            const serverResponse1 = await dispatch(thunkUpdateTodos(updateTodo, todo_Id))
-
-            closeModal()
+        // check if there are errors before dispatching
+        if (!Object.values(issues).length) {
+            await dispatch(thunkUpdateTodos(updateTodo, todo_Id));
+            closeModal();
         }
-
-    }
+    };
 
     return (
-        <>
-            <form className="updateTodoForm" onSubmit={handleSubmit}>
-                <div id='updateTodo'>Update Todo</div>
-                <div id='title'>Title</div>
-                <input
-                    type="text"
-                    placeholder="Title"
-                    value={title}
-                    onChange={updateTitle} />
-                <div>Difficulty</div>
-                <select name="difficultySelector">
-                    <option value={1} onChange={updateDifficulty}>1</option>
-                    <option value={2} onChange={updateDifficulty}>2</option>
-                    <option value={3} onChange={updateDifficulty}>3</option>
-                    <option value={4} onChange={updateDifficulty}>4</option>
-                    <option value={5} onChange={updateDifficulty}>5</option>
-                </select>
-                {/* <div id='dueDate'>Due Date</div>
-            <input
-                type="text"
-                placeholder="Due Date"
-                value={dueDate}
-                onChange={updateDueDate} /> */}
-                <div id='description'>Description</div>
-                <div className="error" style={{ visibility: descriptionError }}>Description needs a minimum of 30 characters</div>
-                <textarea
-                    type="text"
-                    placeholder="Description"
-                    value={description}
-                    onChange={updateDescription} />
-                <div id="submitButton">
-                    <button type="submit">Update Todo</button>
+        <div className="daily-edit-ctn">
+        <form className="edit-daily-habit-form" onSubmit={handleSubmit}>
+            {/* this div covers the top section to give it its styling */}
+            <div className="daily-edit-form-top">
+                <div className="edit-daily-title-and-btns">
+                    {/* Title */}
+                    <div>
+                        <p className="edit-daily-p">Edit To Do</p>
+                    </div>
+
+                    {/* Buttons */}
+                    <div className="edit-daily-btn-save-cancel">
+                        <button
+                            className="daily-edit cancel"
+                            onClick={closeModal}
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            onClick={(e) => {
+                                handleSubmit(e);
+                            }}
+                            className="daily-edit save"
+                        >
+                            Save
+                        </button>
+                    </div>
                 </div>
-            </form>
-            <div id="CancelButton">
-                <button onClick={closeModal}>Cancel</button>
+                <div className="daily-edit-input-ctn">
+                    {/* This div is for the title input */}
+                    <label>Title</label>
+
+                    <input
+                        type="text"
+                        value={title}
+                        placeholder="Add a title"
+                        className="daily-edit-form-top-input"
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+
+                    <div className="errors">{errors?.title}</div>
+                </div>
+
+                <div className="daily-edit-input-ctn">
+                    {/* This div is for the description input */}
+                    <label>Notes</label>
+
+                    <textarea
+                        placeholder="Add notes"
+                        className="daily-edit-form-top-input"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                    />
+
+                    <div className="errors">{errors?.description}</div>
+                </div>
+
+                {/* End of top of form */}
             </div>
-        </>
+
+            <div className="daily-edit-form-bottom">
+                {/* This is where checklist input will go in the future */}
+
+                <div className="edit-daily-select-ctn">
+                    {/* Difficulty selector div */}
+                    <label id="gap">Difficulty</label>
+
+                    <select
+                        value={difficulty}
+                        onChange={(e) => setDifficulty(e.target.value)}
+                    >
+                        <option value={1}>Trivial</option>
+                        <option value={2}>Easy</option>
+                        <option value={3}>Medium</option>
+                        <option value={4}>Hard</option>
+                    </select>
+
+                    <div className="errors">{errors?.difficulty}</div>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
     )
 }
 
