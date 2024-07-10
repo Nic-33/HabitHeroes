@@ -1,0 +1,16 @@
+.create_button button {
+    background-color: #823ffd;
+
+    color: aliceblue;
+    width: 10rem;
+    height: 2rem;
+    border-radius: .5rem;
+    border: none;
+    margin-bottom: 10px;
+
+}
+
+.create_button button:hover {
+    background-color: #7230ec;
+
+}

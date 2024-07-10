@@ -58,3 +58,7 @@
     border: none;
     
 }
+.edit-avatar-menu button:hover {
+    background-color: #823ffd;
+    
+}
